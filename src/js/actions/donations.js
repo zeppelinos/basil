@@ -32,9 +32,7 @@ const DonationsActions = {
       dispatch(FetchingActions.start(message))
       try {
         const basil = await Basil.at(BASIL_ADDRESS)
-        const transaction = await basil.donate(r, g, b, { from: donor, value: toWei(value) })
-        const donation = transaction.logs[0].args
-        dispatch(DonationsActions.add(donation))
+        await basil.donate(r, g, b, { from: donor, value: toWei(value) })
         dispatch(FetchingActions.stop())
       } catch(error) {
         dispatch(AlertActions.showError(error))
@@ -44,7 +42,7 @@ const DonationsActions = {
 
   add(donation) {
     return async function(dispatch) {
-      donation.value = fromWei(donation.value)
+      donation.value = fromWei(donation.value).toString()
       dispatch({ type: ActionTypes.ADD_DONATION, donation })
     }
   },

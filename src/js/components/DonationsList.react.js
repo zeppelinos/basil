@@ -29,7 +29,7 @@ class DonationsList extends React.Component {
         <li className="collection-item" key={donation.donor}>
           <div>
             <b>{donation.donor}</b>
-            <span className='secondary-content'>wei {donation.donation}</span>
+            <span className='secondary-content'>ETH {donation.value}</span>
           </div>
         </li>
       )

@@ -1,0 +1,639 @@
+{
+  "contractName": "UpgradeabilityProxy",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "Upgraded",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b6103018061001e6000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d50146100f85780635c60da1b14610186575b60006100566102ad565b61005e6101db565b9150600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415151561009c57600080fd5b6000368080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509050600080825160208401855af43d604051816000823e82600081146100f4578282f35b8282fd5b341561010357600080fd5b61010b610205565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014b578082015181840152602081019050610130565b50505050905090810190601f1680156101785780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561019157600080fd5b6101996101db565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b61020d6102c1565b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102a35780601f10610278576101008083540402835291602001916102a3565b820191906000526020600020905b81548152906001019060200180831161028657829003601f168201915b5050505050905090565b602060405190810160405280600081525090565b6020604051908101604052806000815250905600a165627a7a72305820adae60be0c1c7de37c82ac738a5e46c34c3e889cf805d3464120c5fc571201850029",
+  "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d50146100f85780635c60da1b14610186575b60006100566102ad565b61005e6101db565b9150600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415151561009c57600080fd5b6000368080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509050600080825160208401855af43d604051816000823e82600081146100f4578282f35b8282fd5b341561010357600080fd5b61010b610205565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014b578082015181840152602081019050610130565b50505050905090810190601f1680156101785780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561019157600080fd5b6101996101db565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b61020d6102c1565b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102a35780601f10610278576101008083540402835291602001916102a3565b820191906000526020600020905b81548152906001019060200180831161028657829003601f168201915b5050505050905090565b602060405190810160405280600081525090565b6020604051908101604052806000815250905600a165627a7a72305820adae60be0c1c7de37c82ac738a5e46c34c3e889cf805d3464120c5fc571201850029",
+  "sourceMap": "241:838:9:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "241:838:9:-;;;;;;;;;;;;;;;;;;;;;;;;;;584:13:7;656:17;;:::i;:::-;600:16;:14;:16::i;:::-;584:32;;647:1;630:19;;:5;:19;;;;622:28;;;;;;;;676:8;;656:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;780:1;777;770:4;764:5;757:4;751;747:3;740:5;735:3;722:12;801:14;840:4;834:5;875:4;872:1;867:3;852:14;895:6;913:1;908:28;;;;965:4;960:3;953:6;908:28;929:4;924:3;917:6;494:74:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;690:89:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;737:7;759:15;;;;;;;;;;;752:22;;690:89;:::o;494:74::-;534:6;;:::i;:::-;555:8;548:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;494:74;:::o;241:838:9:-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\nimport './Proxy.sol';\nimport './UpgradeabilityStorage.sol';\n\n/**\n * @title UpgradeabilityProxy\n * @dev This contract represents a proxy where the implementation address to which it will delegate can be upgraded\n */\ncontract UpgradeabilityProxy is Proxy, UpgradeabilityStorage {\n  /**\n  * @dev This event will be emitted every time the implementation gets upgraded\n  * @param version representing the version name of the upgraded implementation\n  * @param implementation representing the address of the upgraded implementation\n  */\n  event Upgraded(string version, address indexed implementation);\n\n  /**\n  * @dev Upgrades the implementation address\n  * @param version representing the version name of the new implementation to be set\n  * @param implementation representing the address of the new implementation to be set\n  */\n  function _upgradeTo(string version, address implementation) internal {\n    require(_implementation != implementation);\n    _version = version;\n    _implementation = implementation;\n    Upgraded(version, implementation);\n  }\n}\n",
+  "sourcePath": "/home/maraoz/git/basil/contracts/UpgradeabilityProxy.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/home/maraoz/git/basil/contracts/UpgradeabilityProxy.sol",
+      "exportedSymbols": {
+        "UpgradeabilityProxy": [
+          429
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 389,
+        "name": "PragmaDirective",
+        "src": "0:24:9"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 365,
+          "absolutePath": "/home/maraoz/git/basil/contracts/Proxy.sol",
+          "file": "./Proxy.sol",
+          "scope": 430,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 390,
+        "name": "ImportDirective",
+        "src": "26:21:9"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 453,
+          "absolutePath": "/home/maraoz/git/basil/contracts/UpgradeabilityStorage.sol",
+          "file": "./UpgradeabilityStorage.sol",
+          "scope": 430,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 391,
+        "name": "ImportDirective",
+        "src": "48:37:9"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            364,
+            452
+          ],
+          "contractKind": "contract",
+          "documentation": "@title UpgradeabilityProxy\n@dev This contract represents a proxy where the implementation address to which it will delegate can be upgraded",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            429,
+            452,
+            364
+          ],
+          "name": "UpgradeabilityProxy",
+          "scope": 430
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Proxy",
+                  "referencedDeclaration": 364,
+                  "type": "contract Proxy"
+                },
+                "id": 392,
+                "name": "UserDefinedTypeName",
+                "src": "273:5:9"
+              }
+            ],
+            "id": 393,
+            "name": "InheritanceSpecifier",
+            "src": "273:5:9"
+          },
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "UpgradeabilityStorage",
+                  "referencedDeclaration": 452,
+                  "type": "contract UpgradeabilityStorage"
+                },
+                "id": 394,
+                "name": "UserDefinedTypeName",
+                "src": "280:21:9"
+              }
+            ],
+            "id": 395,
+            "name": "InheritanceSpecifier",
+            "src": "280:21:9"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "Upgraded"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "version",
+                      "scope": 401,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 396,
+                        "name": "ElementaryTypeName",
+                        "src": "574:6:9"
+                      }
+                    ],
+                    "id": 397,
+                    "name": "VariableDeclaration",
+                    "src": "574:14:9"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "implementation",
+                      "scope": 401,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 398,
+                        "name": "ElementaryTypeName",
+                        "src": "590:7:9"
+                      }
+                    ],
+                    "id": 399,
+                    "name": "VariableDeclaration",
+                    "src": "590:30:9"
+                  }
+                ],
+                "id": 400,
+                "name": "ParameterList",
+                "src": "573:48:9"
+              }
+            ],
+            "id": 401,
+            "name": "EventDefinition",
+            "src": "559:63:9"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "_upgradeTo",
+              "payable": false,
+              "scope": 429,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "version",
+                      "scope": 428,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 402,
+                        "name": "ElementaryTypeName",
+                        "src": "874:6:9"
+                      }
+                    ],
+                    "id": 403,
+                    "name": "VariableDeclaration",
+                    "src": "874:14:9"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "implementation",
+                      "scope": 428,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 404,
+                        "name": "ElementaryTypeName",
+                        "src": "890:7:9"
+                      }
+                    ],
+                    "id": 405,
+                    "name": "VariableDeclaration",
+                    "src": "890:22:9"
+                  }
+                ],
+                "id": 406,
+                "name": "ParameterList",
+                "src": "873:40:9"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 407,
+                "name": "ParameterList",
+                "src": "923:0:9"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 647,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 408,
+                            "name": "Identifier",
+                            "src": "929:7:9"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "!=",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 435,
+                                  "type": "address",
+                                  "value": "_implementation"
+                                },
+                                "id": 409,
+                                "name": "Identifier",
+                                "src": "937:15:9"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 405,
+                                  "type": "address",
+                                  "value": "implementation"
+                                },
+                                "id": 410,
+                                "name": "Identifier",
+                                "src": "956:14:9"
+                              }
+                            ],
+                            "id": 411,
+                            "name": "BinaryOperation",
+                            "src": "937:33:9"
+                          }
+                        ],
+                        "id": 412,
+                        "name": "FunctionCall",
+                        "src": "929:42:9"
+                      }
+                    ],
+                    "id": 413,
+                    "name": "ExpressionStatement",
+                    "src": "929:42:9"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 433,
+                              "type": "string storage ref",
+                              "value": "_version"
+                            },
+                            "id": 414,
+                            "name": "Identifier",
+                            "src": "977:8:9"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 403,
+                              "type": "string memory",
+                              "value": "version"
+                            },
+                            "id": 415,
+                            "name": "Identifier",
+                            "src": "988:7:9"
+                          }
+                        ],
+                        "id": 416,
+                        "name": "Assignment",
+                        "src": "977:18:9"
+                      }
+                    ],
+                    "id": 417,
+                    "name": "ExpressionStatement",
+                    "src": "977:18:9"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 435,
+                              "type": "address",
+                              "value": "_implementation"
+                            },
+                            "id": 418,
+                            "name": "Identifier",
+                            "src": "1001:15:9"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 405,
+                              "type": "address",
+                              "value": "implementation"
+                            },
+                            "id": 419,
+                            "name": "Identifier",
+                            "src": "1019:14:9"
+                          }
+                        ],
+                        "id": 420,
+                        "name": "Assignment",
+                        "src": "1001:32:9"
+                      }
+                    ],
+                    "id": 421,
+                    "name": "ExpressionStatement",
+                    "src": "1001:32:9"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_string_memory_ptr",
+                                  "typeString": "string memory"
+                                },
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 401,
+                              "type": "function (string memory,address)",
+                              "value": "Upgraded"
+                            },
+                            "id": 422,
+                            "name": "Identifier",
+                            "src": "1039:8:9"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 403,
+                              "type": "string memory",
+                              "value": "version"
+                            },
+                            "id": 423,
+                            "name": "Identifier",
+                            "src": "1048:7:9"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 405,
+                              "type": "address",
+                              "value": "implementation"
+                            },
+                            "id": 424,
+                            "name": "Identifier",
+                            "src": "1057:14:9"
+                          }
+                        ],
+                        "id": 425,
+                        "name": "FunctionCall",
+                        "src": "1039:33:9"
+                      }
+                    ],
+                    "id": 426,
+                    "name": "ExpressionStatement",
+                    "src": "1039:33:9"
+                  }
+                ],
+                "id": 427,
+                "name": "Block",
+                "src": "923:154:9"
+              }
+            ],
+            "id": 428,
+            "name": "FunctionDefinition",
+            "src": "854:223:9"
+          }
+        ],
+        "id": 429,
+        "name": "ContractDefinition",
+        "src": "241:838:9"
+      }
+    ],
+    "id": 430,
+    "name": "SourceUnit",
+    "src": "0:1080:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-23T19:07:54.728Z"
+}

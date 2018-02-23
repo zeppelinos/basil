@@ -1,0 +1,302 @@
+{
+  "contractName": "OwnedUpgradeableBasilStorage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "highestDonation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "b",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "r",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "upgradeabilityOwner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "g",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b6104428061001e6000396000f30060606040526004361061008e576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063043f08e7146100935780634df7e3d0146100bc57806354fd4d50146100e55780635c60da1b146101735780636c8ae38c146101c85780636fde8202146101f15780638da5cb5b14610246578063e2179b8e1461029b575b600080fd5b341561009e57600080fd5b6100a66102c4565b6040518082815260200191505060405180910390f35b34156100c757600080fd5b6100cf6102ca565b6040518082815260200191505060405180910390f35b34156100f057600080fd5b6100f86102d0565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561013857808201518184015260208101905061011d565b50505050905090810190601f1680156101655780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561017e57600080fd5b610186610378565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101d357600080fd5b6101db6103a2565b6040518082815260200191505060405180910390f35b34156101fc57600080fd5b6102046103a8565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561025157600080fd5b6102596103d2565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156102a657600080fd5b6102ae6103fc565b6040518082815260200191505060405180910390f35b60075481565b60065481565b6102d8610402565b60008054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561036e5780601f106103435761010080835404028352916020019161036e565b820191906000526020600020905b81548152906001019060200180831161035157829003601f168201915b5050505050905090565b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60045481565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60055481565b6020604051908101604052806000815250905600a165627a7a72305820e9295f49917dfb993ad374c951def8358e5756b547293bd2217396b1f185e9460029",
+  "deployedBytecode": "0x60606040526004361061008e576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063043f08e7146100935780634df7e3d0146100bc57806354fd4d50146100e55780635c60da1b146101735780636c8ae38c146101c85780636fde8202146101f15780638da5cb5b14610246578063e2179b8e1461029b575b600080fd5b341561009e57600080fd5b6100a66102c4565b6040518082815260200191505060405180910390f35b34156100c757600080fd5b6100cf6102ca565b6040518082815260200191505060405180910390f35b34156100f057600080fd5b6100f86102d0565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561013857808201518184015260208101905061011d565b50505050905090810190601f1680156101655780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561017e57600080fd5b610186610378565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101d357600080fd5b6101db6103a2565b6040518082815260200191505060405180910390f35b34156101fc57600080fd5b6102046103a8565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561025157600080fd5b6102596103d2565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156102a657600080fd5b6102ae6103fc565b6040518082815260200191505060405180910390f35b60075481565b60065481565b6102d8610402565b60008054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561036e5780601f106103435761010080835404028352916020019161036e565b820191906000526020600020905b81548152906001019060200180831161035157829003601f168201915b5050505050905090565b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60045481565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60055481565b6020604051908101604052806000815250905600a165627a7a72305820e9295f49917dfb993ad374c951def8358e5756b547293bd2217396b1f185e9460029",
+  "sourceMap": "376:107:3:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "376:107:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;350:30:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;301:16;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;494:74:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;690:89:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;261:16:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;332:99:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;289:71:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;281:16:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;350:30;;;;:::o;301:16::-;;;;:::o;494:74:5:-;534:6;;:::i;:::-;555:8;548:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;494:74;:::o;690:89::-;737:7;759:15;;;;;;;;;;;752:22;;690:89;:::o;261:16:1:-;;;;:::o;332:99:4:-;384:7;406:20;;;;;;;;;;;399:27;;332:99;:::o;289:71:7:-;327:7;349:6;;;;;;;;;;;342:13;;289:71;:::o;281:16:1:-;;;;:::o;376:107:3:-;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\nimport './BasilStorage.sol';\nimport './UpgradeabilityStorage.sol';\nimport './UpgradeabilityOwnerStorage.sol';\n\n/**\n * @title OwnedUpgradeableBasilStorage\n * @dev This is the storage necessary to perform upgradeable contracts.\n * This means, required state variables for owned upgradeability purpose and those strictly related to basil contracts.\n */\ncontract OwnedUpgradeableBasilStorage is UpgradeabilityStorage, UpgradeabilityOwnerStorage, BasilStorage {}\n",
+  "sourcePath": "/home/maraoz/git/basil/contracts/OwnedUpgradeableBasilStorage.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/home/maraoz/git/basil/contracts/OwnedUpgradeableBasilStorage.sol",
+      "exportedSymbols": {
+        "OwnedUpgradeableBasilStorage": [
+          153
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 143,
+        "name": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 20,
+          "absolutePath": "/home/maraoz/git/basil/contracts/BasilStorage.sol",
+          "file": "./BasilStorage.sol",
+          "scope": 154,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 144,
+        "name": "ImportDirective",
+        "src": "26:28:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 200,
+          "absolutePath": "/home/maraoz/git/basil/contracts/UpgradeabilityStorage.sol",
+          "file": "./UpgradeabilityStorage.sol",
+          "scope": 154,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 145,
+        "name": "ImportDirective",
+        "src": "55:37:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 177,
+          "absolutePath": "/home/maraoz/git/basil/contracts/UpgradeabilityOwnerStorage.sol",
+          "file": "./UpgradeabilityOwnerStorage.sol",
+          "scope": 154,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 146,
+        "name": "ImportDirective",
+        "src": "93:42:3"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            19,
+            176,
+            199,
+            281
+          ],
+          "contractKind": "contract",
+          "documentation": "@title OwnedUpgradeableBasilStorage\n@dev This is the storage necessary to perform upgradeable contracts.\nThis means, required state variables for owned upgradeability purpose and those strictly related to basil contracts.",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            153,
+            19,
+            281,
+            176,
+            199
+          ],
+          "name": "OwnedUpgradeableBasilStorage",
+          "nodes": [
+            null
+          ],
+          "scope": 154
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "UpgradeabilityStorage",
+                  "referencedDeclaration": 199,
+                  "type": "contract UpgradeabilityStorage"
+                },
+                "id": 147,
+                "name": "UserDefinedTypeName",
+                "src": "417:21:3"
+              }
+            ],
+            "id": 148,
+            "name": "InheritanceSpecifier",
+            "src": "417:21:3"
+          },
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "UpgradeabilityOwnerStorage",
+                  "referencedDeclaration": 176,
+                  "type": "contract UpgradeabilityOwnerStorage"
+                },
+                "id": 149,
+                "name": "UserDefinedTypeName",
+                "src": "440:26:3"
+              }
+            ],
+            "id": 150,
+            "name": "InheritanceSpecifier",
+            "src": "440:26:3"
+          },
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "BasilStorage",
+                  "referencedDeclaration": 19,
+                  "type": "contract BasilStorage"
+                },
+                "id": 151,
+                "name": "UserDefinedTypeName",
+                "src": "468:12:3"
+              }
+            ],
+            "id": 152,
+            "name": "InheritanceSpecifier",
+            "src": "468:12:3"
+          }
+        ],
+        "id": 153,
+        "name": "ContractDefinition",
+        "src": "376:107:3"
+      }
+    ],
+    "id": 154,
+    "name": "SourceUnit",
+    "src": "0:484:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-23T21:11:35.955Z"
+}

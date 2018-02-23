@@ -1,0 +1,279 @@
+{
+  "contractName": "BasilStorage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "highestDonation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "b",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "r",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "g",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b6101d88061001e6000396000f30060606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063043f08e7146100725780634df7e3d01461009b5780636c8ae38c146100c45780638da5cb5b146100ed578063e2179b8e14610142575b600080fd5b341561007d57600080fd5b61008561016b565b6040518082815260200191505060405180910390f35b34156100a657600080fd5b6100ae610171565b6040518082815260200191505060405180910390f35b34156100cf57600080fd5b6100d7610177565b6040518082815260200191505060405180910390f35b34156100f857600080fd5b61010061017d565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014d57600080fd5b6101556101a6565b6040518082815260200191505060405180910390f35b60045481565b60035481565b60015481565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600254815600a165627a7a723058205df4833f52b39b82350b1b35d2452112b9ec5088de906d54e966de4d1f9e98e20029",
+  "deployedBytecode": "0x60606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063043f08e7146100725780634df7e3d01461009b5780636c8ae38c146100c45780638da5cb5b146100ed578063e2179b8e14610142575b600080fd5b341561007d57600080fd5b61008561016b565b6040518082815260200191505060405180910390f35b34156100a657600080fd5b6100ae610171565b6040518082815260200191505060405180910390f35b34156100cf57600080fd5b6100d7610177565b6040518082815260200191505060405180910390f35b34156100f857600080fd5b61010061017d565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014d57600080fd5b6101556101a6565b6040518082815260200191505060405180910390f35b60045481565b60035481565b60015481565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600254815600a165627a7a723058205df4833f52b39b82350b1b35d2452112b9ec5088de906d54e966de4d1f9e98e20029",
+  "sourceMap": "206:177:1:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "206:177:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;350:30;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;301:16;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;261;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;289:71:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;281:16:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;350:30;;;;:::o;301:16::-;;;;:::o;261:::-;;;;:::o;289:71:7:-;327:7;349:6;;;;;;;;;;;342:13;;289:71;:::o;281:16:1:-;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\nimport './ownership/OwnableStorage.sol';\n\n/**\n * @title BasilStorage\n * @dev This contract holds all the necessary state variables to carry out the storage of a basil contract\n */\ncontract BasilStorage is OwnableStorage {\n  // color\n  uint256 public r;\n  uint256 public g;\n  uint256 public b;\n  // highest donation in wei\n  uint256 public highestDonation;\n}\n",
+  "sourcePath": "/home/maraoz/git/basil/contracts/BasilStorage.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/home/maraoz/git/basil/contracts/BasilStorage.sol",
+      "exportedSymbols": {
+        "BasilStorage": [
+          19
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 7,
+        "name": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 282,
+          "absolutePath": "/home/maraoz/git/basil/contracts/ownership/OwnableStorage.sol",
+          "file": "./ownership/OwnableStorage.sol",
+          "scope": 20,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 8,
+        "name": "ImportDirective",
+        "src": "26:40:1"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            281
+          ],
+          "contractKind": "contract",
+          "documentation": "@title BasilStorage\n@dev This contract holds all the necessary state variables to carry out the storage of a basil contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            19,
+            281
+          ],
+          "name": "BasilStorage",
+          "scope": 20
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "OwnableStorage",
+                  "referencedDeclaration": 281,
+                  "type": "contract OwnableStorage"
+                },
+                "id": 9,
+                "name": "UserDefinedTypeName",
+                "src": "231:14:1"
+              }
+            ],
+            "id": 10,
+            "name": "InheritanceSpecifier",
+            "src": "231:14:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "r",
+              "scope": 19,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint256",
+                  "type": "uint256"
+                },
+                "id": 11,
+                "name": "ElementaryTypeName",
+                "src": "261:7:1"
+              }
+            ],
+            "id": 12,
+            "name": "VariableDeclaration",
+            "src": "261:16:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "g",
+              "scope": 19,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint256",
+                  "type": "uint256"
+                },
+                "id": 13,
+                "name": "ElementaryTypeName",
+                "src": "281:7:1"
+              }
+            ],
+            "id": 14,
+            "name": "VariableDeclaration",
+            "src": "281:16:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "b",
+              "scope": 19,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint256",
+                  "type": "uint256"
+                },
+                "id": 15,
+                "name": "ElementaryTypeName",
+                "src": "301:7:1"
+              }
+            ],
+            "id": 16,
+            "name": "VariableDeclaration",
+            "src": "301:16:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "highestDonation",
+              "scope": 19,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint256",
+                  "type": "uint256"
+                },
+                "id": 17,
+                "name": "ElementaryTypeName",
+                "src": "350:7:1"
+              }
+            ],
+            "id": 18,
+            "name": "VariableDeclaration",
+            "src": "350:30:1"
+          }
+        ],
+        "id": 19,
+        "name": "ContractDefinition",
+        "src": "206:177:1"
+      }
+    ],
+    "id": 20,
+    "name": "SourceUnit",
+    "src": "0:384:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-23T21:11:35.956Z"
+}

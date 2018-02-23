@@ -11,6 +11,10 @@ contract BasilStorage is OwnableStorage {
   uint256 public r;
   uint256 public g;
   uint256 public b;
+
+  // Tells whether the basil has been initialized or not
+  bool internal _initialized;
+
   // highest donation in wei
   uint256 public highestDonation;
 }

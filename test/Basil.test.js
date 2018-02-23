@@ -1,10 +1,20 @@
+const abi = require('ethereumjs-abi')
 import assertRevert from "./helpers/assertRevert";
 
-const Basil = artifacts.require('Basil');
+const Basil_V0 = artifacts.require('Basil_V0');
+const BasilProxy = artifacts.require('BasilProxy');
 
-contract('Basil', ([_, owner, aWallet, someone, anotherone]) => {
+contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
   beforeEach(async function () {
-    this.basil = await Basil.new({ from: owner })
+    const basil_v0 = await Basil_V0.new()
+    const proxy = await BasilProxy.new({ from: proxyOwner })
+
+    const methodId = abi.methodID('initialize', ['address']).toString('hex');
+    const params = abi.rawEncode(['address'], [owner]).toString('hex');
+    const initializeData = '0x' + methodId + params;
+
+    await proxy.upgradeToAndCall('0', basil_v0.address, initializeData, { from: proxyOwner })
+    this.basil = Basil_V0.at(proxy.address)
   })
 
   describe('donate', function () {
@@ -218,7 +228,7 @@ contract('Basil', ([_, owner, aWallet, someone, anotherone]) => {
 
         describe('when there were no funds', function () {
           it('reverts', async function () {
-            await this.basil.withdraw(wallet, { from });
+            await assertRevert(this.basil.withdraw(wallet, { from }));
           })
         })
 
@@ -231,16 +241,16 @@ contract('Basil', ([_, owner, aWallet, someone, anotherone]) => {
           })
 
           it('transfers all the contract funds to the requested wallet', async function () {
-            const previousWalletBalance = web3.eth.getBalance(wallet)
-            const previousContractBalance = web3.eth.getBalance(this.basil.address)
+            const previousWalletBalance = await web3.eth.getBalance(wallet)
+            const previousContractBalance = await web3.eth.getBalance(this.basil.address)
 
             assert(previousContractBalance.eq(donation))
-            await this.basil.withdraw(wallet, { from });
+            await this.basil.withdraw(wallet, { from })
 
-            const newWalletBalance = web3.eth.getBalance(wallet)
+            const newWalletBalance = await web3.eth.getBalance(wallet)
             assert(newWalletBalance.eq(previousWalletBalance.plus(donation)))
 
-            const newContractBalance = web3.eth.getBalance(this.basil.address)
+            const newContractBalance = await web3.eth.getBalance(this.basil.address)
             assert(newContractBalance.eq(0))
           })
         })

@@ -13,6 +13,12 @@ contract Basil_V0 is Ownable, OwnedUpgradeableBasilStorage {
   event Withdrawal(address indexed wallet, uint256 value);
   event NewDonation(address indexed donor, uint256 value, uint256 r, uint256 g, uint256 b);
 
+  function initialize(address owner) public {
+    require(!_initialized);
+    setOwner(owner);
+    _initialized = true;
+  }
+
   function donate(uint256 _r, uint256 _g, uint256 _b) external payable {
     require(_r < 256);
     require(_g < 256);
@@ -27,6 +33,7 @@ contract Basil_V0 is Ownable, OwnedUpgradeableBasilStorage {
   }
 
   function withdraw(address wallet) public onlyOwner {
+    require(this.balance > 0);
     require(wallet != address(0));
     uint256 value = this.balance;
     wallet.transfer(value);

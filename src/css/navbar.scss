@@ -1,0 +1,26 @@
+@import "variables";
+
+nav {
+  background-color: $white !important;
+
+  .search-contract {
+    width: 350px !important;
+    font-size: 14px !important;
+    text-align: right !important;
+  }
+
+  .brand-logo {
+    font-family: Lato;
+    font-size: 25px!important;
+    padding-top: 10px !important;
+  }
+
+  .nav-wrapper {
+    width: 60%!important;
+    margin: auto;
+  }
+
+  ul a {
+    color: $grey !important;
+  }
+}

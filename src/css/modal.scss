@@ -1,0 +1,33 @@
+@import "variables";
+
+#overlay {
+  position: fixed;
+  min-height: 100%;
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: 0;
+  background: black;
+  opacity: .7;
+  margin:0 auto;
+
+  .content {
+    width: 50%;
+    margin-top: 70px;
+    margin-left: 25%;
+    color: $mid-grey;
+    text-align: center;
+    opacity: 1 !important;
+    text-transform: lowercase;
+  }
+
+  &.hidden {
+    width: 0 !important;
+    height: 0 !important;
+    display: none;
+  }
+
+  &.dark {
+    opacity: .9 !important;
+  }
+}

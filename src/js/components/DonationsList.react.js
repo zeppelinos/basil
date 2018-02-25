@@ -15,7 +15,7 @@ class DonationsList extends React.Component {
       <div className={"col " + this.props.col}>
         <div className="card donations-list">
           <div className="card-content">
-            <h3 className="title">Basil donations</h3>
+            <h3 className="title">Some already thought about our basil</h3>
             { donations.length === 0 ? <em>Loading...</em> : <ul className="collection">{this._buildDonationsList(donations)}</ul>}
           </div>
         </div>
@@ -24,11 +24,14 @@ class DonationsList extends React.Component {
   }
 
   _buildDonationsList(donations) {
-    return donations.map(donation => {
+    return donations.map((donation, index) => {
+      const style = { backgroundColor: `rgb(${[donation.r, donation.g, donation.b]})` }
       return (
-        <li className="collection-item" key={donation.donor}>
+        <li className="collection-item" key={index}>
           <div>
             <b>{donation.donor}</b>
+            <span className='chip secondary-content' style={style}>&nbsp;&nbsp;&nbsp;</span>
+            <span className='secondary-content'>&nbsp;</span>
             <span className='secondary-content'>ETH {donation.value}</span>
           </div>
         </li>

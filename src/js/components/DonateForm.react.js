@@ -1,16 +1,14 @@
 import React from 'react';
 import Store from '../store'
 import { connect } from 'react-redux'
+import { HuePicker } from 'react-color'
 import AccountActions from '../actions/accounts'
 import DonationsActions from '../actions/donations'
 
 class DonateForm extends React.Component {
   constructor(props){
     super(props)
-    this.state = { value: 0, r: 0, g: 0, b: 0 }
-    this._updateR = this._updateR.bind(this)
-    this._updateG = this._updateG.bind(this)
-    this._updateB = this._updateB.bind(this)
+    this.state = { value: 0, color: { rgb: { r: 0, g: 0, b: 0 } } }
     this._updateValue = this._updateValue.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
   }
@@ -20,32 +18,32 @@ class DonateForm extends React.Component {
   }
 
   render() {
+    const rgb = this.state.color.rgb;
     const { address, balance } = this.props.account;
     return (
       <div className={"col " + this.props.col}>
         <form className="card" onSubmit={this._handleSubmit}>
           <div className="card-content">
             <h3 className="title">Donate to our basil!</h3>
-            <div className="row">
-              <div className="input-field col s7">
+            <div className="row no-margin">
+              <div className="input-field col s9">
                 <label htmlFor="owner" className='active'>You (address)</label>
                 <input value={address} type="text" id="owner" disabled required/>
               </div>
-              <div className="input-field col s2">
+              <div className="input-field col s3">
                 <label htmlFor="value">Value (eth)</label>
                 <input onChange={this._updateValue} type="number" step="any" id="value" required/>
               </div>
-              <div className="input-field col s1">
-                <label htmlFor="color_r">R</label>
-                <input onChange={this._updateR} type="number" id="color_r" required/>
+            </div>
+            <div className="row no-margin">
+              <div className="col s4">
+                <p>Pick a color for a photo!</p>
               </div>
-              <div className="input-field col s1">
-                <label htmlFor="color_g">G</label>
-                <input onChange={this._updateG} type="number" id="color_g" required/>
+              <div className="col s5">
+                <HuePicker style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
               </div>
-              <div className="input-field col s1">
-                <label htmlFor="color_b">B</label>
-                <input onChange={this._updateB} type="number" id="color_b" required/>
+              <div className="col s3">
+                <label disabled>RGB({rgb.r}, {rgb.g}, {rgb.g})</label>
               </div>
             </div>
           </div>
@@ -61,8 +59,8 @@ class DonateForm extends React.Component {
 
   _handleSubmit(e) {
     e.preventDefault()
-    const { value, r, g, b } = this.state
-    Store.dispatch(DonationsActions.donate(this.props.account.address, value, r, g, b))
+    const { value, color } = this.state
+    Store.dispatch(DonationsActions.donate(this.props.account.address, value, color.rgb.r, color.rgb.g, color.rgb.b))
   }
 
   _updateValue(e) {
@@ -70,19 +68,8 @@ class DonateForm extends React.Component {
     this.setState({ value: e.target.value })
   }
 
-  _updateR(e) {
-    e.preventDefault()
-    this.setState({ r: e.target.value })
-  }
-
-  _updateG(e) {
-    e.preventDefault()
-    this.setState({ g: e.target.value })
-  }
-
-  _updateB(e) {
-    e.preventDefault()
-    this.setState({ b: e.target.value })
+  _updateColor = color => {
+    this.setState({ color: color })
   }
 }
 

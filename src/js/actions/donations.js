@@ -17,7 +17,7 @@ const DonationsActions = {
         const events = basil.NewDonation({}, { fromBlock: 0, toBlock: 'latest' });
         events.watch(function(error, result) {
           if(error) AlertActions.showError(error)
-          else dispatch(DonationsActions.add({ donor: result.args.donor, value: result.args.value }))
+          else dispatch(DonationsActions.add(result.args))
         })
       } catch(error) {
         dispatch(AlertActions.showError(error))

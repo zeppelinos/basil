@@ -20,35 +20,8 @@ html, body{
   padding-top: 15px;
 }
 
-.donations-list {
-  a {
-    color: $grey !important;
-  }
-
-  .chip {
-    margin-top: -5px !important;
-  }
-}
-
-.balance-notification {
-  padding: 5px 20px;
-  margin-top: 5px !important;
-  position: relative;
-  color: #f3f3fd !important;
-  font-size: 13px !important;
-  background-color: $light-grey;
-  border-radius: 20px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-}
-
-.card {
-  .card-action {
-    text-align: right !important;
-  }
-}
-
 @import "./css/buttons";
 @import "./css/navbar";
 @import "./css/forms";
 @import "./css/modal";
+@import "./css/donations";

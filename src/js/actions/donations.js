@@ -27,7 +27,7 @@ const DonationsActions = {
 
   donate(donor, value, r, g, b) {
     return async function(dispatch) {
-      const message = `Donating wei ${value} RGB(${r}, ${g}, ${b}) from ${donor} to Zeppelin's basil`
+      const message = `Donating ETH ${value} to Zeppelin's Basil! RGB(${r}, ${g}, ${b}) from ${donor}`
       console.log(message)
       dispatch(FetchingActions.start(message))
       try {

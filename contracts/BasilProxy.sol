@@ -1,7 +1,8 @@
 pragma solidity ^0.4.18;
 
 import './BasilStorage.sol';
-import './OwnedUpgradeabilityProxy.sol';
+import 'zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol';
+
 
 /**
  * @title BasilProxy

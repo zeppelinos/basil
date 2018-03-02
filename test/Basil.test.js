@@ -1,20 +1,23 @@
-const abi = require('ethereumjs-abi')
-import assertRevert from "./helpers/assertRevert";
+'use strict';
 
-const Basil_V0 = artifacts.require('Basil_V0');
-const BasilProxy = artifacts.require('BasilProxy');
+const abi = require('ethereumjs-abi')
+import assertRevert from './helpers/assertRevert'
+
+const Basil = artifacts.require('Basil')
+const Registry = artifacts.require('zos-core/contracts/registry/Registry.sol')
 
 contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
   beforeEach(async function () {
-    const basil_v0 = await Basil_V0.new()
-    const proxy = await BasilProxy.new({ from: proxyOwner })
+    const registry = await Registry.new()
+    const behavior = await Basil.new()
+    registry.addVersion('0', behavior.address)
 
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
     const params = abi.rawEncode(['address'], [owner]).toString('hex');
     const initializeData = '0x' + methodId + params;
 
-    await proxy.upgradeToAndCall('0', basil_v0.address, initializeData, { from: proxyOwner })
-    this.basil = Basil_V0.at(proxy.address)
+    const proxyData = await registry.createProxyAndCall('0', initializeData, { from: proxyOwner })
+    this.basil = Basil.at(proxyData.logs[0].address)
   })
 
   describe('donate', function () {

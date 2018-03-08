@@ -1,23 +1,31 @@
 pragma solidity ^0.4.18;
 
-import './ownership/Ownable.sol';
+import 'zos-core/contracts/ownership/Ownable.sol';
 import './OwnedUpgradeableBasilStorage.sol';
-import 'zeppelin-solidity/contracts/math/SafeMath.sol';
-import 'zos-core/contracts/registry/Registry.sol';
+
+// TODO: needed for tests, see how to get truffle
+// to find these without this hack
+import 'zos-core/contracts/Registry.sol';
+import 'zos-core/contracts/Factory.sol';
 
 /**
- * @title Basil_V0
- * @dev Version 0 of a basil to show upgradeability.
+ * @title Basil
  */
-contract Basil is Ownable, OwnedUpgradeableBasilStorage {
+contract Basil is OwnedUpgradeableBasilStorage, Ownable {
+
+  function Basil() 
+    Ownable()
+    OwnedUpgradeableBasilStorage()
+    public
+  {}
   
   event Withdrawal(address indexed wallet, uint256 value);
   event NewDonation(address indexed donor, uint256 value, uint256 r, uint256 g, uint256 b);
 
   function initialize(address owner) public {
-    require(!_initialized);
+    require(!initialized);
     setOwner(owner);
-    _initialized = true;
+    initialized = true;
   }
 
   function donate(uint256 _r, uint256 _g, uint256 _b) external payable {

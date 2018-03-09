@@ -17,7 +17,6 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
     const params = abi.rawEncode(['address'], [owner]).toString('hex');
     const initializeData = '0x' + methodId + params;
-
     const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
     const proxyAddress = proxyData.logs[0].args.proxy;
     this.basil = Basil.at(proxyAddress)

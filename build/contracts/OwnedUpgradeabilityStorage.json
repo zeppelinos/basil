@@ -71,22 +71,22 @@
   ],
   "bytecode": "0x6060604052341561000f57600080fd5b6040516020806103d28339810160405280805190602001909190505080806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050506103558061007d6000396000f300606060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d50146100675780635c60da1b146100f55780636fde82021461014a5780637b1039991461019f575b600080fd5b341561007257600080fd5b61007a6101f4565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100ba57808201518184015260208101905061009f565b50505050905090810190601f1680156100e75780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010057600080fd5b61010861029c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561015557600080fd5b61015d6102c6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101aa57600080fd5b6101b26102ec565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6101fc610315565b60018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102925780601f1061026757610100808354040283529160200191610292565b820191906000526020600020905b81548152906001019060200180831161027557829003601f168201915b5050505050905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6020604051908101604052806000815250905600a165627a7a723058201a052a4cbef526a51e08907ae5e43336ee064a8e9fba09f9deef9c47bd6aab170029",
   "deployedBytecode": "0x606060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d50146100675780635c60da1b146100f55780636fde82021461014a5780637b1039991461019f575b600080fd5b341561007257600080fd5b61007a6101f4565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100ba57808201518184015260208101905061009f565b50505050905090810190601f1680156100e75780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010057600080fd5b61010861029c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561015557600080fd5b61015d6102c6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101aa57600080fd5b6101b26102ec565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6101fc610315565b60018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102925780601f1061026757610100808354040283529160200191610292565b820191906000526020600020905b81548152906001019060200180831161027557829003601f168201915b5050505050905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6020604051908101604052806000815250905600a165627a7a723058201a052a4cbef526a51e08907ae5e43336ee064a8e9fba09f9deef9c47bd6aab170029",
-  "sourceMap": "200:424:9:-;;;331:107;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;413:8;554::12;542:9;;:20;;;;;;;;;;;;;;;;;;479:88;331:107:9;200:424;;;;;;",
-  "deployedSourceMap": "200:424:9:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;904:89:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;292:34:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1083:78:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;748:6;;:::i;:::-;769:8;762:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;:::o;904:89::-;951:7;973:15;;;;;;;;;;;966:22;;904:89;:::o;292:34:9:-;;;;;;;;;;;;;:::o;1083:78:12:-;1124:8;1147:9;;;;;;;;;;;1140:16;;1083:78;:::o;200:424:9:-;;;;;;;;;;;;;;;:::o",
+  "sourceMap": "200:424:6:-;;;331:107;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;413:8;554::9;542:9;;:20;;;;;;;;;;;;;;;;;;479:88;331:107:6;200:424;;;;;;",
+  "deployedSourceMap": "200:424:6:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;904:89:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;292:34:6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1083:78:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;748:6;;:::i;:::-;769:8;762:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;:::o;904:89::-;951:7;973:15;;;;;;;;;;;966:22;;904:89;:::o;292:34:6:-;;;;;;;;;;;;;:::o;1083:78:9:-;1124:8;1147:9;;;;;;;;;;;1140:16;;1083:78;:::o;200:424:6:-;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity ^0.4.18;\n\n\nimport './UpgradeabilityStorage.sol';\nimport '../Registry.sol';\n\n\n/**\n * @title OwnedUpgradeabilityStorage\n * @dev This contract keeps track of the upgradeability owner\n */\ncontract OwnedUpgradeabilityStorage is UpgradeabilityStorage {\n  // Owner of the contract\n  address public upgradeabilityOwner;\n\n  function OwnedUpgradeabilityStorage(Registry registry) \n    UpgradeabilityStorage(registry)\n    public\n  {}\n\n  /**\n   * @dev Sets the address of the owner\n   */\n  function setUpgradeabilityOwner(address newUpgradeabilityOwner) internal {\n    upgradeabilityOwner = newUpgradeabilityOwner;\n  }\n}\n",
   "sourcePath": "zos-core/contracts/upgradeability/OwnedUpgradeabilityStorage.sol",
   "ast": {
     "absolutePath": "zos-core/contracts/upgradeability/OwnedUpgradeabilityStorage.sol",
     "exportedSymbols": {
       "OwnedUpgradeabilityStorage": [
-        646
+        568
       ]
     },
-    "id": 647,
+    "id": 569,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 620,
+        "id": 542,
         "literals": [
           "solidity",
           "^",
@@ -94,27 +94,27 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:9"
+        "src": "0:24:6"
       },
       {
         "absolutePath": "zos-core/contracts/upgradeability/UpgradeabilityStorage.sol",
         "file": "./UpgradeabilityStorage.sol",
-        "id": 621,
+        "id": 543,
         "nodeType": "ImportDirective",
-        "scope": 647,
-        "sourceUnit": 790,
-        "src": "27:37:9",
+        "scope": 569,
+        "sourceUnit": 712,
+        "src": "27:37:6",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
         "absolutePath": "zos-core/contracts/Registry.sol",
         "file": "../Registry.sol",
-        "id": 622,
+        "id": 544,
         "nodeType": "ImportDirective",
-        "scope": 647,
-        "sourceUnit": 422,
-        "src": "65:25:9",
+        "scope": 569,
+        "sourceUnit": 344,
+        "src": "65:25:6",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -124,42 +124,42 @@
             "arguments": [],
             "baseName": {
               "contractScope": null,
-              "id": 623,
+              "id": 545,
               "name": "UpgradeabilityStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 789,
-              "src": "239:21:9",
+              "referencedDeclaration": 711,
+              "src": "239:21:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$789",
+                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$711",
                 "typeString": "contract UpgradeabilityStorage"
               }
             },
-            "id": 624,
+            "id": 546,
             "nodeType": "InheritanceSpecifier",
-            "src": "239:21:9"
+            "src": "239:21:6"
           }
         ],
         "contractDependencies": [
-          789
+          711
         ],
         "contractKind": "contract",
         "documentation": "@title OwnedUpgradeabilityStorage\n@dev This contract keeps track of the upgradeability owner",
         "fullyImplemented": true,
-        "id": 646,
+        "id": 568,
         "linearizedBaseContracts": [
-          646,
-          789
+          568,
+          711
         ],
         "name": "OwnedUpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 626,
+            "id": 548,
             "name": "upgradeabilityOwner",
             "nodeType": "VariableDeclaration",
-            "scope": 646,
-            "src": "292:34:9",
+            "scope": 568,
+            "src": "292:34:6",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -167,10 +167,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 625,
+              "id": 547,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "292:7:9",
+              "src": "292:7:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
@@ -181,12 +181,12 @@
           },
           {
             "body": {
-              "id": 634,
+              "id": 556,
               "nodeType": "Block",
-              "src": "436:2:9",
+              "src": "436:2:6",
               "statements": []
             },
-            "id": 635,
+            "id": 557,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -195,64 +195,64 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 631,
+                    "id": 553,
                     "name": "registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 628,
-                    "src": "413:8:9",
+                    "referencedDeclaration": 550,
+                    "src": "413:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   }
                 ],
-                "id": 632,
+                "id": 554,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 630,
+                  "id": 552,
                   "name": "UpgradeabilityStorage",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 789,
-                  "src": "391:21:9",
+                  "referencedDeclaration": 711,
+                  "src": "391:21:6",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_UpgradeabilityStorage_$789_$",
+                    "typeIdentifier": "t_type$_t_contract$_UpgradeabilityStorage_$711_$",
                     "typeString": "type(contract UpgradeabilityStorage)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "391:31:9"
+                "src": "391:31:6"
               }
             ],
             "name": "OwnedUpgradeabilityStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 629,
+              "id": 551,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 628,
+                  "id": 550,
                   "name": "registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 635,
-                  "src": "367:17:9",
+                  "scope": 557,
+                  "src": "367:17:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 627,
+                    "id": 549,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "367:8:9",
+                    "referencedDeclaration": 343,
+                    "src": "367:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -260,43 +260,43 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "366:19:9"
+              "src": "366:19:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 633,
+              "id": 555,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "436:0:9"
+              "src": "436:0:6"
             },
-            "scope": 646,
-            "src": "331:107:9",
+            "scope": 568,
+            "src": "331:107:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 644,
+              "id": 566,
               "nodeType": "Block",
-              "src": "567:55:9",
+              "src": "567:55:6",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 642,
+                    "id": 564,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 640,
+                      "id": 562,
                       "name": "upgradeabilityOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 626,
-                      "src": "573:19:9",
+                      "referencedDeclaration": 548,
+                      "src": "573:19:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -306,30 +306,30 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 641,
+                      "id": 563,
                       "name": "newUpgradeabilityOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 637,
-                      "src": "595:22:9",
+                      "referencedDeclaration": 559,
+                      "src": "595:22:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "573:44:9",
+                    "src": "573:44:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 643,
+                  "id": 565,
                   "nodeType": "ExpressionStatement",
-                  "src": "573:44:9"
+                  "src": "573:44:6"
                 }
               ]
             },
-            "id": 645,
+            "id": 567,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -337,16 +337,16 @@
             "name": "setUpgradeabilityOwner",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 638,
+              "id": 560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 637,
+                  "id": 559,
                   "name": "newUpgradeabilityOwner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 645,
-                  "src": "526:30:9",
+                  "scope": 567,
+                  "src": "526:30:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -354,10 +354,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 636,
+                    "id": 558,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "526:7:9",
+                    "src": "526:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -367,40 +367,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "525:32:9"
+              "src": "525:32:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 639,
+              "id": 561,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "567:0:9"
+              "src": "567:0:6"
             },
-            "scope": 646,
-            "src": "494:128:9",
+            "scope": 568,
+            "src": "494:128:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 647,
-        "src": "200:424:9"
+        "scope": 569,
+        "src": "200:424:6"
       }
     ],
-    "src": "0:625:9"
+    "src": "0:625:6"
   },
   "legacyAST": {
     "absolutePath": "zos-core/contracts/upgradeability/OwnedUpgradeabilityStorage.sol",
     "exportedSymbols": {
       "OwnedUpgradeabilityStorage": [
-        646
+        568
       ]
     },
-    "id": 647,
+    "id": 569,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 620,
+        "id": 542,
         "literals": [
           "solidity",
           "^",
@@ -408,27 +408,27 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:9"
+        "src": "0:24:6"
       },
       {
         "absolutePath": "zos-core/contracts/upgradeability/UpgradeabilityStorage.sol",
         "file": "./UpgradeabilityStorage.sol",
-        "id": 621,
+        "id": 543,
         "nodeType": "ImportDirective",
-        "scope": 647,
-        "sourceUnit": 790,
-        "src": "27:37:9",
+        "scope": 569,
+        "sourceUnit": 712,
+        "src": "27:37:6",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
         "absolutePath": "zos-core/contracts/Registry.sol",
         "file": "../Registry.sol",
-        "id": 622,
+        "id": 544,
         "nodeType": "ImportDirective",
-        "scope": 647,
-        "sourceUnit": 422,
-        "src": "65:25:9",
+        "scope": 569,
+        "sourceUnit": 344,
+        "src": "65:25:6",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -438,42 +438,42 @@
             "arguments": [],
             "baseName": {
               "contractScope": null,
-              "id": 623,
+              "id": 545,
               "name": "UpgradeabilityStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 789,
-              "src": "239:21:9",
+              "referencedDeclaration": 711,
+              "src": "239:21:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$789",
+                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$711",
                 "typeString": "contract UpgradeabilityStorage"
               }
             },
-            "id": 624,
+            "id": 546,
             "nodeType": "InheritanceSpecifier",
-            "src": "239:21:9"
+            "src": "239:21:6"
           }
         ],
         "contractDependencies": [
-          789
+          711
         ],
         "contractKind": "contract",
         "documentation": "@title OwnedUpgradeabilityStorage\n@dev This contract keeps track of the upgradeability owner",
         "fullyImplemented": true,
-        "id": 646,
+        "id": 568,
         "linearizedBaseContracts": [
-          646,
-          789
+          568,
+          711
         ],
         "name": "OwnedUpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 626,
+            "id": 548,
             "name": "upgradeabilityOwner",
             "nodeType": "VariableDeclaration",
-            "scope": 646,
-            "src": "292:34:9",
+            "scope": 568,
+            "src": "292:34:6",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -481,10 +481,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 625,
+              "id": 547,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "292:7:9",
+              "src": "292:7:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
@@ -495,12 +495,12 @@
           },
           {
             "body": {
-              "id": 634,
+              "id": 556,
               "nodeType": "Block",
-              "src": "436:2:9",
+              "src": "436:2:6",
               "statements": []
             },
-            "id": 635,
+            "id": 557,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -509,64 +509,64 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 631,
+                    "id": 553,
                     "name": "registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 628,
-                    "src": "413:8:9",
+                    "referencedDeclaration": 550,
+                    "src": "413:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   }
                 ],
-                "id": 632,
+                "id": 554,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 630,
+                  "id": 552,
                   "name": "UpgradeabilityStorage",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 789,
-                  "src": "391:21:9",
+                  "referencedDeclaration": 711,
+                  "src": "391:21:6",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_UpgradeabilityStorage_$789_$",
+                    "typeIdentifier": "t_type$_t_contract$_UpgradeabilityStorage_$711_$",
                     "typeString": "type(contract UpgradeabilityStorage)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "391:31:9"
+                "src": "391:31:6"
               }
             ],
             "name": "OwnedUpgradeabilityStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 629,
+              "id": 551,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 628,
+                  "id": 550,
                   "name": "registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 635,
-                  "src": "367:17:9",
+                  "scope": 557,
+                  "src": "367:17:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 627,
+                    "id": 549,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "367:8:9",
+                    "referencedDeclaration": 343,
+                    "src": "367:8:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -574,43 +574,43 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "366:19:9"
+              "src": "366:19:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 633,
+              "id": 555,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "436:0:9"
+              "src": "436:0:6"
             },
-            "scope": 646,
-            "src": "331:107:9",
+            "scope": 568,
+            "src": "331:107:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 644,
+              "id": 566,
               "nodeType": "Block",
-              "src": "567:55:9",
+              "src": "567:55:6",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 642,
+                    "id": 564,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 640,
+                      "id": 562,
                       "name": "upgradeabilityOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 626,
-                      "src": "573:19:9",
+                      "referencedDeclaration": 548,
+                      "src": "573:19:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -620,30 +620,30 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 641,
+                      "id": 563,
                       "name": "newUpgradeabilityOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 637,
-                      "src": "595:22:9",
+                      "referencedDeclaration": 559,
+                      "src": "595:22:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "573:44:9",
+                    "src": "573:44:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 643,
+                  "id": 565,
                   "nodeType": "ExpressionStatement",
-                  "src": "573:44:9"
+                  "src": "573:44:6"
                 }
               ]
             },
-            "id": 645,
+            "id": 567,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -651,16 +651,16 @@
             "name": "setUpgradeabilityOwner",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 638,
+              "id": 560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 637,
+                  "id": 559,
                   "name": "newUpgradeabilityOwner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 645,
-                  "src": "526:30:9",
+                  "scope": 567,
+                  "src": "526:30:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -668,10 +668,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 636,
+                    "id": 558,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "526:7:9",
+                    "src": "526:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -681,27 +681,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "525:32:9"
+              "src": "525:32:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 639,
+              "id": 561,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "567:0:9"
+              "src": "567:0:6"
             },
-            "scope": 646,
-            "src": "494:128:9",
+            "scope": 568,
+            "src": "494:128:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 647,
-        "src": "200:424:9"
+        "scope": 569,
+        "src": "200:424:6"
       }
     ],
-    "src": "0:625:9"
+    "src": "0:625:6"
   },
   "compiler": {
     "name": "solc",
@@ -709,5 +709,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-03-09T16:10:18.092Z"
+  "updatedAt": "2018-03-09T16:41:23.119Z"
 }

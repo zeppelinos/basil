@@ -57,22 +57,22 @@
   ],
   "bytecode": "0x6060604052341561000f57600080fd5b60405160208061034a83398101604052808051906020019091905050806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550506102cf8061007b6000396000f300606060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d501461005c5780635c60da1b146100ea5780637b1039991461013f575b600080fd5b341561006757600080fd5b61006f610194565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100af578082015181840152602081019050610094565b50505050905090810190601f1680156100dc5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156100f557600080fd5b6100fd61023c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014a57600080fd5b610152610266565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61019c61028f565b60018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102325780601f1061020757610100808354040283529160200191610232565b820191906000526020600020905b81548152906001019060200180831161021557829003601f168201915b5050505050905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6020604051908101604052806000815250905600a165627a7a7230582007f1819f735e9aefdd7463266a1c82b4274c15a08d833d9bdad5114b3045a70d0029",
   "deployedBytecode": "0x606060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806354fd4d501461005c5780635c60da1b146100ea5780637b1039991461013f575b600080fd5b341561006757600080fd5b61006f610194565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100af578082015181840152602081019050610094565b50505050905090810190601f1680156100dc5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156100f557600080fd5b6100fd61023c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014a57600080fd5b610152610266565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61019c61028f565b60018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102325780601f1061020757610100808354040283529160200191610232565b820191906000526020600020905b81548152906001019060200180831161021557829003601f168201915b5050505050905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6020604051908101604052806000815250905600a165627a7a7230582007f1819f735e9aefdd7463266a1c82b4274c15a08d833d9bdad5114b3045a70d0029",
-  "sourceMap": "192:971:12:-;;;479:88;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;554:8;542:9;;:20;;;;;;;;;;;;;;;;;;479:88;192:971;;;;;;",
-  "deployedSourceMap": "192:971:12:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;904:89:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1083:78;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;748:6;;:::i;:::-;769:8;762:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;:::o;904:89::-;951:7;973:15;;;;;;;;;;;966:22;;904:89;:::o;1083:78::-;1124:8;1147:9;;;;;;;;;;;1140:16;;1083:78;:::o;192:971::-;;;;;;;;;;;;;;;:::o",
+  "sourceMap": "192:971:9:-;;;479:88;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;554:8;542:9;;:20;;;;;;;;;;;;;;;;;;479:88;192:971;;;;;;",
+  "deployedSourceMap": "192:971:9:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;904:89:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1083:78;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;748:6;;:::i;:::-;769:8;762:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;708:74;:::o;904:89::-;951:7;973:15;;;;;;;;;;;966:22;;904:89;:::o;1083:78::-;1124:8;1147:9;;;;;;;;;;;1140:16;;1083:78;:::o;192:971::-;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity ^0.4.18;\n\nimport '../Registry.sol';\n\n/**\n * @title UpgradeabilityStorage\n * @dev This contract holds all the necessary state variables to support the upgrade functionality\n */\ncontract UpgradeabilityStorage {\n  // Versions registry\n  Registry private _registry;\n\n  // Version name of the current implementation\n  string internal _version;\n\n  // Address of the current implementation\n  address internal _implementation;\n\n  /**\n  * @dev Constructor function\n  */\n  function UpgradeabilityStorage(Registry registry) public {\n    _registry = registry;\n  }\n\n  /**\n  * @dev Tells the version name of the current implementation\n  * @return string representing the name of the current version\n  */\n  function version() public view returns (string) {\n    return _version;\n  }\n\n  /**\n  * @dev Tells the address of the current implementation\n  * @return address of the current implementation\n  */\n  function implementation() public view returns (address) {\n    return _implementation;\n  }\n\n  /**\n  * @dev Tells the address of registry\n  * @return address of the registry\n  */\n  function registry() public view returns (Registry) {\n    return _registry;\n  }\n}\n",
   "sourcePath": "zos-core/contracts/upgradeability/UpgradeabilityStorage.sol",
   "ast": {
     "absolutePath": "zos-core/contracts/upgradeability/UpgradeabilityStorage.sol",
     "exportedSymbols": {
       "UpgradeabilityStorage": [
-        789
+        711
       ]
     },
-    "id": 790,
+    "id": 712,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 747,
+        "id": 669,
         "literals": [
           "solidity",
           "^",
@@ -80,16 +80,16 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:9"
       },
       {
         "absolutePath": "zos-core/contracts/Registry.sol",
         "file": "../Registry.sol",
-        "id": 748,
+        "id": 670,
         "nodeType": "ImportDirective",
-        "scope": 790,
-        "sourceUnit": 422,
-        "src": "26:25:12",
+        "scope": 712,
+        "sourceUnit": 344,
+        "src": "26:25:9",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -99,35 +99,35 @@
         "contractKind": "contract",
         "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
         "fullyImplemented": true,
-        "id": 789,
+        "id": 711,
         "linearizedBaseContracts": [
-          789
+          711
         ],
         "name": "UpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 750,
+            "id": 672,
             "name": "_registry",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "250:26:12",
+            "scope": 711,
+            "src": "250:26:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Registry_$421",
+              "typeIdentifier": "t_contract$_Registry_$343",
               "typeString": "contract Registry"
             },
             "typeName": {
               "contractScope": null,
-              "id": 749,
+              "id": 671,
               "name": "Registry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 421,
-              "src": "250:8:12",
+              "referencedDeclaration": 343,
+              "src": "250:8:9",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Registry_$421",
+                "typeIdentifier": "t_contract$_Registry_$343",
                 "typeString": "contract Registry"
               }
             },
@@ -136,11 +136,11 @@
           },
           {
             "constant": false,
-            "id": 752,
+            "id": 674,
             "name": "_version",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "329:24:12",
+            "scope": 711,
+            "src": "329:24:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -148,10 +148,10 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 751,
+              "id": 673,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "329:6:12",
+              "src": "329:6:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string storage pointer"
@@ -162,11 +162,11 @@
           },
           {
             "constant": false,
-            "id": 754,
+            "id": 676,
             "name": "_implementation",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "401:32:12",
+            "scope": 711,
+            "src": "401:32:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -174,10 +174,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 753,
+              "id": 675,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "401:7:12",
+              "src": "401:7:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
@@ -188,28 +188,28 @@
           },
           {
             "body": {
-              "id": 763,
+              "id": 685,
               "nodeType": "Block",
-              "src": "536:31:12",
+              "src": "536:31:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 761,
+                    "id": 683,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 759,
+                      "id": 681,
                       "name": "_registry",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 750,
-                      "src": "542:9:12",
+                      "referencedDeclaration": 672,
+                      "src": "542:9:9",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Registry_$421",
+                        "typeIdentifier": "t_contract$_Registry_$343",
                         "typeString": "contract Registry"
                       }
                     },
@@ -217,30 +217,30 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 760,
+                      "id": 682,
                       "name": "registry",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 756,
-                      "src": "554:8:12",
+                      "referencedDeclaration": 678,
+                      "src": "554:8:9",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Registry_$421",
+                        "typeIdentifier": "t_contract$_Registry_$343",
                         "typeString": "contract Registry"
                       }
                     },
-                    "src": "542:20:12",
+                    "src": "542:20:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
-                  "id": 762,
+                  "id": 684,
                   "nodeType": "ExpressionStatement",
-                  "src": "542:20:12"
+                  "src": "542:20:9"
                 }
               ]
             },
-            "id": 764,
+            "id": 686,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -248,31 +248,31 @@
             "name": "UpgradeabilityStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 757,
+              "id": 679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 756,
+                  "id": 678,
                   "name": "registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 764,
-                  "src": "510:17:12",
+                  "scope": 686,
+                  "src": "510:17:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 755,
+                    "id": 677,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "510:8:12",
+                    "referencedDeclaration": 343,
+                    "src": "510:8:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -280,49 +280,49 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "509:19:12"
+              "src": "509:19:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 758,
+              "id": 680,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "536:0:12"
+              "src": "536:0:9"
             },
-            "scope": 789,
-            "src": "479:88:12",
+            "scope": 711,
+            "src": "479:88:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 771,
+              "id": 693,
               "nodeType": "Block",
-              "src": "756:26:12",
+              "src": "756:26:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 769,
+                    "id": 691,
                     "name": "_version",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 752,
-                    "src": "769:8:12",
+                    "referencedDeclaration": 674,
+                    "src": "769:8:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage",
                       "typeString": "string storage ref"
                     }
                   },
-                  "functionReturnParameters": 768,
-                  "id": 770,
+                  "functionReturnParameters": 690,
+                  "id": 692,
                   "nodeType": "Return",
-                  "src": "762:15:12"
+                  "src": "762:15:9"
                 }
               ]
             },
-            "id": 772,
+            "id": 694,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -330,23 +330,23 @@
             "name": "version",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 765,
+              "id": 687,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "724:2:12"
+              "src": "724:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 768,
+              "id": 690,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 767,
+                  "id": 689,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 772,
-                  "src": "748:6:12",
+                  "scope": 694,
+                  "src": "748:6:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -354,10 +354,10 @@
                     "typeString": "string memory"
                   },
                   "typeName": {
-                    "id": 766,
+                    "id": 688,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "748:6:12",
+                    "src": "748:6:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string storage pointer"
@@ -367,42 +367,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "747:8:12"
+              "src": "747:8:9"
             },
-            "scope": 789,
-            "src": "708:74:12",
+            "scope": 711,
+            "src": "708:74:9",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 779,
+              "id": 701,
               "nodeType": "Block",
-              "src": "960:33:12",
+              "src": "960:33:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 777,
+                    "id": 699,
                     "name": "_implementation",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 754,
-                    "src": "973:15:12",
+                    "referencedDeclaration": 676,
+                    "src": "973:15:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 776,
-                  "id": 778,
+                  "functionReturnParameters": 698,
+                  "id": 700,
                   "nodeType": "Return",
-                  "src": "966:22:12"
+                  "src": "966:22:9"
                 }
               ]
             },
-            "id": 780,
+            "id": 702,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -410,23 +410,23 @@
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 773,
+              "id": 695,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "927:2:12"
+              "src": "927:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 776,
+              "id": 698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 775,
+                  "id": 697,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 780,
-                  "src": "951:7:12",
+                  "scope": 702,
+                  "src": "951:7:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -434,10 +434,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 774,
+                    "id": 696,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "951:7:12",
+                    "src": "951:7:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -447,42 +447,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "950:9:12"
+              "src": "950:9:9"
             },
-            "scope": 789,
-            "src": "904:89:12",
+            "scope": 711,
+            "src": "904:89:9",
             "stateMutability": "view",
-            "superFunction": 653,
+            "superFunction": 575,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 787,
+              "id": 709,
               "nodeType": "Block",
-              "src": "1134:27:12",
+              "src": "1134:27:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 785,
+                    "id": 707,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 750,
-                    "src": "1147:9:12",
+                    "referencedDeclaration": 672,
+                    "src": "1147:9:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
-                  "functionReturnParameters": 784,
-                  "id": 786,
+                  "functionReturnParameters": 706,
+                  "id": 708,
                   "nodeType": "Return",
-                  "src": "1140:16:12"
+                  "src": "1140:16:9"
                 }
               ]
             },
-            "id": 788,
+            "id": 710,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -490,38 +490,38 @@
             "name": "registry",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 781,
+              "id": 703,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1100:2:12"
+              "src": "1100:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 784,
+              "id": 706,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 783,
+                  "id": 705,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 788,
-                  "src": "1124:8:12",
+                  "scope": 710,
+                  "src": "1124:8:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 782,
+                    "id": 704,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "1124:8:12",
+                    "referencedDeclaration": 343,
+                    "src": "1124:8:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -529,33 +529,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1123:10:12"
+              "src": "1123:10:9"
             },
-            "scope": 789,
-            "src": "1083:78:12",
+            "scope": 711,
+            "src": "1083:78:9",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 790,
-        "src": "192:971:12"
+        "scope": 712,
+        "src": "192:971:9"
       }
     ],
-    "src": "0:1164:12"
+    "src": "0:1164:9"
   },
   "legacyAST": {
     "absolutePath": "zos-core/contracts/upgradeability/UpgradeabilityStorage.sol",
     "exportedSymbols": {
       "UpgradeabilityStorage": [
-        789
+        711
       ]
     },
-    "id": 790,
+    "id": 712,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 747,
+        "id": 669,
         "literals": [
           "solidity",
           "^",
@@ -563,16 +563,16 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:9"
       },
       {
         "absolutePath": "zos-core/contracts/Registry.sol",
         "file": "../Registry.sol",
-        "id": 748,
+        "id": 670,
         "nodeType": "ImportDirective",
-        "scope": 790,
-        "sourceUnit": 422,
-        "src": "26:25:12",
+        "scope": 712,
+        "sourceUnit": 344,
+        "src": "26:25:9",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -582,35 +582,35 @@
         "contractKind": "contract",
         "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
         "fullyImplemented": true,
-        "id": 789,
+        "id": 711,
         "linearizedBaseContracts": [
-          789
+          711
         ],
         "name": "UpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 750,
+            "id": 672,
             "name": "_registry",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "250:26:12",
+            "scope": 711,
+            "src": "250:26:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Registry_$421",
+              "typeIdentifier": "t_contract$_Registry_$343",
               "typeString": "contract Registry"
             },
             "typeName": {
               "contractScope": null,
-              "id": 749,
+              "id": 671,
               "name": "Registry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 421,
-              "src": "250:8:12",
+              "referencedDeclaration": 343,
+              "src": "250:8:9",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Registry_$421",
+                "typeIdentifier": "t_contract$_Registry_$343",
                 "typeString": "contract Registry"
               }
             },
@@ -619,11 +619,11 @@
           },
           {
             "constant": false,
-            "id": 752,
+            "id": 674,
             "name": "_version",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "329:24:12",
+            "scope": 711,
+            "src": "329:24:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -631,10 +631,10 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 751,
+              "id": 673,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "329:6:12",
+              "src": "329:6:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string storage pointer"
@@ -645,11 +645,11 @@
           },
           {
             "constant": false,
-            "id": 754,
+            "id": 676,
             "name": "_implementation",
             "nodeType": "VariableDeclaration",
-            "scope": 789,
-            "src": "401:32:12",
+            "scope": 711,
+            "src": "401:32:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -657,10 +657,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 753,
+              "id": 675,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "401:7:12",
+              "src": "401:7:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
@@ -671,28 +671,28 @@
           },
           {
             "body": {
-              "id": 763,
+              "id": 685,
               "nodeType": "Block",
-              "src": "536:31:12",
+              "src": "536:31:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 761,
+                    "id": 683,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 759,
+                      "id": 681,
                       "name": "_registry",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 750,
-                      "src": "542:9:12",
+                      "referencedDeclaration": 672,
+                      "src": "542:9:9",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Registry_$421",
+                        "typeIdentifier": "t_contract$_Registry_$343",
                         "typeString": "contract Registry"
                       }
                     },
@@ -700,30 +700,30 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 760,
+                      "id": 682,
                       "name": "registry",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 756,
-                      "src": "554:8:12",
+                      "referencedDeclaration": 678,
+                      "src": "554:8:9",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Registry_$421",
+                        "typeIdentifier": "t_contract$_Registry_$343",
                         "typeString": "contract Registry"
                       }
                     },
-                    "src": "542:20:12",
+                    "src": "542:20:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
-                  "id": 762,
+                  "id": 684,
                   "nodeType": "ExpressionStatement",
-                  "src": "542:20:12"
+                  "src": "542:20:9"
                 }
               ]
             },
-            "id": 764,
+            "id": 686,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -731,31 +731,31 @@
             "name": "UpgradeabilityStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 757,
+              "id": 679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 756,
+                  "id": 678,
                   "name": "registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 764,
-                  "src": "510:17:12",
+                  "scope": 686,
+                  "src": "510:17:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 755,
+                    "id": 677,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "510:8:12",
+                    "referencedDeclaration": 343,
+                    "src": "510:8:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -763,49 +763,49 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "509:19:12"
+              "src": "509:19:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 758,
+              "id": 680,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "536:0:12"
+              "src": "536:0:9"
             },
-            "scope": 789,
-            "src": "479:88:12",
+            "scope": 711,
+            "src": "479:88:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 771,
+              "id": 693,
               "nodeType": "Block",
-              "src": "756:26:12",
+              "src": "756:26:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 769,
+                    "id": 691,
                     "name": "_version",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 752,
-                    "src": "769:8:12",
+                    "referencedDeclaration": 674,
+                    "src": "769:8:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage",
                       "typeString": "string storage ref"
                     }
                   },
-                  "functionReturnParameters": 768,
-                  "id": 770,
+                  "functionReturnParameters": 690,
+                  "id": 692,
                   "nodeType": "Return",
-                  "src": "762:15:12"
+                  "src": "762:15:9"
                 }
               ]
             },
-            "id": 772,
+            "id": 694,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -813,23 +813,23 @@
             "name": "version",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 765,
+              "id": 687,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "724:2:12"
+              "src": "724:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 768,
+              "id": 690,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 767,
+                  "id": 689,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 772,
-                  "src": "748:6:12",
+                  "scope": 694,
+                  "src": "748:6:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -837,10 +837,10 @@
                     "typeString": "string memory"
                   },
                   "typeName": {
-                    "id": 766,
+                    "id": 688,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "748:6:12",
+                    "src": "748:6:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string storage pointer"
@@ -850,42 +850,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "747:8:12"
+              "src": "747:8:9"
             },
-            "scope": 789,
-            "src": "708:74:12",
+            "scope": 711,
+            "src": "708:74:9",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 779,
+              "id": 701,
               "nodeType": "Block",
-              "src": "960:33:12",
+              "src": "960:33:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 777,
+                    "id": 699,
                     "name": "_implementation",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 754,
-                    "src": "973:15:12",
+                    "referencedDeclaration": 676,
+                    "src": "973:15:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 776,
-                  "id": 778,
+                  "functionReturnParameters": 698,
+                  "id": 700,
                   "nodeType": "Return",
-                  "src": "966:22:12"
+                  "src": "966:22:9"
                 }
               ]
             },
-            "id": 780,
+            "id": 702,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -893,23 +893,23 @@
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 773,
+              "id": 695,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "927:2:12"
+              "src": "927:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 776,
+              "id": 698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 775,
+                  "id": 697,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 780,
-                  "src": "951:7:12",
+                  "scope": 702,
+                  "src": "951:7:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -917,10 +917,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 774,
+                    "id": 696,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "951:7:12",
+                    "src": "951:7:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -930,42 +930,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "950:9:12"
+              "src": "950:9:9"
             },
-            "scope": 789,
-            "src": "904:89:12",
+            "scope": 711,
+            "src": "904:89:9",
             "stateMutability": "view",
-            "superFunction": 653,
+            "superFunction": 575,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 787,
+              "id": 709,
               "nodeType": "Block",
-              "src": "1134:27:12",
+              "src": "1134:27:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 785,
+                    "id": 707,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 750,
-                    "src": "1147:9:12",
+                    "referencedDeclaration": 672,
+                    "src": "1147:9:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
-                  "functionReturnParameters": 784,
-                  "id": 786,
+                  "functionReturnParameters": 706,
+                  "id": 708,
                   "nodeType": "Return",
-                  "src": "1140:16:12"
+                  "src": "1140:16:9"
                 }
               ]
             },
-            "id": 788,
+            "id": 710,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -973,38 +973,38 @@
             "name": "registry",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 781,
+              "id": 703,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1100:2:12"
+              "src": "1100:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 784,
+              "id": 706,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 783,
+                  "id": 705,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 788,
-                  "src": "1124:8:12",
+                  "scope": 710,
+                  "src": "1124:8:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_Registry_$421",
+                    "typeIdentifier": "t_contract$_Registry_$343",
                     "typeString": "contract Registry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 782,
+                    "id": 704,
                     "name": "Registry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 421,
-                    "src": "1124:8:12",
+                    "referencedDeclaration": 343,
+                    "src": "1124:8:9",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Registry_$421",
+                      "typeIdentifier": "t_contract$_Registry_$343",
                       "typeString": "contract Registry"
                     }
                   },
@@ -1012,20 +1012,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1123:10:12"
+              "src": "1123:10:9"
             },
-            "scope": 789,
-            "src": "1083:78:12",
+            "scope": 711,
+            "src": "1083:78:9",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 790,
-        "src": "192:971:12"
+        "scope": 712,
+        "src": "192:971:9"
       }
     ],
-    "src": "0:1164:12"
+    "src": "0:1164:9"
   },
   "compiler": {
     "name": "solc",
@@ -1033,5 +1033,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-03-09T16:10:18.092Z"
+  "updatedAt": "2018-03-09T16:41:23.122Z"
 }

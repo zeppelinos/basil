@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
 import 'zos-core/contracts/ownership/Ownable.sol';
-import './OwnedUpgradeableBasilStorage.sol';
+import 'zos-core/contracts/upgradeability/OwnedUpgradeabilityStorage.sol';
 
 // TODO: needed for tests, see how to get truffle
 // to find these without this hack
@@ -11,11 +11,24 @@ import 'zos-core/contracts/Factory.sol';
 /**
  * @title Basil
  */
-contract Basil is OwnedUpgradeableBasilStorage, Ownable {
+contract Basil is OwnedUpgradeabilityStorage, Ownable {
 
+  // color
+  uint256 public r;
+  uint256 public g;
+  uint256 public b;
+
+  // Tells whether the basil has been initialized or not
+  bool public initialized;
+
+  // highest donation in wei
+  uint256 public highestDonation;
+
+
+  // constructor
   function Basil() 
     Ownable()
-    OwnedUpgradeableBasilStorage()
+    OwnedUpgradeabilityStorage(Registry(0x0))
     public
   {}
   

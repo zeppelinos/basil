@@ -36,7 +36,6 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
     })
 
     it('sets the right registry', async function () {
-      await this.basil.transferOwnership(proxyOwner, {from: owner})
       const registry = await this.basil.registry();
       assert.equal(registry, this.registry.address);
     })

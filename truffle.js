@@ -7,11 +7,6 @@ module.exports = {
       host: 'localhost',
       port: 8545,
       network_id: 3,
-    },
-    test: {
-      host: 'localhost',
-      port: 9545,
-      network_id: 3,
     }
   }
 };

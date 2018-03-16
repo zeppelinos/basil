@@ -4,7 +4,7 @@ require('babel-polyfill');
 module.exports = {
   networks: {
     ropsten: {
-      host: "localhost",
+      host: 'localhost',
       port: 8545,
       network_id: 3,
     }

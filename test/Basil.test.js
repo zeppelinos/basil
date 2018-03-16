@@ -1,20 +1,44 @@
-const abi = require('ethereumjs-abi')
-import assertRevert from "./helpers/assertRevert";
+'use strict';
 
-const Basil_V0 = artifacts.require('Basil_V0');
-const BasilProxy = artifacts.require('BasilProxy');
+const abi = require('ethereumjs-abi')
+import assertRevert from './helpers/assertRevert'
+
+const Basil = artifacts.require('Basil')
+const Registry = artifacts.require('zos-core/contracts/Registry.sol')
+const Factory = artifacts.require('zos-core/contracts/Factory.sol')
 
 contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
   beforeEach(async function () {
-    const basil_v0 = await Basil_V0.new()
-    const proxy = await BasilProxy.new({ from: proxyOwner })
+    const behavior = await Basil.new()
+    const registry = await Registry.new()
+    const factory = await Factory.new(registry.address)
+    registry.addVersion('0', behavior.address)
 
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
     const params = abi.rawEncode(['address'], [owner]).toString('hex');
     const initializeData = '0x' + methodId + params;
+    const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
+    const proxyAddress = proxyData.logs[0].args.proxy;
+    this.basil = Basil.at(proxyAddress)
+    this.registry = registry
+  })
+  describe('zos-core usage', function () {
+    it('sets the right upgradeability owner', async function () {
+      const upgradeabilityOwner = await this.basil.upgradeabilityOwner();
+      assert.equal(upgradeabilityOwner, proxyOwner);
+    })
 
-    await proxy.upgradeToAndCall('0', basil_v0.address, initializeData, { from: proxyOwner })
-    this.basil = Basil_V0.at(proxy.address)
+    it('initializes the basil', async function () {
+      const init = await this.basil.initialized();
+      const basilOwner = await this.basil.owner();
+      assert.equal(init, true);
+      assert.equal(basilOwner, owner);
+    })
+
+    it('sets the right registry', async function () {
+      const registry = await this.basil.registry();
+      assert.equal(registry, this.registry.address);
+    })
   })
 
   describe('donate', function () {
@@ -74,9 +98,6 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           it('becomes the highest donation', async function () {
             await this.basil.donate(R, G, B, { from: donor, value: firstDonation })
 
-            const highestDonation = await this.basil.highestDonation()
-            assert(highestDonation.eq(firstDonation))
-
             const r = await this.basil.r()
             assert(r.eq(R))
 
@@ -85,6 +106,9 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
 
             const b = await this.basil.b()
             assert(b.eq(B))
+
+            const highestDonation = await this.basil.highestDonation()
+            assert(highestDonation.eq(firstDonation))
           })
 
           it('emits a new donation event', async function () {

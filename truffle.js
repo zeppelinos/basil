@@ -2,10 +2,6 @@ require('babel-register');
 require('babel-polyfill');
 
 module.exports = {
-  mocha: {
-    bail: true,
-    logs: true,
-  },
   networks: {
     ropsten: {
       host: 'localhost',

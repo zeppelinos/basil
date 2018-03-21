@@ -7,7 +7,9 @@
     "test": "npx truffle test",
     "console": "npx truffle console",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "lint:sol": "solium -d .",
+    "lint:sol:fix": "solium -d . --fix"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,7 @@
     "node-sass": "^4.5.3",
     "resolve-url-loader": "^2.2.0",
     "sass-loader": "^6.0.6",
+    "solium": "^1.1.5",
     "style-loader": "^0.18.2",
     "truffle": "^4.1.0",
     "webpack": "^3.5.5",

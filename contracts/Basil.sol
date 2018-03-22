@@ -47,11 +47,8 @@ contract Basil is OwnedUpgradeabilityStorage, Ownable {
     b = _b;
     highestDonation = msg.value;
     NewDonation(
-      msg.sender,
-      msg.value,
-      r,
-      g,
-      b);
+      msg.sender, msg.value,
+      r, g, b);
   }
 
   function initialize(address owner) public {

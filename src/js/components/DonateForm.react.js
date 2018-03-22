@@ -1,16 +1,16 @@
 import React from 'react';
-import Store from '../store'
-import { connect } from 'react-redux'
-import { HuePicker } from 'react-color'
-import AccountActions from '../actions/accounts'
-import DonationsActions from '../actions/donations'
+import Store from '../store';
+import { connect } from 'react-redux';
+import { HuePicker } from 'react-color';
+import AccountActions from '../actions/accounts';
+import DonationsActions from '../actions/donations';
 
 class DonateForm extends React.Component {
   constructor(props){
-    super(props)
-    this.state = { value: 0, color: { rgb: { r: 0, g: 0, b: 0 } } }
-    this._updateValue = this._updateValue.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
+    super(props);
+    this.state = { value: 0, color: { rgb: { r: 0, g: 0, b: 0 } } };
+    this._updateValue = this._updateValue.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   componentWillMount() {

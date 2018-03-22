@@ -13,7 +13,7 @@ module.exports = {
       name: "ropsten",
       host: 'localhost',
       port: 8545,
-      network_id: 3,
-    }
-  }
+      network_id: 3, // eslint-disable-line camelcase
+    },
+  },
 };

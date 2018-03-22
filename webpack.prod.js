@@ -8,14 +8,14 @@ const config = merge(common, {
   plugins: [
     new UglifyJSPlugin(),
     new Dotenv({
-      path: './.env.production'
+      path: './.env.production',
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ]
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+  ],
 });
 
 module.exports = config;

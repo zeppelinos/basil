@@ -1,5 +1,5 @@
-import Network from './network'
-import contract from 'truffle-contract'
+import Network from './network';
+import contract from 'truffle-contract';
 
 const provider = Network.provider();
 
@@ -8,4 +8,4 @@ Basil.setProvider(provider);
 
 export {
   Basil,
-}
+};

@@ -2,23 +2,47 @@
 
 import assertRevert from './helpers/assertRevert';
 
+const abi = require('ethereumjs-abi');
+
 const Basil = artifacts.require('Basil');
+const Registry = artifacts.require('zos-core/contracts/Registry.sol');
+const Factory = artifacts.require('zos-core/contracts/Factory.sol');
 
-contract('Basil', (accounts) => {
-  describe('implementation', function() {
-    shouldBehaveLikeBasil(Basil, accounts);
-  });
-});
-
-function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, someone, anotherone]) {
-
+contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
   beforeEach(async function () {
-    this.basil = await ContractKlazz.new();
-    await this.basil.initialize(owner);
+    const behavior = await Basil.new();
+    const registry = await Registry.new();
+    const factory = await Factory.new(registry.address);
+    registry.addVersion('0', behavior.address);
+
+    const methodId = abi.methodID('initialize', ['address']).toString('hex');
+    const params = abi.rawEncode(['address'], [owner]).toString('hex');
+    const initializeData = '0x' + methodId + params;
+    const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner });
+    const proxyAddress = proxyData.logs[0].args.proxy;
+    this.basil = Basil.at(proxyAddress);
+    this.registry = registry;
+  });
+  describe('zos-core usage', function () {
+    it('sets the right upgradeability owner', async function () {
+      const upgradeabilityOwner = await this.basil.upgradeabilityOwner();
+      assert.equal(upgradeabilityOwner, proxyOwner);
+    });
+
+    it('initializes the basil', async function () {
+      const init = await this.basil.initialized();
+      const basilOwner = await this.basil.owner();
+      assert.equal(init, true);
+      assert.equal(basilOwner, owner);
+    });
+
+    it('sets the right registry', async function () {
+      const registry = await this.basil.registry();
+      assert.equal(registry, this.registry.address);
+    });
   });
 
   describe('donate', function () {
-
     describe('when there are no donations', function () {
       const donor = someone;
 
@@ -125,13 +149,12 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
           const secondDonation = 2;
 
           it('reverts', async function () {
-            await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
+            await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }));
           });
         });
 
         describe('when the new donation is greater than the previous one', function () {
           const secondDonation = 3;
-
 
           describe('when the given R value are invalid', function () {
             const R = 256;
@@ -184,8 +207,8 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
               assert(b.eq(B));
             });
 
-            it('emits a new donation event', async function () {;
-                                                                const { logs } = await this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation });
+            it('emits a new donation event', async function () {
+              const { logs } = await this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation });
 
               assert.equal(logs.length, 1);
               assert.equal(logs[0].event, 'NewDonation');
@@ -194,7 +217,7 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
               assert.equal(logs[0].args.r, R);
               assert.equal(logs[0].args.g, G);
               assert.equal(logs[0].args.b, B);
-                                                                });
+            });
           });
         });
       });
@@ -202,7 +225,6 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
   });
 
   describe('withdraw', function () {
-
     describe('when the sender is not the owner', function () {
       const from = anotherone;
       const wallet = aWallet;
@@ -232,7 +254,7 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
           });
         });
 
-        describe.only('when there were some funds', function () {
+        describe('when there were some funds', function () {
           const donor = someone;
           const donation = 999;
 
@@ -257,8 +279,4 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
       });
     });
   });
-}
-
-module.exports = shouldBehaveLikeBasil;
-
-
+});

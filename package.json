@@ -6,12 +6,14 @@
   "scripts": {
     "test": "npx truffle test",
     "console": "npx truffle console",
-    "deploy": "npx truffle exec scripts/deploy.js --network development",
-    "deploy-ropsten": "npx truffle exec scripts/deploy.js --network development",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:sol": "solium -d .",
-    "lint:sol:fix": "solium -d . --fix"
+    "lint:sol:fix": "solium -d . --fix",
+    "lint:all": "npm run lint && npm run lint:sol",
+    "lint:all:fix": "npm run lint:fix && npm run lint:sol:fix"
   },
   "repository": {
     "type": "git",
@@ -30,8 +32,6 @@
   },
   "homepage": "https://github.com/ZeppelinSolutions/basil#readme",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-register": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -45,6 +45,12 @@
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
+    "eslint": "^4.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "ethereumjs-abi": "^0.6.5",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
@@ -55,17 +61,16 @@
     "sass-loader": "^6.0.6",
     "solium": "^1.1.5",
     "style-loader": "^0.18.2",
-    "truffle": "^4.1.5",
+    "truffle": "^4.1.0",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1",
     "webpack-merge": "^4.1.0",
-    "zeppelin-solidity": "^1.8.0"
+    "zeppelin-solidity": "^1.7.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
-    "kernel": "git://github.com/zeppelinos/kernel-registry.git#master",
+    "eslint-plugin-react": "^7.7.0",
     "materialize-css": "^0.100.2",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
@@ -79,6 +84,6 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos-core": "git://github.com/zeppelinos/core.git#master"
+    "zos-core": "0.0.2"
   }
 }

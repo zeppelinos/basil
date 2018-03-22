@@ -6,21 +6,21 @@ const common = require('./webpack.common.js');
 const config = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, "/dist"),
+    contentBase: path.join(__dirname, '/dist'),
     compress: true,
     port: 3000,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     historyApiFallback: {
-      index: './index.html'
-    }
+      index: './index.html',
+    },
   },
   plugins: [
     new Dotenv({
-      path: './.env.development'
-    })
+      path: './.env.development',
+    }),
   ],
   watchOptions: {
-    poll: 1000
+    poll: 1000,
   },
 });
 

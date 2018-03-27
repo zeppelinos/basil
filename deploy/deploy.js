@@ -3,10 +3,12 @@ const prompt = require('prompt');
 const colors = require('colors');
 const Web3 = require("web3");
 const figlet = require('figlet');
+const TruffleContract = require('truffle-contract');
 
 const deploy_data = require("./deploy_data.json");
 
 let network;
+let web3;
 
 function welcomeMsg() {
   const fonts = [
@@ -90,6 +92,38 @@ function selectNetwork() {
   });
 }
 
+function getContractFromArtifacts(artifacts) {
+  const contract = TruffleContract(artifacts);
+  contract.setProvider(web3);
+  return contract;
+}
+
+function withoutExtension(file) {
+  return file.split('.')[0];
+}
+
+function validateAddress(address) {
+  if(!address) return false;
+  if(address === '0x0000000000000000000000000000000000000000') return false;
+  if(address.substring(0, 2) !== "0x") return false;
+
+  // Basic validation: length, valid characters, etc
+  if(!/^(0x)?[0-9a-f]{40}$/i.test(address)) return false;
+
+  return true;
+}
+
+function getLastdeployedAddress(contractData) {
+
+  // Retrieve last deployed address.
+  const deployData = contractData.networks[network.name];
+  const lastDeployedAddress = deployData.lastDeployedAddress;
+  if(!lastDeployedAddress) return undefined;
+  const isValidAddress = validateAddress(lastDeployedAddress);
+  if(!isValidAddress) return undefined;
+  return lastDeployedAddress;
+}
+
 async function execute() {
 
   welcomeMsg();
@@ -108,8 +142,30 @@ async function execute() {
   // Iterate contract entries.
   const contracts = deploy_data.contracts;
   for(let i = 0; i < contracts.length; i++) {
-    const aContract = contracts[i];
-    console.log(colors.red(aContract.name));
+    const contractData = contracts[i];
+    console.log(colors.cyan(contractData.filename));
+
+    // Retrieve contract artifacts.
+    let artifacts;
+    try {
+      artifacts = require(`../build/contracts/${withoutExtension(contractData.filename)}`);
+    }
+    catch(error) {
+      console.log(colors.red(`No compiled artifacts found for ${contractData.filename} - ${error}`));
+    }
+    if(!artifacts) continue;
+    const contract = getContractFromArtifacts(artifacts);
+
+    // Check for previously deployed versions.
+    const deployedAddress = getLastdeployedAddress(contractData);
+    let deployNeeded = false;
+    if(deployedAddress) {
+      console.log("Contract has been deployed.");
+    }
+    else {
+      console.log("Contract has not been deployed.");
+      // TODO: prompt for deploy.
+    }
   }
 }
 execute();

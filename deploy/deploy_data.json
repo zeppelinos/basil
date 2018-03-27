@@ -15,10 +15,15 @@
   ],
   "contracts": [
     {
-      "name": "Basil.sol"
+      "filename": "Basil.sol",
+      "networks": {
+        "development": {
+          "lastDeployedAddress": "x"
+        }
+      }
     },
     {
-      "name": "SomeOtherContract.sol"
+      "filename": "SomeOtherContract.sol"
     }
   ] 
 }

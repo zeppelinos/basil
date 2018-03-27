@@ -4,40 +4,74 @@ const abi = require('ethereumjs-abi')
 import assertRevert from './helpers/assertRevert'
 
 const Basil = artifacts.require('Basil')
+const BasilTestUpgrade = artifacts.require('BasilTestUpgrade.sol')
 const Registry = artifacts.require('zos-core/contracts/Registry.sol')
 const Factory = artifacts.require('zos-core/contracts/Factory.sol')
+const OwnedUpgradeabilityProxy = artifacts.require('zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol')
 
 contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
+
+  let registry;
+  let factory;
+  let proxy;
+  let basil;
+  let basil_v1;
+
   beforeEach(async function () {
+
+    // Deploy the upgradeability wrappers.
+    registry = await Registry.new()
+    factory = await Factory.new(registry.address)
+    
+    // Deploy first implementation and upload it to the registry.
     const behavior = await Basil.new()
-    const registry = await Registry.new()
-    const factory = await Factory.new(registry.address)
     registry.addVersion('0', behavior.address)
 
+    // Create the proxy with the first implementation, and execute 
+    // the implementation's initialize function.
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
     const params = abi.rawEncode(['address'], [owner]).toString('hex');
     const initializeData = '0x' + methodId + params;
     const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
     const proxyAddress = proxyData.logs[0].args.proxy;
-    this.basil = Basil.at(proxyAddress)
-    this.registry = registry
+    proxy = OwnedUpgradeabilityProxy.at(proxyAddress);
+    basil = Basil.at(proxyAddress)
   })
+
   describe('zos-core usage', function () {
+
     it('sets the right upgradeability owner', async function () {
-      const upgradeabilityOwner = await this.basil.upgradeabilityOwner();
+      const upgradeabilityOwner = await basil.upgradeabilityOwner();
       assert.equal(upgradeabilityOwner, proxyOwner);
     })
 
     it('initializes the basil', async function () {
-      const init = await this.basil.initialized();
-      const basilOwner = await this.basil.owner();
+      const init = await basil.initialized();
+      const basilOwner = await basil.owner();
       assert.equal(init, true);
       assert.equal(basilOwner, owner);
     })
 
+    it('can update the basil', async function() {
+
+      // Deploy the new behavior and register it.
+      const behavior = await BasilTestUpgrade.new();
+      registry.addVersion('1', behavior.address);
+
+      // Signal the proxy to upgrade to the new version.
+      await proxy.upgradeTo('1', {from: proxyOwner});
+      assert.equal(await proxy.version(), '1');
+      assert.equal(await proxy.implementation(), behavior.address);
+
+      // Test the new version's features.
+      basil_v1 = await BasilTestUpgrade.at(proxy.address);
+      const msg = await basil_v1.sayHi();
+      assert.equal(msg, "Hi!");
+    })
+
     it('sets the right registry', async function () {
-      const registry = await this.basil.registry();
-      assert.equal(registry, this.registry.address);
+      const reg = await basil.registry();
+      assert.equal(reg, registry.address);
     })
   })
 
@@ -53,7 +87,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
         const B = 5
 
         it('reverts', async function () {
-          await assertRevert(this.basil.donate(R, G, B, { from: donor, value: firstDonation }))
+          await assertRevert(basil.donate(R, G, B, { from: donor, value: firstDonation }))
         })
       })
 
@@ -66,7 +100,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const B = 5
 
           it('reverts', async function () {
-            await assertRevert(this.basil.donate(R, G, B, { from: donor, value: firstDonation }))
+            await assertRevert(basil.donate(R, G, B, { from: donor, value: firstDonation }))
           })
         })
 
@@ -76,7 +110,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const B = 5
 
           it('reverts', async function () {
-            await assertRevert(this.basil.donate(R, G, B, { from: donor, value: firstDonation }))
+            await assertRevert(basil.donate(R, G, B, { from: donor, value: firstDonation }))
           })
         })
 
@@ -86,7 +120,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const B = 256
 
           it('reverts', async function () {
-            await assertRevert(this.basil.donate(R, G, B, { from: donor, value: firstDonation }))
+            await assertRevert(basil.donate(R, G, B, { from: donor, value: firstDonation }))
           })
         })
 
@@ -96,23 +130,23 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const B = 5
 
           it('becomes the highest donation', async function () {
-            await this.basil.donate(R, G, B, { from: donor, value: firstDonation })
+            await basil.donate(R, G, B, { from: donor, value: firstDonation })
 
-            const r = await this.basil.r()
+            const r = await basil.r()
             assert(r.eq(R))
 
-            const g = await this.basil.g()
+            const g = await basil.g()
             assert(g.eq(G))
 
-            const b = await this.basil.b()
+            const b = await basil.b()
             assert(b.eq(B))
 
-            const highestDonation = await this.basil.highestDonation()
+            const highestDonation = await basil.highestDonation()
             assert(highestDonation.eq(firstDonation))
           })
 
           it('emits a new donation event', async function () {
-            const { logs } = await this.basil.donate(R, G, B, { from: donor, value: firstDonation })
+            const { logs } = await basil.donate(R, G, B, { from: donor, value: firstDonation })
 
             assert.equal(logs.length, 1);
             assert.equal(logs[0].event, 'NewDonation');
@@ -131,7 +165,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
       const firstDonation = 2
 
       beforeEach(async function () {
-        await this.basil.donate(10, 10, 10, { from: donor, value: firstDonation })
+        await basil.donate(10, 10, 10, { from: donor, value: firstDonation })
       })
 
       describe('when another donor appears', function () {
@@ -141,7 +175,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const secondDonation = 1
 
           it('reverts', async function () {
-            await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
+            await assertRevert(basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
           })
         })
 
@@ -149,7 +183,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const secondDonation = 2
 
           it('reverts', async function () {
-            await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
+            await assertRevert(basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
           })
         })
 
@@ -163,7 +197,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
             const B = 5
 
             it('reverts', async function () {
-              await assertRevert(this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
+              await assertRevert(basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
             })
           })
 
@@ -173,7 +207,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
             const B = 5
 
             it('reverts', async function () {
-              await assertRevert(this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
+              await assertRevert(basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
             })
           })
 
@@ -183,7 +217,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
             const B = 256
 
             it('reverts', async function () {
-              await assertRevert(this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
+              await assertRevert(basil.donate(R, G, B, { from: anotherDonor, value: secondDonation }))
             })
           })
 
@@ -193,23 +227,23 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
             const B = 255
 
             it('becomes the highest donation', async function () {
-              await this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation })
+              await basil.donate(R, G, B, { from: anotherDonor, value: secondDonation })
 
-              const highestDonation = await this.basil.highestDonation()
+              const highestDonation = await basil.highestDonation()
               assert(highestDonation.eq(secondDonation))
 
-              const r = await this.basil.r()
+              const r = await basil.r()
               assert(r.eq(R))
 
-              const g = await this.basil.g()
+              const g = await basil.g()
               assert(g.eq(G))
 
-              const b = await this.basil.b()
+              const b = await basil.b()
               assert(b.eq(B))
             })
 
             it('emits a new donation event', async function () {
-              const { logs } = await this.basil.donate(R, G, B, { from: anotherDonor, value: secondDonation })
+              const { logs } = await basil.donate(R, G, B, { from: anotherDonor, value: secondDonation })
 
               assert.equal(logs.length, 1);
               assert.equal(logs[0].event, 'NewDonation');
@@ -232,7 +266,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
       const wallet = aWallet;
 
       it('reverts', async function () {
-        await assertRevert(this.basil.withdraw(wallet, { from }))
+        await assertRevert(basil.withdraw(wallet, { from }))
       })
     })
 
@@ -243,7 +277,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
         const wallet = 0x0;
 
         it('reverts', async function () {
-          await assertRevert(this.basil.withdraw(wallet, { from }))
+          await assertRevert(basil.withdraw(wallet, { from }))
         })
       })
 
@@ -252,7 +286,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
 
         describe('when there were no funds', function () {
           it('reverts', async function () {
-            await assertRevert(this.basil.withdraw(wallet, { from }));
+            await assertRevert(basil.withdraw(wallet, { from }));
           })
         })
 
@@ -261,20 +295,20 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
           const donation = 999
 
           beforeEach(async function () {
-            await this.basil.donate(255, 255, 255, { from: donor, value: donation })
+            await basil.donate(255, 255, 255, { from: donor, value: donation })
           })
 
           it('transfers all the contract funds to the requested wallet', async function () {
             const previousWalletBalance = await web3.eth.getBalance(wallet)
-            const previousContractBalance = await web3.eth.getBalance(this.basil.address)
+            const previousContractBalance = await web3.eth.getBalance(basil.address)
 
             assert(previousContractBalance.eq(donation))
-            await this.basil.withdraw(wallet, { from })
+            await basil.withdraw(wallet, { from })
 
             const newWalletBalance = await web3.eth.getBalance(wallet)
             assert(newWalletBalance.eq(previousWalletBalance.plus(donation)))
 
-            const newContractBalance = await web3.eth.getBalance(this.basil.address)
+            const newContractBalance = await web3.eth.getBalance(basil.address)
             assert(newContractBalance.eq(0))
           })
         })

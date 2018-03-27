@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx truffle test",
     "console": "npx truffle console",
+    "deploy": "node ./deploy/deploy.js",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js"
   },
@@ -56,8 +57,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
+    "figlet": "^1.2.0",
     "materialize-css": "^0.100.2",
+    "prompt": "^1.0.0",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
     "react-dom": "^15.6.1",

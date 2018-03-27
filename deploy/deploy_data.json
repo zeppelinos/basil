@@ -1,0 +1,24 @@
+{
+  "networks": [
+    {
+      "name": "development",
+      "id": "*",
+      "host": "http://localhost",
+      "port": 8545
+    },
+    {
+      "name": "ropsten",
+      "id": "3",
+      "host": "x",
+      "port": 8545
+    }
+  ],
+  "contracts": [
+    {
+      "name": "Basil.sol"
+    },
+    {
+      "name": "SomeOtherContract.sol"
+    }
+  ] 
+}

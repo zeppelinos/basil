@@ -5,3 +5,4 @@ dist/
 bundle.js
 geth.log
 .env.*
+build/

@@ -92,40 +92,6 @@ function selectNetwork() {
   });
 }
 
-function getContractArtifacts(filename) {
-  let artifacts;
-  try {
-    artifacts = require(`../build/contracts/${withoutExtension(filename)}`);
-  }
-  catch(error) {
-    console.log(colors.red(`No compiled artifacts found for ${filename} - ${error}`));
-  }
-  return artifacts;
-}
-
-function getTruffleContract(filename) {
-  const artifacts = getContractArtifacts(filename);
-  const truffleContract = TruffleContract(artifacts);
-  truffleContract.setProvider(web3);
-  return truffleContract;
-}
-
-function deployNewContract(filename, args, props) {
-  args ||= [];
-  props ||= {};
-  return new Promise((resolve, reject) => {
-    const contract = getTruffleContract(filename).new(...args, props);
-    resolve(contract);
-  });
-}
-
-function getContractAt(filename, address) {
-  return new Promise((resolve, reject) => {
-    const contract = getTruffleContract(filename).at(address);
-    resolve(contract);
-  });
-}
-
 function withoutExtension(file) {
   return file.split('.')[0];
 }
@@ -141,53 +107,107 @@ function isValidAddress(address) {
   return true;
 }
 
-function getAddress(contracData, fieldName) {
+function getAddress(contractData, fieldName) {
   const deployData = contractData.networks[network.name];
   const address = deployData[fieldName];
   return isValidAddress(address) ? address : undefined;
 }
 
 function getProxy(contractData) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const proxyAddress = getAddress(contractData, "proxyAddress");
     if(!proxyAddress) {
       const proxy = await deployProxy();
       resolve(proxy);
     }
     else {
-      resolve(getContract(contracData.filename, proxyAddress));
+      resolve(getContract(contractData.filename, proxyAddress));
     }
   });
 }
 
-function deployRegistryForContract(contractData) {
+function getContractArtifacts(filename) {
+  console.log(`Getting artifacts for ${filename}.`);
+  let artifacts;
+  try {
+    const path = `../build/contracts/${withoutExtension(filename)}.json`;
+    artifacts = require(path);
+  }
+  catch(error) {
+    console.log(colors.red(`No compiled artifacts found for ${filename} - ${error}`));
+  }
+  return artifacts;
+}
+
+function getTruffleContract(filename) {
+  console.log(`Getting TruffleContract for ${filename}.`);
+  const artifacts = getContractArtifacts(filename);
+  const truffleContract = TruffleContract(artifacts);
+  truffleContract.defaults({
+    from: web3.eth.accounts[0]
+  });
+  truffleContract.setProvider(web3.currentProvider);
+  return truffleContract;
+}
+
+function str(object) {
+  return JSON.stringify(object, null, 2);
+}
+
+function deployNewContract(filename, args, props) {
+  args = args || [];
+  props = props || {
+    gasPrice: web3.eth.gasPrice * 10,
+    gas: 4500000
+  }
+  console.log(`Deploying new contract: ${filename}, args: [${args}], props: ${str(props)}`)
+  return new Promise(async (resolve, reject) => {
+    const truffleContract = getTruffleContract(filename);
+    const contract = await truffleContract.new(...args, props);
+    console.log(`New contract deployed: ${filename}, at: ${contract.address}`);
+    resolve(contract);
+  });
+}
+
+function getContractAt(filename, address) {
   return new Promise((resolve, reject) => {
-    const registry = await deployNewContract("Registry");
+    const contract = getTruffleContract(filename).at(address);
+    resolve(contract);
+  });
+}
+
+function deployRegistryForContract(contractData) {
+  console.log(colors.gray('Deploying registry...'));
+  return new Promise(async (resolve, reject) => {
+    const registry = await deployNewContract("Registry.sol");
     contractData.registryAddress = registry.address;
     // TODO: mark write data flag
+    console.log(colors.green('Registry deployed.'));
     resolve(registry);
   });
 }
 
-function deployFactoryForContract(contractData) {
-  return new Promise((resolve, reject) => {
-    const registryAddress = getAddress(contractData, "registryAddress");
-    const factory = await deployNewContract("Factory", [registryAddress]);
+function deployFactoryForContract(contractData, registry) {
+  console.log(colors.gray('Deploying factory...'));
+  return new Promise(async (resolve, reject) => {
+    const factory = await deployNewContract("Factory.sol", [registry.address]);
     // TODO: mark write data flag
+    console.log(await factory.registry());
+    console.log(colors.green('Factory deployed'));
     resolve(factory);
   });
 }
 
-async function checkContractForDeployment(contractData) {
+async function deployContract(contractData) {
   console.log(colors.cyan(contractData.filename));
 
   // Deploy registry.
   // TODO: reuse if existing
-  const registry = await deployRegistryForContract(contracData);
+  const registry = await deployRegistryForContract(contractData);
 
   // Deploy factory.
   // TODO: reuse if existing.
-  const factory = await deployFactoryForContract(contracData);
+  const factory = await deployFactoryForContract(contractData, registry);
 
   // ...
 }
@@ -211,7 +231,7 @@ async function execute() {
   const contracts = deploy_data.contracts;
   for(let i = 0; i < contracts.length; i++) {
     const contractData = contracts[i];
-    checkContractForDeployment(contractData);
+    deployContract(contractData);
   }
 }
 execute();

@@ -29,9 +29,6 @@
           ]
         }
       }
-    },
-    {
-      "filename": "SomeOtherContract.sol"
     }
   ] 
 }

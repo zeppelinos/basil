@@ -92,17 +92,45 @@ function selectNetwork() {
   });
 }
 
-function getContractFromArtifacts(artifacts) {
-  const contract = TruffleContract(artifacts);
-  contract.setProvider(web3);
-  return contract;
+function getContractArtifacts(filename) {
+  let artifacts;
+  try {
+    artifacts = require(`../build/contracts/${withoutExtension(filename)}`);
+  }
+  catch(error) {
+    console.log(colors.red(`No compiled artifacts found for ${filename} - ${error}`));
+  }
+  return artifacts;
+}
+
+function getTruffleContract(filename) {
+  const artifacts = getContractArtifacts(filename);
+  const truffleContract = TruffleContract(artifacts);
+  truffleContract.setProvider(web3);
+  return truffleContract;
+}
+
+function deployNewContract(filename, args, props) {
+  args ||= [];
+  props ||= {};
+  return new Promise((resolve, reject) => {
+    const contract = getTruffleContract(filename).new(...args, props);
+    resolve(contract);
+  });
+}
+
+function getContractAt(filename, address) {
+  return new Promise((resolve, reject) => {
+    const contract = getTruffleContract(filename).at(address);
+    resolve(contract);
+  });
 }
 
 function withoutExtension(file) {
   return file.split('.')[0];
 }
 
-function validateAddress(address) {
+function isValidAddress(address) {
   if(!address) return false;
   if(address === '0x0000000000000000000000000000000000000000') return false;
   if(address.substring(0, 2) !== "0x") return false;
@@ -113,15 +141,55 @@ function validateAddress(address) {
   return true;
 }
 
-function getLastdeployedAddress(contractData) {
-
-  // Retrieve last deployed address.
+function getAddress(contracData, fieldName) {
   const deployData = contractData.networks[network.name];
-  const lastDeployedAddress = deployData.lastDeployedAddress;
-  if(!lastDeployedAddress) return undefined;
-  const isValidAddress = validateAddress(lastDeployedAddress);
-  if(!isValidAddress) return undefined;
-  return lastDeployedAddress;
+  const address = deployData[fieldName];
+  return isValidAddress(address) ? address : undefined;
+}
+
+function getProxy(contractData) {
+  return new Promise((resolve, reject) => {
+    const proxyAddress = getAddress(contractData, "proxyAddress");
+    if(!proxyAddress) {
+      const proxy = await deployProxy();
+      resolve(proxy);
+    }
+    else {
+      resolve(getContract(contracData.filename, proxyAddress));
+    }
+  });
+}
+
+function deployRegistryForContract(contractData) {
+  return new Promise((resolve, reject) => {
+    const registry = await deployNewContract("Registry");
+    contractData.registryAddress = registry.address;
+    // TODO: mark write data flag
+    resolve(registry);
+  });
+}
+
+function deployFactoryForContract(contractData) {
+  return new Promise((resolve, reject) => {
+    const registryAddress = getAddress(contractData, "registryAddress");
+    const factory = await deployNewContract("Factory", [registryAddress]);
+    // TODO: mark write data flag
+    resolve(factory);
+  });
+}
+
+async function checkContractForDeployment(contractData) {
+  console.log(colors.cyan(contractData.filename));
+
+  // Deploy registry.
+  // TODO: reuse if existing
+  const registry = await deployRegistryForContract(contracData);
+
+  // Deploy factory.
+  // TODO: reuse if existing.
+  const factory = await deployFactoryForContract(contracData);
+
+  // ...
 }
 
 async function execute() {
@@ -129,8 +197,7 @@ async function execute() {
   welcomeMsg();
 
   // TODO: validate schema
-  // Verify that networks exist, contracts exist, etc and notify user if 
-  // problems exist, then exit.
+  // Verify that networks exist, contracts exist, etc and notify user if problems exist, then exit.
 
   // Select a network.
   network = await selectNetwork();
@@ -139,33 +206,12 @@ async function execute() {
   // Connect to network.
   await connectNetwork();
 
-  // Iterate contract entries.
+  // Iterate contract entries and
+  // check for necessary deployments.
   const contracts = deploy_data.contracts;
   for(let i = 0; i < contracts.length; i++) {
     const contractData = contracts[i];
-    console.log(colors.cyan(contractData.filename));
-
-    // Retrieve contract artifacts.
-    let artifacts;
-    try {
-      artifacts = require(`../build/contracts/${withoutExtension(contractData.filename)}`);
-    }
-    catch(error) {
-      console.log(colors.red(`No compiled artifacts found for ${contractData.filename} - ${error}`));
-    }
-    if(!artifacts) continue;
-    const contract = getContractFromArtifacts(artifacts);
-
-    // Check for previously deployed versions.
-    const deployedAddress = getLastdeployedAddress(contractData);
-    let deployNeeded = false;
-    if(deployedAddress) {
-      console.log("Contract has been deployed.");
-    }
-    else {
-      console.log("Contract has not been deployed.");
-      // TODO: prompt for deploy.
-    }
+    checkContractForDeployment(contractData);
   }
 }
 execute();

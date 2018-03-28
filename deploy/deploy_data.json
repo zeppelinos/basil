@@ -18,7 +18,15 @@
       "filename": "Basil.sol",
       "networks": {
         "development": {
-          "lastDeployedAddress": "x"
+          "registryAddress": "x",
+          "factoryAddress": "x",
+          "proxyAddress": "x",
+          "implementations": [
+            {
+              "version": "",
+              "address": ""
+            }
+          ]
         }
       }
     },

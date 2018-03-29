@@ -4,6 +4,7 @@ const colors = require('colors');
 const Web3 = require("web3");
 const figlet = require('figlet');
 const TruffleContract = require('truffle-contract');
+const abi = require('ethereumjs-abi')
 
 const deploy_data = require("./deploy_data.json");
 
@@ -157,14 +158,14 @@ function str(object) {
 function deployNewContract(filename, args, props) {
   args = args || [];
   props = props || {
-    gasPrice: web3.eth.gasPrice * 10,
-    gas: 4500000
+    gasPrice: 100000000000,
+    gas: 6000000
   }
   console.log(`Deploying new contract: ${filename}, args: [${args}], props: ${str(props)}`)
   return new Promise(async (resolve, reject) => {
     const truffleContract = getTruffleContract(filename);
     const contract = await truffleContract.new(...args, props);
-    console.log(`New contract deployed: ${filename}, at: ${contract.address}`);
+    console.log(colors.green(`New contract deployed: ${filename}, at: ${contract.address}`));
     resolve(contract);
   });
 }
@@ -176,40 +177,41 @@ function getContractAt(filename, address) {
   });
 }
 
-function deployRegistryForContract(contractData) {
-  console.log(colors.gray('Deploying registry...'));
-  return new Promise(async (resolve, reject) => {
-    const registry = await deployNewContract("Registry.sol");
-    contractData.registryAddress = registry.address;
-    // TODO: mark write data flag
-    console.log(colors.green('Registry deployed.'));
-    resolve(registry);
-  });
-}
-
-function deployFactoryForContract(contractData, registry) {
-  console.log(colors.gray('Deploying factory...'));
-  return new Promise(async (resolve, reject) => {
-    const factory = await deployNewContract("Factory.sol", [registry.address]);
-    // TODO: mark write data flag
-    console.log(await factory.registry());
-    console.log(colors.green('Factory deployed'));
-    resolve(factory);
-  });
-}
-
 async function deployContract(contractData) {
   console.log(colors.cyan(contractData.filename));
 
   // Deploy registry.
   // TODO: reuse if existing
-  const registry = await deployRegistryForContract(contractData);
+  const registry = await deployNewContract("Registry.sol");
 
   // Deploy factory.
   // TODO: reuse if existing.
-  const factory = await deployFactoryForContract(contractData, registry);
+  const factory = await deployNewContract("Factory.sol", [registry.address]);
+  console.log(`Factory's registry: ${await factory.registry()}`);
+  factory.contract.allEvents().watch((error, event) => {
+    console.log('FACTORY EVENT');
+    console.log(event, error);
+  });
 
-  // ...
+  // Deploy implementation and upload it to the registry.
+  // TODO: reuse if existing.
+  const implementation = await deployNewContract(contractData.filename);
+  await registry.addVersion('0', implementation.address);
+  console.log(`Added version '0' to the registry: ${await registry.getVersion('0')}`);
+
+  // Deploy proxy.
+  // TODO: reuse if existing.
+  console.log(colors.gray(`Deploying proxy...`));
+  // const initData = implementation.contract.initialize.getData(web3.eth.accounts[0]);
+    // const methodId = abi.methodID('initialize', ['address']).toString('hex');
+    // const params = abi.rawEncode(['address'], [web3.eth.accounts[0]]).toString('hex');
+    // const initData = '0x' + methodId + params;
+  // console.log(`initData: ${initData}`);
+  const proxyData = await factory.createProxy('0', {from: web3.eth.accounts[0]});
+  // const proxyData = await factory.createProxyAndCall('0', initData, {from: web3.eth.accounts[1]});
+  console.log(proxyData)
+  const proxyAddress = proxyData.logs[0].args.proxy;
+  console.log(colors.green(`Proxy deployed at: ${proxyAddress}`));
 }
 
 async function execute() {

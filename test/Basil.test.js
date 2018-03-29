@@ -12,10 +12,10 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
     const behavior = await Basil.new()
     const registry = await Registry.new()
     const factory = await Factory.new(registry.address)
-    registry.addVersion('0', behavior.address)
+   registry.addVersion('0', behavior.address)
 
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
-    const params = abi.rawEncode(['address'], [owner]).toString('hex');
+    const params = abi.rawEncode(['address'], [web3.eth.accounts[0]]).toString('hex');
     const initializeData = '0x' + methodId + params;
     const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
     const proxyAddress = proxyData.logs[0].args.proxy;

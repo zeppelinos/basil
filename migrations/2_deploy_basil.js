@@ -4,7 +4,7 @@ const Basil = artifacts.require("./Basil.sol");
 
 const colors = require('colors');
 const fs = require('fs');
-const data = require('../data/deploy_data.json');
+const data = require('./deploy_data.json');
 
 module.exports = function(deployer, network, accounts) {
   deployer.then(async () => {
@@ -46,7 +46,7 @@ module.exports = function(deployer, network, accounts) {
     data[network].factoryAddress = factory.address;
     data[network].registryAddress = registry.address;
     const writeData = JSON.stringify(data, null, 2);
-    console.log(colors.green(`> storing deploy data: ${writeData}`));
-    fs.writeFileSync('./data/deploy_data.json', writeData, 'utf8')
+    console.log(colors.green(`> storing deploy data.`));
+    fs.writeFileSync('./deploy_data.json', writeData, 'utf8')
   });
 };

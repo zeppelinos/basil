@@ -1,0 +1,12 @@
+{
+  "development": {
+    "proxyAddress": "0x58e761585ad82e2ef28d6478ba61bc771e901462",
+    "factoryAddress": "0x54fb86a6bb9f443678550ccf857a3dbd1e8e5110",
+    "registryAddress": "0x890f10a322261f108810758599b0a4f05a956576"
+  },
+  "ropsten": {
+    "proxyAddress": "x",
+    "factoryAddress": "x",
+    "registryAddress": "x"
+  }
+}

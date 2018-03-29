@@ -2,7 +2,7 @@ const Registry = artifacts.require('zos-core/contracts/Registry.sol');
 const OwnedUpgradeabilityProxy = artifacts.require('zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol');
 const Basil = artifacts.require("./Basil.sol");
 
-const data = require('../data/deploy_data.json');
+const data = require('./deploy_data.json');
 const colors = require('colors');
 
 module.exports = async function(deployer, network, accounts) {

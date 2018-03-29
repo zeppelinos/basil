@@ -9,6 +9,9 @@ const fs = require('fs');
 module.exports = async function(deployer, network, accounts) {
   deployer.then(async () => {
     
+    // Greeter.
+    console.log(colors.yellow(colors.inverse(`Running migration 3 in network: ${network}`)));
+    
     // Retrieve proxy.                    
     const proxyAddress = data[network].proxyAddress;
     if(!proxyAddress) return;             
@@ -40,7 +43,6 @@ module.exports = async function(deployer, network, accounts) {
     data[network].deployedVersion = version;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
-    console.log(data);
     fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
   });
 }

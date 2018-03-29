@@ -9,6 +9,9 @@ const data = require('./deploy_data.json');
 module.exports = function(deployer, network, accounts) {
   deployer.then(async () => {
 
+    // Greeter.
+    console.log(colors.yellow(colors.inverse(`Running migration 2 in network: ${network}`)));
+
     // Deploy the version registry.
     console.log(colors.cyan(`> deploying registry`));
     const registry = await Registry.new();
@@ -46,7 +49,6 @@ module.exports = function(deployer, network, accounts) {
     data[network].deployedVersion = version;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
-    console.log(data);
     fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
   });
 };

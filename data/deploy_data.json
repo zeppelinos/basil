@@ -1,8 +1,8 @@
 {
   "development": {
-    "proxyAddress": "0xcc606ed45f02e4eba12e2f27d97ae6be8f620387",
-    "factoryAddress": "0x1ed407a5f0e0f8a163b56676dac2654434c8a21d",
-    "registryAddress": "0x9530b01ff5c8ec3aee6354122c5cf33a626de12a"
+    "proxyAddress": "0x4c0b9fd99ed764b568a8ef1930e17d58b0b36945",
+    "factoryAddress": "0x1924dde233899b28f2dd36b0d9bbdce1ca9037c9",
+    "registryAddress": "0x779cb0d0c31b06e08723344e2b104249ac0d98fe"
   },
   "ropsten": {
     "proxyAddress": "x",

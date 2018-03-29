@@ -4,9 +4,11 @@ const Basil = artifacts.require("./Basil.sol");
 
 const data = require('./deploy_data.json');
 const colors = require('colors');
+const fs = require('fs');
 
 module.exports = async function(deployer, network, accounts) {
   deployer.then(async () => {
+    
     // Retrieve proxy.                    
     const proxyAddress = data[network].proxyAddress;
     if(!proxyAddress) return;             
@@ -14,8 +16,7 @@ module.exports = async function(deployer, network, accounts) {
     const proxy = OwnedUpgradeabilityProxy.at(proxyAddress);
 
     // Retrieve registry.
-    const registryAddress = data[network].registryAddress;
-    if(!registryAddress) return;             
+    const registryAddress = await proxy.registry();
     console.log(colors.gray(`> retrieving registry at: ${registryAddress}`));
     const registry = Registry.at(registryAddress);
 
@@ -34,6 +35,13 @@ module.exports = async function(deployer, network, accounts) {
     console.log(colors.gray(`> upgrading proxy to version ${version}`));
     await proxy.upgradeTo(version);
     console.log(colors.cyan(`> proxy upgraded to version ${await proxy.version()}, with implementation: ${await proxy.implementation()}`));
+    
+    // Store proxy data for selected network.
+    data[network].deployedVersion = version;
+    const writeData = JSON.stringify(data, null, 2);
+    console.log(colors.green(`> storing deploy data.`));
+    console.log(data);
+    fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
   });
 }
 

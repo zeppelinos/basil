@@ -1,12 +1,10 @@
 {
   "development": {
-    "proxyAddress": "0x4c0b9fd99ed764b568a8ef1930e17d58b0b36945",
-    "factoryAddress": "0x1924dde233899b28f2dd36b0d9bbdce1ca9037c9",
-    "registryAddress": "0x779cb0d0c31b06e08723344e2b104249ac0d98fe"
+    "proxyAddress": "0x8a91b32d9923189c266afed8e6713d33b5986369",
+    "deployedVersion": "1"
   },
   "ropsten": {
     "proxyAddress": "x",
-    "factoryAddress": "x",
-    "registryAddress": "x"
+    "deployedVersion": "x"
   }
 }

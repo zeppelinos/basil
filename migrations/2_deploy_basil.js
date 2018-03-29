@@ -34,7 +34,7 @@ module.exports = function(deployer, network, accounts) {
     console.log(colors.cyan(`> creating proxy with owner ${owner}, and call data: ${initializeData}`));
     const proxyData = await factory.createProxyAndCall('0', initializeData, { from: owner })
     console.log(colors.gray(`> proxy creation tx: ${proxyData.tx}`));
-    const proxyAddress = proxyData.logs[0].args.proxy;
+    proxyAddress = proxyData.logs[0].args.proxy;
     console.log(colors.gray(`> proxy deployed: ${proxyAddress}`));
                                         
     // Verify proxy.                    
@@ -43,10 +43,10 @@ module.exports = function(deployer, network, accounts) {
                                         
     // Store proxy data for selected network.
     data[network].proxyAddress = proxyAddress;
-    data[network].factoryAddress = factory.address;
-    data[network].registryAddress = registry.address;
+    data[network].deployedVersion = version;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
-    fs.writeFileSync('./deploy_data.json', writeData, 'utf8')
+    console.log(data);
+    fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
   });
 };

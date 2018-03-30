@@ -15,7 +15,6 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
   let factory;
   let proxy;
   let basil;
-  let basil_v1;
 
   beforeEach(async function () {
 
@@ -64,7 +63,7 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
       assert.equal(await proxy.implementation(), behavior.address);
 
       // Test the new version's features.
-      basil_v1 = await BasilTestUpgrade.at(proxy.address);
+      const basil_v1 = await BasilTestUpgrade.at(proxy.address);
       const msg = await basil_v1.sayHi();
       assert.equal(msg, "Hi!");
     })

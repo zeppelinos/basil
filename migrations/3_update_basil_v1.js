@@ -2,7 +2,6 @@ const Registry = artifacts.require('zos-core/contracts/Registry.sol');
 const OwnedUpgradeabilityProxy = artifacts.require('zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol');
 const Basil = artifacts.require("./Basil.sol");
 
-const data = require('./deploy_data.json');
 const colors = require('colors');
 const fs = require('fs');
 
@@ -12,8 +11,19 @@ module.exports = async function(deployer, network, accounts) {
     // Greeter.
     console.log(colors.yellow(colors.inverse(`Running migration 3 in network: ${network}`)));
     
+    // Retrieve previous deployment data.
+    const path = `./migrations/deploy_data.${network}.json`;
+    let data; 
+    try { 
+      data = JSON.parse(fs.readFileSync(path, 'utf8'));
+    }
+    catch(err) {
+      console.log(colors.red(err));
+      return;
+    };
+   
     // Retrieve proxy.                    
-    const proxyAddress = data[network].proxyAddress;
+    const proxyAddress = data.proxyAddress;
     if(!proxyAddress) return;             
     console.log(colors.gray(`> retrieving proxy at: ${proxyAddress}`));
     const proxy = OwnedUpgradeabilityProxy.at(proxyAddress);
@@ -40,10 +50,10 @@ module.exports = async function(deployer, network, accounts) {
     console.log(colors.cyan(`> proxy upgraded to version ${await proxy.version()}, with implementation: ${await proxy.implementation()}`));
     
     // Store proxy data for selected network.
-    data[network].deployedVersions[version] = implementation.address;
+    data.deployedVersions[version] = implementation.address;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
-    fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
+    fs.writeFileSync(path, writeData, 'utf8')
   });
 }
 

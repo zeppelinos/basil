@@ -1,9 +1,0 @@
-{
-  "development": {
-    "proxyAddress": "0x3aea06a09e860043a487ee365fc6df9d67d28cd3",
-    "deployedVersions": {
-      "0": "0x01b37490e6e80f698ab4bc38927f8f2508fe79f3",
-      "1": "0x15702c0d9aee4b594ba4ffa4c17e3e6a98026955"
-    }
-  }
-}

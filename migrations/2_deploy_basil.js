@@ -4,7 +4,6 @@ const Basil = artifacts.require("./Basil.sol");
 
 const colors = require('colors');
 const fs = require('fs');
-const data = require('./deploy_data.json');
 
 module.exports = function(deployer, network, accounts) {
   deployer.then(async () => {
@@ -45,10 +44,23 @@ module.exports = function(deployer, network, accounts) {
     console.log(colors.gray(`> proxy owner: ${await basil_v0.owner()}`));
                                         
     // Store proxy data for selected network.
-    data[network].proxyAddress = proxyAddress;
-    data[network].deployedVersions[version] = implementation.address;
+    const path = `./migrations/deploy_data.${network}.json`;
+    let data; 
+    try { 
+      data = JSON.parse(fs.readFileSync(path, 'utf8'));
+    } 
+    catch(err) {
+
+      // First time, create data schema.
+      data = {
+        proxyAddress: '',
+        deployedVersions: {}
+      };
+    };
+    data.proxyAddress = proxyAddress;
+    data.deployedVersions[version] = implementation.address;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
-    fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')
+    fs.writeFileSync(path, writeData, 'utf8')
   });
 };

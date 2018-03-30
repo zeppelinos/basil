@@ -40,7 +40,7 @@ module.exports = async function(deployer, network, accounts) {
     console.log(colors.cyan(`> proxy upgraded to version ${await proxy.version()}, with implementation: ${await proxy.implementation()}`));
     
     // Store proxy data for selected network.
-    data[network].deployedVersion = version;
+    data[network].deployedVersions[version] = implementation.address;
     const writeData = JSON.stringify(data, null, 2);
     console.log(colors.green(`> storing deploy data.`));
     fs.writeFileSync('./migrations/deploy_data.json', writeData, 'utf8')

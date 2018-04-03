@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { PROVIDER } from 'constants'
+import { ACTIVE_NETWORK } from 'constants'
 
 const Network = {
   web3() {
@@ -12,7 +12,8 @@ const Network = {
 
   provider() {
     if (typeof web3 !== 'undefined') return web3.currentProvider
-    return new Web3.providers.HttpProvider(PROVIDER)
+    const provider = `${ACTIVE_NETWORK.host}:${ACTIVE_NETWORK.port}`;
+    return new Web3.providers.HttpProvider(provider);
   },
 
   async validateCode(address, code) {

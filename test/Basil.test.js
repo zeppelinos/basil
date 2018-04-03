@@ -4,25 +4,36 @@ const abi = require('ethereumjs-abi')
 import assertRevert from './helpers/assertRevert'
 
 const Basil = artifacts.require('Basil')
+const BasilTestUpgrade = artifacts.require('BasilTestUpgrade.sol')
 const Registry = artifacts.require('zos-core/contracts/Registry.sol')
 const Factory = artifacts.require('zos-core/contracts/Factory.sol')
+const OwnedUpgradeabilityProxy = artifacts.require('zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol')
 
 contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
-  beforeEach(async function () {
-    const behavior = await Basil.new()
-    const registry = await Registry.new()
-    const factory = await Factory.new(registry.address)
-    registry.addVersion('0', behavior.address)
 
+  beforeEach(async function () {
+
+    // Deploy the upgradeability wrappers.
+    this.registry = await Registry.new()
+    this.factory = await Factory.new(this.registry.address)
+    
+    // Deploy first implementation and upload it to the registry.
+    const behavior = await Basil.new()
+    this.registry.addVersion('0', behavior.address)
+
+    // Create the proxy with the first implementation, and execute 
+    // the implementation's initialize function.
     const methodId = abi.methodID('initialize', ['address']).toString('hex');
     const params = abi.rawEncode(['address'], [owner]).toString('hex');
     const initializeData = '0x' + methodId + params;
-    const proxyData = await factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
+    const proxyData = await this.factory.createProxyAndCall('0', initializeData, { from: proxyOwner })
     const proxyAddress = proxyData.logs[0].args.proxy;
+    this.proxy = OwnedUpgradeabilityProxy.at(proxyAddress);
     this.basil = Basil.at(proxyAddress)
-    this.registry = registry
   })
+
   describe('zos-core usage', function () {
+
     it('sets the right upgradeability owner', async function () {
       const upgradeabilityOwner = await this.basil.upgradeabilityOwner();
       assert.equal(upgradeabilityOwner, proxyOwner);
@@ -35,9 +46,26 @@ contract('Basil', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
       assert.equal(basilOwner, owner);
     })
 
+    it('can update the basil', async function() {
+
+      // Deploy the new behavior and register it.
+      const behavior = await BasilTestUpgrade.new();
+      this.registry.addVersion('1', behavior.address);
+
+      // Signal the proxy to upgrade to the new version.
+      await this.proxy.upgradeTo('1', {from: proxyOwner});
+      assert.equal(await this.proxy.version(), '1');
+      assert.equal(await this.proxy.implementation(), behavior.address);
+
+      // Test the new version's features.
+      const basil_v1 = await BasilTestUpgrade.at(this.proxy.address);
+      const msg = await basil_v1.sayHi();
+      assert.equal(msg, "Hi!");
+    })
+
     it('sets the right registry', async function () {
-      const registry = await this.basil.registry();
-      assert.equal(registry, this.registry.address);
+      const reg = await this.basil.registry();
+      assert.equal(reg, this.registry.address);
     })
   })
 

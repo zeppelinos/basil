@@ -6,12 +6,12 @@ module.exports = {
     development: {
       host: 'localhost',
       port: 8545,
-      network_id: '*', // eslint-disable-line camelcase
+      network_id: '*',
     },
     ropsten: {
       host: 'localhost',
       port: 8545,
-      network_id: '*', // eslint-disable-line camelcase
+      network_id: 3,
     }
   }
 };

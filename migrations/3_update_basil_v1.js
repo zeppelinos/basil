@@ -56,17 +56,3 @@ module.exports = async function(deployer, network, accounts) {
     fs.writeFileSync(path, writeData, 'utf8')
   });
 }
-
-
-
-
-
-
-
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    

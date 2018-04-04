@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
     "materialize-css": "^0.100.2",
     "react": "^15.6.1",

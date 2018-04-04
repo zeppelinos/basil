@@ -2,6 +2,8 @@
 node_modules
 .DS_Store
 dist/
+build/
 bundle.js
 geth.log
 .env.*
+migrations/deploy_data.development.json

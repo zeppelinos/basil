@@ -21,8 +21,9 @@ class Navbar extends React.Component {
           </Link>
           {basil &&
             <ul className="right grey-text">
-              <li>Donation {basil.highestDonation} | </li>
-              <li>RGB {basil.r}, {basil.g}, {basil.b}</li>
+              <li>Last donation: <strong>{basil.highestDonation} ETH</strong></li>
+              &nbsp;
+              <li>RGB: <strong>{basil.r} - {basil.g} - {basil.b}</strong></li>
             </ul>
           }
         </div>

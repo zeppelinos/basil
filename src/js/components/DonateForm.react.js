@@ -27,7 +27,6 @@ class DonateForm extends React.Component {
             <h3 className="title">Donate to our basil!</h3>
             <div className="row no-margin">
               <div className="input-field col s9">
-                <label htmlFor="owner" className='active'>You (address)</label>
                 <input value={address} type="text" id="owner" disabled required/>
               </div>
               <div className="input-field col s3">

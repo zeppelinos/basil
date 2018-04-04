@@ -8,7 +8,7 @@ import DonationsActions from '../actions/donations'
 class DonateForm extends React.Component {
   constructor(props){
     super(props)
-    this.state = { value: 0, color: { rgb: { r: 0, g: 0, b: 0 } } }
+    this.state = { value: 0, color: { rgb: { r: 255, g: 0, b: 0 } } }
     this._updateValue = this._updateValue.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
   }
@@ -44,6 +44,13 @@ class DonateForm extends React.Component {
               </div>
               <div className="col s3">
                 <label disabled>RGB({rgb.r}, {rgb.g}, {rgb.g})</label>
+              </div>
+            </div>
+            <div className="row no-margin">
+              <div className="col s12">
+                <div style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
+                  <img width="150" src="../../images/basil.svg"></img>
+                </div>
               </div>
             </div>
           </div>

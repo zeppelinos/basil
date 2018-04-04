@@ -31,7 +31,10 @@ class DonationsList extends React.Component {
           <div>
             <b>{donation.donor}</b>
             <span className='chip secondary-content' style={style}>&nbsp;&nbsp;&nbsp;</span>
-            <span className='secondary-content'>&nbsp;</span>
+            <span className='secondary-content'>
+              &nbsp;
+              <label>{`${donation.r} - ${donation.g} - ${donation.b}`}</label>
+            </span>
             <span className='secondary-content'>ETH {donation.value}</span>
           </div>
         </li>

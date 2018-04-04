@@ -5,7 +5,7 @@ class DeployUtil {
 
   constructor(_artifacts, _network, _accounts) {
 
-    this.deployDataPath = `./migrations/deploy_data.${this.network}.json`;
+    this.deployDataPath = `./migrations/deploy_data.${_network}.json`;
 
     this.artifacts = _artifacts;
     this.network = _network;

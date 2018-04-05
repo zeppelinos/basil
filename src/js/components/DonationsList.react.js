@@ -16,7 +16,7 @@ class DonationsList extends React.Component {
         <div className="card donations-list">
           <div className="card-content">
             <h3 className="title">Some already thought about our basil</h3>
-            { donations.length === 0 ? <em>Loading...</em> : <ul className="collection">{this._buildDonationsList(donations)}</ul>}
+            { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
           </div>
         </div>
       </div>
@@ -24,22 +24,36 @@ class DonationsList extends React.Component {
   }
 
   _buildDonationsList(donations) {
-    return donations.map((donation, index) => {
-      const style = { backgroundColor: `rgb(${[donation.r, donation.g, donation.b]})` }
-      return (
-        <li className="collection-item" key={index}>
-          <div>
-            <b>{donation.donor}</b>
-            <span className='chip secondary-content' style={style}>&nbsp;&nbsp;&nbsp;</span>
-            <span className='secondary-content'>
-              &nbsp;
-              <label>{`${donation.r} - ${donation.g} - ${donation.b}`}</label>
-            </span>
-            <span className='secondary-content'>ETH {donation.value}</span>
-          </div>
-        </li>
-      )
-    })
+    
+    const len = Math.ceil(donations.length / 3);
+    const rows = [];
+    for(let r = 0; r < len; r++) {
+      rows.push(
+        <div className="row no-margin" key={r}>
+          {this._buildDonationItem(donations[r])}
+          {this._buildDonationItem(donations[r + 1])}
+          {this._buildDonationItem(donations[r + 2])}
+        </div>
+      );
+    }
+    return rows;
+    // TODO: delete chip css object
+  }
+
+  _buildDonationItem(donation) {
+    if(!donation) return <div className="col s4"></div>
+    const style = { backgroundColor: `rgb(${[donation.r, donation.g, donation.b]})` }
+    return (
+      <div className="col s4">
+        <div className="row no-margin" style={style}>
+          <label>{`${donation.r} - ${donation.g} - ${donation.b}`}</label>
+        </div>
+        <div className="row no-margin">
+          {donation.donor}
+          <span className='secondary-content'>ETH {donation.value}</span>
+        </div>
+      </div>
+    );
   }
 }
 

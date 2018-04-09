@@ -15,7 +15,7 @@ class DonationsList extends React.Component {
       <div className={"col " + this.props.col}>
         <div className="card donations-list">
           <div className="card-content">
-            <h3 className="title">Some already thought about our basil</h3>
+            <h3 className="titleList">Some already thought about our basil</h3>
             { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
           </div>
         </div>
@@ -45,13 +45,19 @@ class DonationsList extends React.Component {
     const style = { backgroundColor: `rgb(${[donation.r, donation.g, donation.b]})` }
     return (
       <div className="col s4">
-        <div className="row no-margin" style={style}>
-          <label>{`${donation.r} - ${donation.g} - ${donation.b}`}</label>
-        </div>
-        <div className="row no-margin">
-          {donation.donor}
-          <span className='secondary-content'>ETH {donation.value}</span>
-        </div>
+        <div className="donationCard">
+          <div className="row no-margin donationColor" style={style}>
+            <label>
+            <div className="donationRgb">
+            {`${donation.r} - ${donation.g} - ${donation.b}`}
+            </div>
+            </label>
+          </div>
+          <div className="row no-margin donationAddress">
+            {donation.donor}
+            <div className="secondary-content donationValue">ETH {donation.value}</div>
+          </div>
+        </div>  
       </div>
     );
   }

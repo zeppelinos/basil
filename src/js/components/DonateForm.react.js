@@ -23,20 +23,24 @@ class DonateForm extends React.Component {
     return (
       <div className={"col " + this.props.col}>
         <form className="card" onSubmit={this._handleSubmit}>
-          <div className="card-content">
+          <div className="card-contentForm">
             <div className="row no-margin">
+
               <div className="col s6">
-                <h3 className="title">Customize the Zeppelin LED</h3>
+
+                <h3 className="titleForm">Customize the Zeppelin LED</h3>
                 <div className="row no-margin">
                   <div className="col s5">
                     <HuePicker style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
                   </div>
                 </div>
+
                 <div className="row no-margin">
                   <div className="input-field col s9">
                     <input value={address} type="text" id="owner" disabled required/>
                   </div>
                 </div>
+
                 <div className="card-action">
                   <div className="row no-margin">
                     <div className="input-field col s6">
@@ -48,10 +52,14 @@ class DonateForm extends React.Component {
                     </div>  
                   </div>
                 </div>
+
               </div>
-              <div className="col s6" style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
+
+              <div className="col s6 selectedColor" style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
                 <img width="150" src="../../images/basil.svg"></img>
+
               </div>
+
             </div>
           </div>
         </form>

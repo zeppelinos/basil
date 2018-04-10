@@ -51,11 +51,11 @@
     "sass-loader": "^6.0.6",
     "solium": "^1.1.5",
     "style-loader": "^0.18.2",
-    "truffle": "^4.1.0",
+    "truffle": "^4.1.5",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1",
     "webpack-merge": "^4.1.0",
-    "zeppelin-solidity": "^1.7.0"
+    "zeppelin-solidity": "^1.8.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",

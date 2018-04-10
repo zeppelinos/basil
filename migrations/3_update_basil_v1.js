@@ -2,6 +2,7 @@ const Basil = artifacts.require("./Basil.sol");
 const DeployUtil = require('./deploy_util.js');
 
 module.exports = async function(deployer, network, accounts) {
+  return; // TODO: remove after zos-core integration refactor and tests pass
 
   const util = new DeployUtil(artifacts, network, accounts);
 

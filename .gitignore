@@ -6,4 +6,5 @@ build/
 bundle.js
 geth.log
 .env.*
+.env
 migrations/deploy_data.development.json

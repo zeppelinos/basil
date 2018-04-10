@@ -8,7 +8,7 @@ import DonationsActions from '../actions/donations'
 class DonateForm extends React.Component {
   constructor(props){
     super(props)
-    this.state = { value: 0, color: { rgb: { r: 0, g: 0, b: 0 } } }
+    this.state = { value: 0, color: { rgb: { r: 255, g: 0, b: 0 } } }
     this._updateValue = this._updateValue.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
   }
@@ -23,33 +23,43 @@ class DonateForm extends React.Component {
     return (
       <div className={"col " + this.props.col}>
         <form className="card" onSubmit={this._handleSubmit}>
-          <div className="card-content">
-            <h3 className="title">Donate to our basil!</h3>
+          <div className="card-contentForm">
             <div className="row no-margin">
-              <div className="input-field col s9">
-                <label htmlFor="owner" className='active'>You (address)</label>
-                <input value={address} type="text" id="owner" disabled required/>
+
+              <div className="col s6">
+
+                <h3 className="titleForm">Customize the Zeppelin LED</h3>
+                <div className="row no-margin">
+                  <div className="col s5">
+                    <HuePicker style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
+                  </div>
+                </div>
+
+                <div className="row no-margin">
+                  <div className="input-field col s9">
+                    <input value={address} type="text" id="owner" disabled required/>
+                  </div>
+                </div>
+
+                <div className="card-action">
+                  <div className="row no-margin">
+                    <div className="input-field col s6">
+                      <label htmlFor="value">Value (eth)</label>
+                      <input onChange={this._updateValue} type="number" step="any" id="value" required/>
+                    </div>
+                    <div className="col s6">
+                      <button className="btn btn-primary">Donate</button>
+                    </div>  
+                  </div>
+                </div>
+
               </div>
-              <div className="input-field col s3">
-                <label htmlFor="value">Value (eth)</label>
-                <input onChange={this._updateValue} type="number" step="any" id="value" required/>
+
+              <div className="col s6 selectedColor" style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
+                <img width="150" src="../../images/basil.svg"></img>
+
               </div>
-            </div>
-            <div className="row no-margin">
-              <div className="col s4">
-                <p>Pick a color for a photo!</p>
-              </div>
-              <div className="col s5">
-                <HuePicker style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
-              </div>
-              <div className="col s3">
-                <label disabled>RGB({rgb.r}, {rgb.g}, {rgb.g})</label>
-              </div>
-            </div>
-          </div>
-          <div className="card-action">
-            <div className="row no-margin">
-              <button className="btn btn-primary">Donate</button>
+
             </div>
           </div>
         </form>

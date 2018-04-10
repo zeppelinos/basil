@@ -24,3 +24,23 @@ form input:focus, form textarea:focus, form select:focus {
 textarea {
   resize: none;
 }
+
+.titleForm {
+    font-size: 1.5rem;
+    line-height: 110%;
+    margin: 2.5rem 0 4rem 0;
+    text-align: left;
+    font-family: roboto;
+    font-weight: 500;
+    color: #4a4a4a;
+}
+
+.card .card-contentForm {
+    padding: 0;
+    border-radius: 0 0 2px 2px;
+    height: 350px;
+}
+
+.col.s6.selectedColor {
+    height: 350px;
+}

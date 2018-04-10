@@ -61,6 +61,7 @@
     "babel-runtime": "^6.26.0",
     "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
+    "kernel": "github:zeppelinos/kernel-registry",
     "materialize-css": "^0.100.2",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
@@ -74,6 +75,6 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos-core": "0.0.2"
+    "zos-core": "git://github.com/zeppelinos/core.git#master"
   }
 }

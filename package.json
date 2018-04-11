@@ -6,6 +6,8 @@
   "scripts": {
     "test": "npx truffle test",
     "console": "npx truffle console",
+    "deploy": "npx truffle exec scripts/deploy.js --network development",
+    "deploy-ropsten": "npx truffle exec scripts/deploy.js --network development",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",
     "lint:sol": "solium -d .",
@@ -28,6 +30,8 @@
   },
   "homepage": "https://github.com/ZeppelinSolutions/basil#readme",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-register": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -61,7 +65,7 @@
     "babel-runtime": "^6.26.0",
     "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
-    "kernel": "github:zeppelinos/kernel-registry",
+    "kernel": "git://github.com/zeppelinos/kernel-registry.git#master",
     "materialize-css": "^0.100.2",
     "react": "^15.6.1",
     "react-color": "^2.13.8",

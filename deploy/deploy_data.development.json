@@ -1,0 +1,11 @@
+{
+  "controllerAddress": "0xbb507b5683e7be48a02c8546a0b8739da2081709",
+  "contracts": {
+    "Basil": {
+      "proxyAddress": "0xc639251cb951d839183972d69bfc0ace5be883dd",
+      "versions": {
+        "0": "0x829237d41a5698f1e0c79ec02440858992718db3"
+      }
+    }
+  }
+}

@@ -11,5 +11,6 @@ import "zos-core/contracts/Registry.sol";
 import "zos-core/contracts/ProjectController.sol";
 import "zos-core/contracts/upgradeability/UpgradeabilityProxyFactory.sol";
 import "zos-core/contracts/upgradeability/OwnedUpgradeabilityProxy.sol";
+import "kernel/contracts/ZepCore.sol";
 
 contract Dummy {}

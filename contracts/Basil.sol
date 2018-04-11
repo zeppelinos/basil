@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zos-core/contracts/ownership/Ownable.sol";
 
 /**
  * @title Basil
@@ -45,7 +45,7 @@ contract Basil is Ownable {
 
   function initialize(address owner) public {
     require(!initialized);
-    transferOwnership(owner);
+    setOwner(owner);
     initialized = true;
   }
 

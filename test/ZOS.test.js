@@ -44,10 +44,7 @@ contract('ZOS', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
 
         it('can create a proxy for implementation 0', async function() {
           const initData = this.implementation0.contract.initialize.getData(owner);
-          // REVERTS IN THIS NEXT CALL
           const proxyData = await this.controller.createAndCall(projectName, '0', contractName, initData);
-          console.log(proxyData);
-          return;
           const proxyAddress = proxyData.logs[0].args.proxy;
           this.basilProxy = await OwnedUpgradeabilityProxy.at(this.proxyAddress)
           assert.equal(this.basilProxy.implementation(), this.implementation0.address);

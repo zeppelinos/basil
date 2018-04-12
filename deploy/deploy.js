@@ -1,19 +1,17 @@
+
 import DeployData from './deploy_data_util.js';
 import Deployer from 'kernel/deploy/objects/Deployer';
-import RegistryManager from 'kernel/deploy/objects/RegistryManager';
-import ProjectControllerManager from 'kernel/deploy/objects/ProjectControllerManager';
 
-const Registry = artifacts.require("./Registry");
 const Basil = artifacts.require("./Basil.sol");
 const ProjectController = artifacts.require('ProjectController');
 
 const PROJECT_OWNER = web3.eth.accounts[0];
 const PROJECT_NAME = 'TheBasil';
 
-const data = DeployData.readData(network);
+const data = DeployData.read(network);
 
 let controller;
-let registry;
+// let registry;
 
 async function deploy() {
   await deployController();
@@ -26,18 +24,16 @@ async function deployBasil() {
 
     // Register first implementation.
     const version = '0';
-    const Contract = Basil;
-    const registryManager = new RegistryManager(registry);
     console.log(`deploying and registering first implementation of ${contractName}...`);
-    await registryManager.deployAndRegister(Contract, contractName, version);
-    const implementationAddress = await registry.getImplementation(version, contractName);
-    console.log(`first implementation deployed, version: ${version}, at: ${implementationAddress}`);
+    const implementation = await Deployer.deployAndRegister(controller, Basil, contractName, version);
+    console.log(`first implementation deployed, version: ${version}, at: ${implementation.address}`);
 
     // Create proxy with first implementation.
-    const projectControllerManager = new ProjectControllerManager(controller, PROJECT_OWNER);
     console.log(`creating proxy for ${contractName}...`);
-    const proxy = await projectControllerManager.createProxyAndCall(
-      Contract,
+    const proxy = await Deployer.createProxyAndCall(
+      controller,
+      PROJECT_OWNER,
+      Basil,
       contractName,
       PROJECT_NAME,
       version,
@@ -51,10 +47,10 @@ async function deployBasil() {
     data.contracts[contractName] = {
       proxyAddress: proxy.address,
       versions: {
-        '0': implementationAddress
+        '0': implementation.address
       }
     };
-    DeployData.writeData(data, network);
+    DeployData.write(data, network);
   }
 }
 
@@ -71,7 +67,7 @@ async function deployController() {
 
     // Save to disk.
     data.controllerAddress = controller.address;
-    DeployData.writeData(data, network);
+    DeployData.write(data, network);
   }
   else {
 
@@ -80,9 +76,6 @@ async function deployController() {
     controller = await ProjectController.at(data.controllerAddress);
     console.log(`retrieved project controller: ${controller.address}`);
   }
-
-  // Retrieve controller registry.
-  registry = Registry.at(await controller.registry());
 }
 
 module.exports = function(cb) {

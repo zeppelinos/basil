@@ -65,23 +65,5 @@ contract('ZOS', ([_, proxyOwner, owner, aWallet, someone, anotherone]) => {
         });
       });
     });
-
-    // describe('upgrading', function () {
-
-      // it('registers an update to the implementation', async function() {
-//t
-        // const behavior = await BasilTestUpgrade.new();
-        // this.registry.addImplementation('1', this.contractName, behavior.address);
-//
-        // await this.controller.upgradeTo(this.proxy.address, this.projectName, '1', this.contractName, {from: proxyOwner});
-        // assert.equal(await this.proxy.version(), '1');
-        // assert.equal(await this.proxy.implementation(), behavior.address);
-//
-        // const basil_v1 = await BasilTestUpgrade.at(this.proxy.address);
-        // const msg = await basil_v1.sayHi();
-        // assert.equal(msg, "Hi!");
-      // })
-
-    // })
   })
 })

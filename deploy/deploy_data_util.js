@@ -8,7 +8,11 @@ const DeployData = {
 
   read(network) {
     let data;
-    try { data = JSON.parse(fs.readFileSync(this.deployPath(network), 'utf8')); }
+    const path = this.deployPath(network);
+    try {
+      const raw = fs.readFileSync(path, 'utf8');
+      data = JSON.parse(raw);
+    }
     catch(err) {
       data = {
         controllerAddress: undefined,

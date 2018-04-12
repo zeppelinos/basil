@@ -8,12 +8,16 @@ const ProjectController = artifacts.require('ProjectController');
 const PROJECT_OWNER = web3.eth.accounts[0];
 const PROJECT_NAME = 'TheBasil';
 
-const data = DeployData.read(network);
-
+let data;
 let controller;
-// let registry;
+
+const ZOS_ADDRESS = {
+  development: 0x7aed345f11e9d4fe148a9ef27fc45be0ca20fb3b,
+  ropsten: 0x0
+}
 
 async function deploy() {
+  data = DeployData.read(network);
   await deployController();
   await deployBasil();
 }
@@ -52,6 +56,11 @@ async function deployBasil() {
     };
     DeployData.write(data, network);
   }
+  else {
+    // TODO: the fact that the version is not found in the json does not necessarily mean it is not
+    // in the registry, which probably needs to be accounted for.
+    console.log('found Basil version 0, no need to deploy it.');
+  }
 }
 
 async function deployController() {
@@ -61,7 +70,8 @@ async function deployController() {
     console.log(`did not find a project controller, deploying a new one...`);
     controller = await Deployer.projectController(
       PROJECT_OWNER,
-      PROJECT_NAME
+      PROJECT_NAME,
+      ZOS_ADDRESS[network]
     );
     console.log(`deployed new project controller: ${controller.address}`);
 

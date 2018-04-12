@@ -8,3 +8,4 @@ geth.log
 .env.*
 .env
 migrations/deploy_data.development.json
+deploy/deploy_data.development.json

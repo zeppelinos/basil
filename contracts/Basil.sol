@@ -1,18 +1,11 @@
 pragma solidity ^0.4.18;
 
-import "zos-core/contracts/ownership/Ownable.sol";
-import "zos-core/contracts/upgradeability/OwnedUpgradeabilityStorage.sol";
-
-// TODO: needed for tests, see how to get truffle
-// to find these without this hack
-import "zos-core/contracts/Registry.sol";
-import "zos-core/contracts/Factory.sol";
-
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
  * @title Basil
  */
-contract Basil is OwnedUpgradeabilityStorage, Ownable {
+contract Basil is Ownable {
 
   // color
   uint256 public r;
@@ -29,7 +22,6 @@ contract Basil is OwnedUpgradeabilityStorage, Ownable {
   // constructor
   function Basil()
     Ownable()
-    OwnedUpgradeabilityStorage(Registry(0x0))
     public
   {}
 
@@ -51,9 +43,9 @@ contract Basil is OwnedUpgradeabilityStorage, Ownable {
       r, g, b);
   }
 
-  function initialize(address owner) public {
+  function initialize(address _owner) public {
     require(!initialized);
-    setOwner(owner);
+    owner = _owner;
     initialized = true;
   }
 

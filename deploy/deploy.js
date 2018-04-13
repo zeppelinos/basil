@@ -13,10 +13,11 @@ let data;
 let controller;
 let basilProxy;
 
+const FORCE_RE_DEPLOY_ON_DEVELOPMENT = true;
 const ZOS_ADDRESS = {
   development: 0x7aed345f11e9d4fe148a9ef27fc45be0ca20fb3b,
   ropsten: 0x0
-}
+};
 
 async function deploy() {
   data = DeployData.read(network);
@@ -32,9 +33,13 @@ async function deployVersion(version, contractName, ContractKlazz) {
   return implementation;
 }
 
+function forceReDeploy() {
+  return FORCE_RE_DEPLOY_ON_DEVELOPMENT && network === "development";
+}
+
 async function deployBasil() {
   const version = '0';
-  if(!data.contracts || !data.contracts[BASIL_CONTRACT_NAME]) {
+  if(forceReDeploy() || !data.contracts || !data.contracts[BASIL_CONTRACT_NAME]) {
 
     // Deploy and register implementation.
     const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, Basil);
@@ -66,7 +71,7 @@ async function deployBasil() {
 
 async function deployBasilERC721() {
   const version = '1';
-  if(!data.contracts.Basil.versions[version]) {
+  if(forceReDeploy() || !data.contracts.Basil.versions[version]) {
 
     // Deploy and register implementation.
     const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, BasilERC721);
@@ -84,7 +89,7 @@ async function deployBasilERC721() {
 }
 
 async function deployController() {
-  if(!data.controllerAddress) {
+  if(forceReDeploy() || !data.controllerAddress) {
 
     // Deploy a new project controller.
     console.log(`did not find a project controller, deploying a new one...`);

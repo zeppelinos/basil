@@ -26,6 +26,30 @@ const DeployData = {
     const writeData = JSON.stringify(data, null, 2);
     const path = this.deployPath(network);
     fs.writeFileSync(path, writeData, 'utf8');
+  },
+
+  saveContractProxy(data, contractName, proxyAddress, network) {
+    data = this.prepareContractEntry(data, contractName);
+    data.contracts[contractName].proxyAddress = proxyAddress;
+    this.write(data, network);
+    return data;
+  },
+
+  appendContractVersion(data, contractName, version, implementation, network) {
+    data = this.prepareContractEntry(data, contractName);
+    data.contracts[contractName].versions[version] = implementation;
+    this.write(data, network);
+    return data;
+  },
+
+  prepareContractEntry(data, contractName) {
+    if(!data.contracts) data.contracts = {};
+    if(data.contracts[contractName]) return data;
+    data.contracts[contractName] = {
+      proxyAddress: undefined,
+      versions: {}
+    };
+    return data;
   }
 }
 

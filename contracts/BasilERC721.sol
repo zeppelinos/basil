@@ -5,14 +5,14 @@ import "kernel/contracts/test/kernel_instance/ERC721Token.sol";
 
 contract BasilERC721 is Basil {
 
-  ERC721Token public erc721;
+  ERC721Token public token;
   uint256 public numEmittedTokens;
 
-  function setERC721(address _erc721Address) external onlyOwner {
+  function setToken(address _erc721Address) external onlyOwner {
     require(_erc721Address != address(0));
-    require(address(erc721) == address(0));
-    erc721 = ERC721Token(_erc721Address);
-    erc721.initialize();
+    require(address(token) == address(0));
+    token = ERC721Token(_erc721Address);
+    token.initialize();
   }
 
   function donate(uint256 _r, uint256 _g, uint256 _b) public payable {
@@ -21,7 +21,7 @@ contract BasilERC721 is Basil {
   }
 
   function emitUniqueToken(address _tokenOwner) internal {
-    erc721.mint(_tokenOwner, numEmittedTokens);
+    token.mint(_tokenOwner, numEmittedTokens);
     numEmittedTokens++;
   }
 }

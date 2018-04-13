@@ -28,6 +28,12 @@ const DeployData = {
     fs.writeFileSync(path, writeData, 'utf8');
   },
 
+  saveController(data, network, controllerAddress) {
+    data.controllerAddress = controllerAddress;
+    this.write(data, network);
+    return data;
+  },
+
   saveContractProxy(data, contractName, proxyAddress, network) {
     data = this.prepareContractEntry(data, contractName);
     data.contracts[contractName].proxyAddress = proxyAddress;

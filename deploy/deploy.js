@@ -1,4 +1,3 @@
-
 import DeployData from './deploy_data_util.js';
 import Deployer from 'kernel/deploy/objects/Deployer';
 
@@ -26,14 +25,19 @@ async function deploy() {
   await deployBasilERC721();
 }
 
+async function deployVersion(version, contractName, ContractKlazz) {
+  console.log(`deploying and registering version ${version} of ${contractName}...`);
+  const implementation = await Deployer.deployAndRegister(controller, ContractKlazz, contractName, version);
+  console.log(`implementation deployed, version: ${version}, at: ${implementation.address}`);
+  return implementation;
+}
+
 async function deployBasil() {
   const version = '0';
   if(!data.contracts || !data.contracts[BASIL_CONTRACT_NAME]) {
 
     // Deploy and register implementation.
-    console.log(`deploying and registering version ${version} of ${BASIL_CONTRACT_NAME}...`);
-    const implementation = await Deployer.deployAndRegister(controller, Basil, BASIL_CONTRACT_NAME, version);
-    console.log(`implementation deployed, version: ${version}, at: ${implementation.address}`);
+    const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, Basil);
 
     // Create proxy with first implementation.
     console.log(`creating proxy for ${BASIL_CONTRACT_NAME}...`);
@@ -65,9 +69,7 @@ async function deployBasilERC721() {
   if(!data.contracts.Basil.versions[version]) {
 
     // Deploy and register implementation.
-    console.log(`deploying and registering version ${version} of ${BASIL_CONTRACT_NAME}...`);
-    const implementation = await Deployer.deployAndRegister(controller, BasilERC721, BASIL_CONTRACT_NAME, version);
-    console.log(`implementation deployed, version: ${version}, at: ${implementation.address}`);
+    const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, BasilERC721);
 
     // Upgrade proxy.
     controller.upgradeTo(basilProxy.address, PROJECT_NAME, version, BASIL_CONTRACT_NAME);
@@ -77,8 +79,6 @@ async function deployBasilERC721() {
     DeployData.appendContractVersion(data, BASIL_CONTRACT_NAME, version, implementation.address, network);
   }
   else {
-    // Tregistering versions in basil deploy can be abstracted to base functionODO: the fact that the version is not found in the json does not necessarily mean it is not
-    // in the registry, which probably needs to be accounted for.
     console.log('found Basil version 1, no need to deploy it.');
   }
 }
@@ -96,8 +96,7 @@ async function deployController() {
     console.log(`deployed new project controller: ${controller.address}`);
 
     // Save to disk.
-    data.controllerAddress = controller.address;
-    DeployData.write(data, network);
+    data = DeployData.saveController(data, network, controller.address);
   }
   else {
 

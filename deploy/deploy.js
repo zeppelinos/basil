@@ -15,7 +15,7 @@ let basilProxy;
 
 const FORCE_RE_DEPLOY_ON_DEVELOPMENT = true;
 const ZOS_ADDRESS = {
-  development: 0x7aed345f11e9d4fe148a9ef27fc45be0ca20fb3b,
+  development: 0x212fbf392206bca0a478b9ed3253b08559b35903,
   ropsten: 0x0
 };
 

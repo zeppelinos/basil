@@ -28,7 +28,7 @@ contract Basil is Ownable {
   event Withdrawal(address indexed wallet, uint256 value);
   event NewDonation(address indexed donor, uint256 value, uint256 r, uint256 g, uint256 b);
 
-  function donate(uint256 _r, uint256 _g, uint256 _b) external payable {
+  function donate(uint256 _r, uint256 _g, uint256 _b) public payable {
     require(_r < 256);
     require(_g < 256);
     require(_b < 256);

@@ -1,60 +1,66 @@
-
 import DeployData from './deploy_data_util.js';
 import Deployer from 'kernel/deploy/objects/Deployer';
 
 const Basil = artifacts.require("./Basil.sol");
+const BasilERC721 = artifacts.require("./BasilERC721.sol");
 const ProjectController = artifacts.require('ProjectController');
 
 const PROJECT_OWNER = web3.eth.accounts[0];
 const PROJECT_NAME = 'TheBasil';
+const BASIL_CONTRACT_NAME = 'Basil';
 
 let data;
 let controller;
+let basilProxy;
 
+const FORCE_RE_DEPLOY_ON_DEVELOPMENT = true;
 const ZOS_ADDRESS = {
-  development: 0x7aed345f11e9d4fe148a9ef27fc45be0ca20fb3b,
+  development: 0x212fbf392206bca0a478b9ed3253b08559b35903,
   ropsten: 0x0
-}
+};
 
 async function deploy() {
   data = DeployData.read(network);
   await deployController();
   await deployBasil();
+  await deployBasilERC721();
+}
+
+async function deployVersion(version, contractName, ContractKlazz) {
+  console.log(`deploying and registering version ${version} of ${contractName}...`);
+  const implementation = await Deployer.deployAndRegister(controller, ContractKlazz, contractName, version);
+  console.log(`implementation deployed, version: ${version}, at: ${implementation.address}`);
+  return implementation;
+}
+
+function forceReDeploy() {
+  return FORCE_RE_DEPLOY_ON_DEVELOPMENT && network === "development";
 }
 
 async function deployBasil() {
-  const contractName = 'Basil';
-  if(!data.contracts || !data.contracts[contractName]) {
+  const version = '0';
+  if(forceReDeploy() || !data.contracts || !data.contracts[BASIL_CONTRACT_NAME]) {
 
-    // Register first implementation.
-    const version = '0';
-    console.log(`deploying and registering first implementation of ${contractName}...`);
-    const implementation = await Deployer.deployAndRegister(controller, Basil, contractName, version);
-    console.log(`first implementation deployed, version: ${version}, at: ${implementation.address}`);
+    // Deploy and register implementation.
+    const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, Basil);
 
     // Create proxy with first implementation.
-    console.log(`creating proxy for ${contractName}...`);
-    const proxy = await Deployer.createProxyAndCall(
+    console.log(`creating proxy for ${BASIL_CONTRACT_NAME}...`);
+    basilProxy = await Deployer.createProxyAndCall(
       controller,
       PROJECT_OWNER,
       Basil,
-      contractName,
+      BASIL_CONTRACT_NAME,
       PROJECT_NAME,
       version,
       ['address'],
       [PROJECT_OWNER]
     );
-    console.log(`deployed proxy: ${proxy.address}`);
+    console.log(`deployed proxy: ${basilProxy.address}`);
 
     // Save to disk.
-    if(!data.contracts) data.contracts = {};
-    data.contracts[contractName] = {
-      proxyAddress: proxy.address,
-      versions: {
-        '0': implementation.address
-      }
-    };
-    DeployData.write(data, network);
+    data = DeployData.saveContractProxy(data, BASIL_CONTRACT_NAME, basilProxy.address, network);
+    data = DeployData.appendContractVersion(data, BASIL_CONTRACT_NAME, version, implementation.address, network);
   }
   else {
     // TODO: the fact that the version is not found in the json does not necessarily mean it is not
@@ -63,8 +69,27 @@ async function deployBasil() {
   }
 }
 
+async function deployBasilERC721() {
+  const version = '1';
+  if(forceReDeploy() || !data.contracts.Basil.versions[version]) {
+
+    // Deploy and register implementation.
+    const implementation = await deployVersion(version, BASIL_CONTRACT_NAME, BasilERC721);
+
+    // Upgrade proxy.
+    controller.upgradeTo(basilProxy.address, PROJECT_NAME, version, BASIL_CONTRACT_NAME);
+    console.log(`upgraded ${BASIL_CONTRACT_NAME} proxy to version ${version}`);
+
+    // Save to disk.
+    DeployData.appendContractVersion(data, BASIL_CONTRACT_NAME, version, implementation.address, network);
+  }
+  else {
+    console.log('found Basil version 1, no need to deploy it.');
+  }
+}
+
 async function deployController() {
-  if(!data.controllerAddress) {
+  if(forceReDeploy() || !data.controllerAddress) {
 
     // Deploy a new project controller.
     console.log(`did not find a project controller, deploying a new one...`);
@@ -76,8 +101,7 @@ async function deployController() {
     console.log(`deployed new project controller: ${controller.address}`);
 
     // Save to disk.
-    data.controllerAddress = controller.address;
-    DeployData.write(data, network);
+    data = DeployData.saveController(data, network, controller.address);
   }
   else {
 

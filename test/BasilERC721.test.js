@@ -4,15 +4,20 @@ const ERC721Token = artifacts.require('ERC721Token');
 const BasilERC721 = artifacts.require('BasilERC721');
 
 import Deployer from 'kernel/deploy/objects/Deployer';
+import shouldBehaveLikeBasil from './Basil.test';
 
 const ZOS_ADDRESS = "0x212fbf392206bca0a478b9ed3253b08559b35903";
 const ZEPPELIN_VERSION = '1.8.0';
 const ZEPPELIN_DISTRO = 'ZeppelinOS';
 const ERC721_NAME = 'ERC721Token';
 
-contract('BasilERC721', ([owner]) => {
+contract('BasilERC721', (accounts) => {
+
+  const owner = accounts[2];
 
   describe.only('implementation', function() {
+
+    shouldBehaveLikeBasil(BasilERC721, accounts);
 
     beforeEach(async function () {
 

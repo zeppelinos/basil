@@ -1,17 +1,16 @@
-import React from 'react'
-import Store from '../store'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import BasilActions from "../actions/basil";
+import React from 'react';
+import Store from '../store';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import BasilActions from '../actions/basil';
 
 class Navbar extends React.Component {
-
-  componentWillMount() {
-    Store.dispatch(BasilActions.find())
+  componentWillMount () {
+    Store.dispatch(BasilActions.find());
   }
 
-  render() {
-    const basil = this.props.basil
+  render () {
+    const basil = this.props.basil;
     return (
       <nav>
         <div className="nav-wrapper">
@@ -27,12 +26,12 @@ class Navbar extends React.Component {
           }
         </div>
       </nav>
-    )
+    );
   }
 }
 
-function mapStateToProps({ basil }) {
-  return { basil }
+function mapStateToProps ({ basil }) {
+  return { basil };
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(Navbar);

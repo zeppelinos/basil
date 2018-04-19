@@ -5,20 +5,18 @@ import assertRevert from './helpers/assertRevert';
 const Basil = artifacts.require('Basil');
 
 contract('Basil', (accounts) => {
-  describe('implementation', function() {
+  describe('implementation', function () {
     shouldBehaveLikeBasil(Basil, accounts);
   });
 });
 
-function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, someone, anotherone]) {
-
+function shouldBehaveLikeBasil (ContractKlazz, [_, proxyOwner, owner, aWallet, someone, anotherone]) {
   beforeEach(async function () {
     this.basil = await ContractKlazz.new();
     await this.basil.initialize(owner);
   });
 
   describe('donate', function () {
-
     describe('when there are no donations', function () {
       const donor = someone;
 
@@ -125,13 +123,12 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
           const secondDonation = 2;
 
           it('reverts', async function () {
-            await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }))
+              await assertRevert(this.basil.sendTransaction({ from: anotherDonor, value: secondDonation }));
           });
         });
 
         describe('when the new donation is greater than the previous one', function () {
           const secondDonation = 3;
-
 
           describe('when the given R value are invalid', function () {
             const R = 256;
@@ -202,7 +199,6 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
   });
 
   describe('withdraw', function () {
-
     describe('when the sender is not the owner', function () {
       const from = anotherone;
       const wallet = aWallet;
@@ -260,5 +256,3 @@ function shouldBehaveLikeBasil(ContractKlazz, [_, proxyOwner, owner, aWallet, so
 }
 
 module.exports = shouldBehaveLikeBasil;
-
-

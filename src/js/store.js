@@ -1,4 +1,3 @@
-import React from 'react';
 import thunkMiddleware from 'redux-thunk';
 import basil from './reducers/basil';
 import alert from './reducers/alerts';

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import DonateForm from './DonateForm.react';
 import NetworkActions from '../actions/network';
 import DonationsList from './DonationsList.react';
-import { withRouter, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class App extends React.Component {
   componentWillMount () {
@@ -41,4 +41,4 @@ function mapStateToProps ({ fetching, network }) {
   return { fetching, network };
 }
 
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(connect(mapStateToProps)(App));

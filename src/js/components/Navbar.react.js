@@ -30,8 +30,8 @@ class Navbar extends React.Component {
   }
 }
 
-function mapStateToProps({ basil }) {
-  return { basil }
+function mapStateToProps ({ basil }) {
+  return { basil };
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(Navbar);

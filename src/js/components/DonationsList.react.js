@@ -15,7 +15,9 @@ class DonationsList extends React.Component {
         <div className="card donations-list">
           <div className="card-content">
             <h3 className="title">Some already thought about our basil</h3>
-            { donations.length === 0 ? <em>Loading...</em> : <ul className="collection">{this._buildDonationsList(donations)}</ul>}
+            { donations.length === 0
+              ? <em>Loading...</em>
+              : <ul className="collection">{this._buildDonationsList(donations)}</ul>}
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import * as ActionTypes from '../actiontypes';
 
 const initialState = { address: '', balance: 0 };

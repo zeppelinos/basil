@@ -1,4 +1,3 @@
-import React from 'react';
 import * as ActionTypes from '../actiontypes';
 
 const AlertsReducer = (state = null, action) => {

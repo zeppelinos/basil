@@ -1,10 +1,8 @@
 import { Basil } from '../contracts';
 import AlertActions from './alerts';
-import AccountActions from './accounts';
 import FetchingActions from './fetching';
 import * as ActionTypes from '../actiontypes';
 import { BASIL_ADDRESS } from '../constants';
-import Network from '../network';
 import toWei from '../helpers/toWei';
 import fromWei from '../helpers/fromWei';
 

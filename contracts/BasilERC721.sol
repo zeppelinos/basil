@@ -1,7 +1,7 @@
 pragma solidity ^0.4.21;
 
 import "./Basil.sol";
-import "kernel/contracts/test/kernel_instance/ERC721Token.sol";
+import "zeppelin-zos/contracts/token/ERC721/ERC721Token.sol";
 
 contract BasilERC721 is Basil {
 

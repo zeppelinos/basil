@@ -3,6 +3,10 @@
 # TODO: remove --no-install from vesion update
 
 NETWORK=$1
+OWNER=$2
+
+echo "NETWORK = "$NETWORK
+echo "OWNER = "$OWNER
 
 # -----------------------------------------------------------------------
 # Project setup and first implementation of an upgradeable Basil.sol
@@ -28,7 +32,7 @@ zos sync --network $NETWORK
 # Request a proxy for the upgradeably Basil.sol
 # NOTE: A dapp could now use the address of the proxy specified in package.zos.<network_name>.json
 echo "zos create-proxy Basil --network $NETWORK"
-zos create-proxy Basil --network $NETWORK
+zos create-proxy Basil --params $OWNER --network $NETWORK
 
 # -------------------------------------------------------------------------------
 # New version of Basil.sol that uses an on-chain ERC721 token implementation

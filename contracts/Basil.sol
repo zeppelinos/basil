@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "zeppelin-zos/contracts/ownership/Ownable.sol";
+import "openzeppelin-zos/contracts/ownership/Ownable.sol";
 
 /**
  * @title Basil

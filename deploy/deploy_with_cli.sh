@@ -64,19 +64,26 @@ echo "zos sync --network $NETWORK"
 zos sync --network $NETWORK
 
 # Create a proxy for the standard library's ERC721 token.
-BASIL=$(jq ".proxies.Basil[0].address" package.zos.local.json)
-echo "zos create-proxy MintableERC721Token --params "$BASIL",BasilToken,BSL --network $NETWORK"
-zos create-proxy MintableERC721Token --init --params $BASIL,BasilToken,BSL --network $NETWORK
+# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
+BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
+# BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json)
+echo "Using Basil proxy deployed at: "$BASIL
+echo "zos create-proxy MintableERC721Token --from "$OWNER" --params "$BASIL",BasilToken,BSL --network $NETWORK"
+zos create-proxy MintableERC721Token --from $OWNER --init --params $BASIL,BasilToken,BSL --network $NETWORK
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# CURRENTLY FAILING HERE IN ROPSTEN: most likely it isn't finding the deployed stdlib address
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Read deployed addresses
 ERC721=$(jq ".proxies.MintableERC721Token[0].address" package.zos.$NETWORK.json)
 echo "Token deployed at: "$ERC721
-BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json)
-echo "Basil deployed at: "$BASIL
 
 # Upgrade the existing contract proxy to use the new version
 echo "zos upgrade-proxy Basil null --network $NETWORK"
 zos upgrade-proxy Basil null --network $NETWORK
 
 # Register the token in Basil.
-echo "BasilERC721.at($BASIL).setToken($ERC721, {from: \"$OWNER\"})" | truffle console --network $NETWORK
+echo "BasilERC721.at(\"$BASIL\").setToken($ERC721, {from: \"$OWNER\"})" | truffle console --network $NETWORK

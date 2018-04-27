@@ -34,25 +34,23 @@ module.exports = function() {
 
   describe('donate', function() {
 
-    // TODO: test highest donation
+    describe('when receiving a donation that is greater than zero', function() {
 
-    // describe('when receiving a donation that is greater than zero', function() {
+      beforeEach(async function() {
+        this.donationValue = 1;
+        this.donation = {from: this.someone, value: web3.toWei(this.donationValue, 'ether')};
+        await this.basil.donate(5, 5, 5, this.donation);
+      });
 
-    //   beforeEach(async function() {
-    //     this.donationValue = 1;
-    //     this.donation = {from: this.donor1, value: web3.toWei(this.donationValue, 'ether')};
-    //     await this.basil.donate(this.donation);
-    //   });
+      it('increments token id', async function() {
+        (await this.basil.numEmittedTokens()).toNumber().should.be.eq(this.donationValue);
+      });
 
-    //   it('increments token id', async function() {
-    //     (await this.basil.numEmittedTokens()).toNumber().should.be.eq(this.donationValue);
-    //   });
+      it('mints tokens', async function() {
+        (await this.token.balanceOf(this.someone)).toNumber().should.be.eq(this.donationValue);
+      });
 
-    //   it('mints tokens', async function() {
-    //     (await this.token.balanceOf(this.donor1)).toNumber().should.be.eq(this.donationValue);
-    //   });
-
-    // });
+    });
 
   });
 }

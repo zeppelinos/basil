@@ -3,7 +3,7 @@ const MintableERC721Token = artifacts.require('MintableERC721Token');
 
 const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 
-contract.only('BasilERC721', (accounts) => {
+contract('BasilERC721', (accounts) => {
 
   beforeEach(async function() {
     this.owner = accounts[2];

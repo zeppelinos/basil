@@ -16,7 +16,7 @@ const shouldBehaveLikeBasil = require('./Basil.behavior.js');
 const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 const should = require('chai').should();
 
-contract.only('AppManager', (accounts) => {
+contract('AppManager', (accounts) => {
 
   before(function() {
     this.owner = accounts[2];

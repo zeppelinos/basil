@@ -1,7 +1,7 @@
 const Basil = artifacts.require('Basil');
 const shouldBehaveLikeBasil = require('./Basil.behavior.js');
 
-contract.only('Basil', (accounts) => {
+contract('Basil', (accounts) => {
 
   beforeEach(async function() {
     this.owner = accounts[2];

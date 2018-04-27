@@ -1,48 +1,23 @@
-// "use strict";
+const BasilERC721 = artifacts.require('BasilERC721');
+const MintableERC721Token = artifacts.require('MintableERC721Token');
 
-// const ERC721Token = artifacts.require('ERC721Token');
-// const BasilERC721 = artifacts.require('BasilERC721');
+const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 
-// import Deployer from 'kernel/deploy/objects/Deployer';
-// import shouldBehaveLikeBasil from './Basil.behavior';
+contract.only('BasilERC721', (accounts) => {
 
-// const ZOS_ADDRESS = "0x212fbf392206bca0a478b9ed3253b08559b35903";
-// const ZEPPELIN_VERSION = '1.8.0';
-// const ZEPPELIN_DISTRO = 'ZeppelinOS';
-// const ERC721_NAME = 'ERC721Token';
+  beforeEach(async function() {
+    this.owner = accounts[2];
+    this.aWallet = accounts[3];
+    this.someone = accounts[4];
+    this.anotherone = accounts[5];
+    this.tokenName = 'DonationToken';
+    this.tokenSymbol = 'DON';
+    this.basil = await BasilERC721.new();
+    await this.basil.initialize(this.owner);
+    this.token = await MintableERC721Token.new();
+    await this.token.initialize(this.basil.address, this.tokenName, this.tokenSymbol);
+    await this.basil.setToken(this.token.address, {from: this.owner});
+  });
 
-// contract('BasilERC721', (accounts) => {
-
-//   const owner = accounts[2];
-
-//   describe.only('implementation', function() {
-
-//     shouldBehaveLikeBasil(BasilERC721, accounts);
-
-//     beforeEach(async function () {
-
-//       // Deploy BasilERC721 implementation.
-//       this.basil = await BasilERC721.new();
-//       await this.basil.initialize(owner);
-
-//       // Get a proxy for ZOS' ERC721Token implementation.
-//       const controller = await Deployer.projectController(owner, 'TheBasil', ZOS_ADDRESS);
-//       const erc721Proxy = await Deployer.createProxy(
-//         controller,
-//         owner,
-//         ERC721Token,
-//         ERC721_NAME,
-//         ZEPPELIN_DISTRO,
-//         ZEPPELIN_VERSION
-//       );
-
-//       // Set the token in Basil.
-//       await this.basil.setToken(erc721Proxy.address);
-//     });
-
-//     it('should properly have its ERC721Token set', async function() {
-//       const token = await this.basil.token();
-//       assert.notEqual(token, 0x0);
-//     });
-//   });
-// });
+  shouldBehaveLikeBasilWithTokens();
+});

@@ -17,6 +17,10 @@ echo "INJECT_ZOS= "$INJECT_ZOS
 # Clean up package.zos.* files
 rm -f package.zos.*
 
+# Util to trace accounts.
+# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
+# exit
+
 # Compile all contracts.
 # echo "npx truffle compile"
 # npx truffle compile
@@ -51,7 +55,7 @@ zos new-version 0.0.2 --stdlib openzeppelin\-zos --no-install --network $NETWORK
 # If on a local network, inject a simulation of the stdlib.
 if [ $INJECT_ZOS == true ] 
 then
-  echo ""
+  echo "zos deploy-all --network $NETWORK"
   zos deploy-all --network $NETWORK
 fi
 
@@ -64,7 +68,6 @@ echo "zos sync --network $NETWORK"
 zos sync --network $NETWORK
 
 # Create a proxy for the standard library's ERC721 token.
-# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
 BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
 # BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json)
 echo "Using Basil proxy deployed at: "$BASIL

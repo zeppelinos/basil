@@ -4,6 +4,7 @@ import "./Basil.sol";
 import "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";
 
 contract BasilERC721 is Basil {
+  using SafeMath for uint256;
 
   // ERC721 non-fungible tokens to be emitted on donations.
   MintableERC721Token public token;
@@ -22,6 +23,6 @@ contract BasilERC721 is Basil {
 
   function emitUniqueToken(address _tokenOwner) internal {
     token.mint(_tokenOwner, numEmittedTokens);
-    numEmittedTokens++;
+    numEmittedTokens = numEmittedTokens.add(1);
   }
 }

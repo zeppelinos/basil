@@ -1,18 +1,19 @@
 pragma solidity ^0.4.21;
 
 import "./Basil.sol";
-import "kernel/contracts/test/kernel_instance/ERC721Token.sol";
+import "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";
 
 contract BasilERC721 is Basil {
+  using SafeMath for uint256;
 
-  ERC721Token public token;
+  // ERC721 non-fungible tokens to be emitted on donations.
+  MintableERC721Token public token;
   uint256 public numEmittedTokens;
 
-  function setToken(address _erc721Address) external onlyOwner {
-    require(_erc721Address != address(0));
-    require(address(token) == address(0));
-    token = ERC721Token(_erc721Address);
-    token.initialize();
+  function setToken(MintableERC721Token _token) external onlyOwner {
+    require(_token != address(0));
+    require(token == address(0));
+    token = _token;
   }
 
   function donate(uint256 _r, uint256 _g, uint256 _b) public payable {
@@ -22,6 +23,6 @@ contract BasilERC721 is Basil {
 
   function emitUniqueToken(address _tokenOwner) internal {
     token.mint(_tokenOwner, numEmittedTokens);
-    numEmittedTokens++;
+    numEmittedTokens = numEmittedTokens.add(1);
   }
 }

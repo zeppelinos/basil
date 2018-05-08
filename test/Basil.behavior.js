@@ -1,4 +1,4 @@
-import assertRevert from './helpers/assertRevert';
+import assertRevert from 'zos-lib/lib/helpers/assertRevert';
 
 module.exports = function() {
 

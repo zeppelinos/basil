@@ -1,4 +1,5 @@
-const assertRevert = require('./helpers/assertRevert.js');
+import assertRevert from 'zos-lib/lib/helpers/assertRevert';
+
 const should = require('chai').should();
 const shouldBehaveLikeBasil = require('./Basil.behavior.js');
 

@@ -3,12 +3,16 @@
 # TODO: remove --no-install from vesion update
 
 NETWORK=$1
-OWNER=$2
-INJECT_ZOS=$3
+INJECT_ZOS=$2
+OWNER=$3
 
 echo "NETWORK = "$NETWORK
 echo "OWNER = "$OWNER
 echo "INJECT_ZOS= "$INJECT_ZOS
+
+# Util to trace accounts.
+# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
+# exit
 
 # -----------------------------------------------------------------------
 # Project setup and first implementation of an upgradeable Basil.sol
@@ -17,22 +21,18 @@ echo "INJECT_ZOS= "$INJECT_ZOS
 # Clean up package.zos.* files
 rm -f package.zos.*
 
-# Util to trace accounts.
-# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
-# exit
-
 # Compile all contracts.
 # echo "npx truffle compile"
 # npx truffle compile
 
 # Initialize project
 # NOTE: Creates a package.zos.json file that keeps track of the project's details
-echo "zos init MyProject 0.0.1 --network $NETWORK"
-zos init Basil 0.0.1 --network $NETWORK
+echo "zos init Basil 0.0.1"
+zos init Basil 0.0.1
 
 # Register Basil.sol in the project as an upgradeable contract.
-echo "zos add-implementation Basil Basil --network $NETWORK"
-zos add-implementation Basil Basil --network $NETWORK
+echo "zos add-implementation Basil Basil"
+zos add-implementation Basil Basil
 
 # Deploy all implementations in the specified network.
 # NOTE: Creates another package.zos.<network_name>.json file, specific to the network used, which keeps track of deployed addresses, etc.
@@ -41,27 +41,27 @@ zos sync --network $NETWORK
 
 # Request a proxy for the upgradeably Basil.sol
 # NOTE: A dapp could now use the address of the proxy specified in package.zos.<network_name>.json
-echo "zos create-proxy Basil --init --params "$OWNER" --network $NETWORK"
-zos create-proxy Basil --init --params $OWNER --network $NETWORK
+echo "zos create-proxy Basil --init --args "$OWNER" --network $NETWORK"
+zos create-proxy Basil --init --args $OWNER --network $NETWORK
 
 # -------------------------------------------------------------------------------
 # New version of Basil.sol that uses an on-chain ERC721 token implementation
 # -------------------------------------------------------------------------------
 
 # Upgrade the project to a new version, so that new implementations can be registered
-echo "zos new-version 0.0.2 --network $NETWORK"
-zos new-version 0.0.2 --stdlib openzeppelin\-zos --no-install --network $NETWORK
+echo "zos new-version 0.0.2 --stdlib openzeppelin\-zos --no-install"
+zos new-version 0.0.2 --stdlib openzeppelin\-zos --no-install
 
 # If on a local network, inject a simulation of the stdlib.
 if [ $INJECT_ZOS == true ] 
 then
-  echo "zos deploy-all --network $NETWORK"
-  zos deploy-all --network $NETWORK
+  echo "zos deploy openzeppelin\-zos --network $NETWORK"
+  zos sync --deploy-stdlib --network $NETWORK
 fi
 
 # Upgrade main contract version
-echo "zos add-implementation BasilERC721 Basil --network $NETWORK"
-zos add-implementation BasilERC721 Basil --network $NETWORK
+echo "zos add-implementation BasilERC721 Basil"
+zos add-implementation BasilERC721 Basil
 
 # Deploy all implementations in the specified network.
 echo "zos sync --network $NETWORK"
@@ -71,8 +71,8 @@ zos sync --network $NETWORK
 BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
 # BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json)
 echo "Using Basil proxy deployed at: "$BASIL
-echo "zos create-proxy MintableERC721Token --from "$OWNER" --params "$BASIL",BasilToken,BSL --network $NETWORK"
-zos create-proxy MintableERC721Token --from $OWNER --init --params $BASIL,BasilToken,BSL --network $NETWORK
+echo "zos create-proxy MintableERC721Token --from "$OWNER" --args "$BASIL",BasilToken,BSL --network $NETWORK"
+zos create-proxy MintableERC721Token --from $OWNER --init --args $BASIL,BasilToken,BSL --network $NETWORK
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -74,12 +74,6 @@ echo "Using Basil proxy deployed at: "$BASIL
 echo "zos create-proxy MintableERC721Token --from "$OWNER" --args "$BASIL",BasilToken,BSL --network $NETWORK"
 zos create-proxy MintableERC721Token --from $OWNER --init --args $BASIL,BasilToken,BSL --network $NETWORK
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# CURRENTLY FAILING HERE IN ROPSTEN: most likely it isn't finding the deployed stdlib address
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # Read deployed addresses
 ERC721=$(jq ".proxies.MintableERC721Token[0].address" package.zos.$NETWORK.json)
 echo "Token deployed at: "$ERC721

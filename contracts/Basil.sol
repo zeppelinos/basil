@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-zos/contracts/ownership/Ownable.sol";
 
 /**
  * @title Basil
@@ -12,18 +12,8 @@ contract Basil is Ownable {
   uint256 public g;
   uint256 public b;
 
-  // Tells whether the basil has been initialized or not
-  bool public initialized;
-
   // highest donation in wei
   uint256 public highestDonation;
-
-
-  // constructor
-  function Basil()
-    Ownable()
-    public
-  {}
 
   event Withdrawal(address indexed wallet, uint256 value);
   event NewDonation(address indexed donor, uint256 value, uint256 r, uint256 g, uint256 b);
@@ -41,12 +31,6 @@ contract Basil is Ownable {
     NewDonation(
       msg.sender, msg.value,
       r, g, b);
-  }
-
-  function initialize(address _owner) public {
-    require(!initialized);
-    owner = _owner;
-    initialized = true;
   }
 
   function withdraw(address wallet) public onlyOwner {

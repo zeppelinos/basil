@@ -12,7 +12,7 @@ module.exports = {
     ropsten: {
       name: "ropsten",
       host: 'localhost',
-      port: 8545,
+      port: 8565,
       network_id: 3,
     }
   }

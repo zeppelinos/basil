@@ -9,7 +9,7 @@ const BasilActions = {
   find() {
     return async function(dispatch) {
       try {
-        const basil = await Basil.at(BASIL_ADDRESS)
+        const basil = Basil.at(BASIL_ADDRESS)
         dispatch(BasilActions.receive(basil))
       } catch(error) {
         dispatch(AlertActions.showError(error))

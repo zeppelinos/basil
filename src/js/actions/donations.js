@@ -13,7 +13,7 @@ const DonationsActions = {
   findAll() {
     return async function(dispatch) {
       try {
-        const basil = await Basil.at(BASIL_ADDRESS)
+        const basil = Basil.at(BASIL_ADDRESS)
         const events = basil.NewDonation({}, { fromBlock: 0, toBlock: 'latest' });
         events.watch(function(error, result) {
           if(error) AlertActions.showError(error)
@@ -31,7 +31,7 @@ const DonationsActions = {
       console.log(message)
       dispatch(FetchingActions.start(message))
       try {
-        const basil = await Basil.at(BASIL_ADDRESS)
+        const basil = Basil.at(BASIL_ADDRESS)
         await basil.donate(r, g, b, { from: donor, value: toWei(value) })
         dispatch(FetchingActions.stop())
       } catch(error) {

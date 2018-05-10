@@ -1,0 +1,30 @@
+{
+  "app": {
+    "address": "0x160177c3e126f3b80ea0eae06fb9744a1ee35f3b",
+    "version": "0.0.2"
+  },
+  "proxies": {
+    "Basil": [
+      {
+        "address": "0xab21e5e72c2fdb13c1f8c9b660f5035eaadc1bc6",
+        "version": "0.0.2"
+      }
+    ],
+    "MintableERC721Token": [
+      {
+        "address": "0x3980f29cbdcffb8bca7a03636f121bf1aec68932",
+        "version": "0.0.2"
+      }
+    ]
+  },
+  "contracts": {
+    "Basil": "0x43ad4f6c33b31534bcfd59c27e0ea6384cacc4b8"
+  },
+  "provider": {
+    "address": "0xb1f22cdcabbe7d7bc817d54bcca9b12b8bad7d27"
+  },
+  "stdlib": {
+    "address": "0xA739d10Cc20211B973dEE09DB8F0D75736E2D817",
+    "name": "openzeppelin-zos"
+  }
+}

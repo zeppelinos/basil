@@ -36,12 +36,12 @@ zos add-implementation Basil Basil
 
 # Deploy all implementations in the specified network.
 # NOTE: Creates another package.zos.<network_name>.json file, specific to the network used, which keeps track of deployed addresses, etc.
-echo "zos sync --network $NETWORK"
+echo "zos sync --network "$NETWORK
 zos sync --network $NETWORK
 
 # Request a proxy for the upgradeably Basil.sol
 # NOTE: A dapp could now use the address of the proxy specified in package.zos.<network_name>.json
-echo "zos create-proxy Basil --init --args "$OWNER" --network $NETWORK"
+echo "zos create-proxy Basil --init --args "$OWNER" --network "$NETWORK
 zos create-proxy Basil --init --args $OWNER --network $NETWORK
 
 # -------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ zos new-version 0.0.2 --stdlib openzeppelin\-zos --no-install
 # If on a local network, inject a simulation of the stdlib.
 if [ $INJECT_ZOS == true ] 
 then
-  echo "zos deploy openzeppelin\-zos --network $NETWORK"
+  echo "zos sync --deploy-stdlib --network "$NETWORK
   zos sync --deploy-stdlib --network $NETWORK
 fi
 
@@ -64,14 +64,14 @@ echo "zos add-implementation BasilERC721 Basil"
 zos add-implementation BasilERC721 Basil
 
 # Deploy all implementations in the specified network.
-echo "zos sync --network $NETWORK"
+echo "zos sync --network "$NETWORK
 zos sync --network $NETWORK
 
 # Create a proxy for the standard library's ERC721 token.
 BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
 # BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json)
 echo "Using Basil proxy deployed at: "$BASIL
-echo "zos create-proxy MintableERC721Token --from "$OWNER" --args "$BASIL",BasilToken,BSL --network $NETWORK"
+echo "zos create-proxy MintableERC721Token --from "$OWNER" --args "$BASIL",BasilToken,BSL --network "$NETWORK
 zos create-proxy MintableERC721Token --from $OWNER --init --args $BASIL,BasilToken,BSL --network $NETWORK
 
 # Read deployed addresses
@@ -79,8 +79,9 @@ ERC721=$(jq ".proxies.MintableERC721Token[0].address" package.zos.$NETWORK.json)
 echo "Token deployed at: "$ERC721
 
 # Upgrade the existing contract proxy to use the new version
-echo "zos upgrade-proxy Basil null --network $NETWORK"
+echo "zos upgrade-proxy Basil null --network "$NETWORK
 zos upgrade-proxy Basil null --network $NETWORK
 
 # Register the token in Basil.
+echo "Registering token in Basil..."
 echo "BasilERC721.at(\"$BASIL\").setToken($ERC721, {from: \"$OWNER\"})" | truffle console --network $NETWORK

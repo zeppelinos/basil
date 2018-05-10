@@ -6,8 +6,8 @@
   "scripts": {
     "test": "npx truffle test",
     "console": "npx truffle console",
-    "deploy": "npx truffle exec scripts/deploy.js --network development",
-    "deploy-ropsten": "npx truffle exec scripts/deploy.js --network development",
+    "deploy": "deploy/deploy_with_cli.sh development true 0xba42df42acefe080e79a51008b86a72c3d7ba208",
+    "deploy-ropsten": "deploy/deploy_with_cli.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",
     "lint:sol": "solium -d .",
@@ -80,6 +80,7 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
+    "zos": "^0.3.17",
     "zos-lib": "^0.1.10"
   }
 }

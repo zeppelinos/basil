@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx truffle test",
     "console": "npx truffle console",
-    "deploy": "deploy/deploy_with_cli.sh development true 0xba42df42acefe080e79a51008b86a72c3d7ba208",
+    "deploy": "deploy/deploy_with_cli.sh development true 0xe795572a1b825719557f9e902a6c7325d8e00c08",
     "deploy_ropsten": "deploy/deploy_with_cli.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",

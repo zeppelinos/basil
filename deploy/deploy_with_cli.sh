@@ -19,7 +19,7 @@ echo "INJECT_ZOS= "$INJECT_ZOS
 # -----------------------------------------------------------------------
 
 # Clean up package.zos.* files
-rm -f package.zos.*
+# rm -f package.zos.*
 
 # Compile all contracts.
 # echo "npx truffle compile"

@@ -1,10 +1,7 @@
 #! /usr/bin/env bash
 
-# TODO: remove --no-install from vesion update
-
 # Enable command logging.
 set -x
-
 
 NETWORK=$1
 INJECT_ZOS=$2
@@ -78,7 +75,6 @@ zos upgrade-proxy Basil --network $NETWORK
 # Register the token in Basil.
 echo "Registering token in Basil..."
 echo "BasilERC721.at(\"$BASIL\").setToken($ERC721, {from: \"$OWNER\"})" | truffle console --network $NETWORK
-# exit
 
 # Disable command logging
 set +x

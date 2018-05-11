@@ -34,7 +34,7 @@ rm -rf build && npx truffle compile
 zos init Basil 0.0.1
 
 # Register Basil.sol in the project as an upgradeable contract.
-zos add-implementation Basil Basil
+zos add-implementation Basil
 
 # Deploy all implementations in the specified network.
 # NOTE: Creates another package.zos.<network_name>.json file, specific to the network used, which keeps track of deployed addresses, etc.
@@ -73,7 +73,7 @@ ERC721=$(jq ".proxies.MintableERC721Token[0].address" package.zos.$NETWORK.json)
 echo "Token deployed at: "$ERC721
 
 # Upgrade the existing contract proxy to use the new version
-zos upgrade-proxy Basil --all --network $NETWORK
+zos upgrade-proxy Basil --network $NETWORK
 
 # Register the token in Basil.
 echo "Registering token in Basil..."

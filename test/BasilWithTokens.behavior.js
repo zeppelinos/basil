@@ -3,9 +3,9 @@ import assertRevert from 'zos-lib/lib/helpers/assertRevert';
 const should = require('chai').should();
 const shouldBehaveLikeBasil = require('./Basil.behavior.js');
 
-module.exports = function() {
+module.exports = function(owner, aWallet, someone, anotherone, tokenName, tokenSymbol) {
 
-  shouldBehaveLikeBasil();
+  shouldBehaveLikeBasil(owner, aWallet, someone, anotherone);
 
   describe('token', function() {
 
@@ -14,16 +14,16 @@ module.exports = function() {
     });
 
     it('has the correct token name', async function() {
-      (await this.token.name()).should.be.eq(this.tokenName);
+      (await this.token.name()).should.be.eq(tokenName);
     });
 
     it('has the correct token symbol', async function() {
-      (await this.token.symbol()).should.be.eq(this.tokenSymbol);
+      (await this.token.symbol()).should.be.eq(tokenSymbol);
     });
 
     it('cannot be set a second time', async function() {
       await assertRevert(
-        this.basil.setToken(this.token.address, {from: this.owner})
+        this.basil.setToken(this.token.address, {from: owner})
       );
     });
 
@@ -39,7 +39,7 @@ module.exports = function() {
 
       beforeEach(async function() {
         this.donationValue = 1;
-        this.donation = {from: this.someone, value: web3.toWei(this.donationValue, 'ether')};
+        this.donation = {from: someone, value: web3.toWei(this.donationValue, 'ether')};
         await this.basil.donate(5, 5, 5, this.donation);
       });
 
@@ -48,7 +48,7 @@ module.exports = function() {
       });
 
       it('mints tokens', async function() {
-        (await this.token.balanceOf(this.someone)).toNumber().should.be.eq(this.donationValue);
+        (await this.token.balanceOf(someone)).toNumber().should.be.eq(this.donationValue);
       });
 
     });

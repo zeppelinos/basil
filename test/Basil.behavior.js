@@ -1,13 +1,13 @@
 import assertRevert from 'zos-lib/lib/helpers/assertRevert';
 
-module.exports = function() {
+module.exports = function(owner, aWallet, someone, anotherone) {
 
   describe('donate', function () {
 
     describe('when there are no donations', function () {
 
       beforeEach(function() {
-        this.donor = this.someone;
+        this.donor = someone;
       });
 
       describe('when the donation is zero', function () {
@@ -95,7 +95,7 @@ module.exports = function() {
       const firstDonation = 2;
       
       beforeEach(function() {
-        this.donor = this.someone;
+        this.donor = someone;
       });
 
       beforeEach(async function () {
@@ -105,7 +105,7 @@ module.exports = function() {
       describe('when another donor appears', function () {
 
         beforeEach(function() {
-          this.anotherDonor = this.anotherone;
+          this.anotherDonor = anotherone;
         });
 
         describe('when the new donation is less than the previous one', function () {
@@ -201,8 +201,8 @@ module.exports = function() {
     describe('when the sender is not the owner', function () {
 
       beforeEach(function() {
-        this.from = this.anotherone;
-        this.wallet = this.aWallet;
+        this.from = anotherone;
+        this.wallet = aWallet;
       });
 
       it('reverts', async function () {
@@ -213,7 +213,7 @@ module.exports = function() {
     describe('when there was a donation before', function () {
 
       beforeEach(function() {
-        this.from = this.owner;
+        this.from = owner;
       });
 
       describe('when the requested wallet is the zero address', function () {
@@ -230,7 +230,7 @@ module.exports = function() {
       describe('when the requested wallet is not the zero address', function () {
 
         beforeEach(function() {
-          this.wallet = this.aWallet;
+          this.wallet = aWallet;
         });
 
         describe('when there were no funds', function () {
@@ -242,7 +242,7 @@ module.exports = function() {
         describe('when there were some funds', function () {
 
           beforeEach(function() {
-            this.donor = this.someone;
+            this.donor = someone;
             this.donation = 999;
           });
 

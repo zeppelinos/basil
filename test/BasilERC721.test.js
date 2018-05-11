@@ -3,21 +3,20 @@ const MintableERC721Token = artifacts.require('MintableERC721Token');
 
 const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 
-contract('BasilERC721', (accounts) => {
+contract('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
+
+  const tokenName = 'DonationToken';
+  const tokenSymbol = 'DON';
 
   beforeEach(async function() {
-    this.owner = accounts[2];
-    this.aWallet = accounts[3];
-    this.someone = accounts[4];
-    this.anotherone = accounts[5];
-    this.tokenName = 'DonationToken';
-    this.tokenSymbol = 'DON';
+
     this.basil = await BasilERC721.new();
-    await this.basil.initialize(this.owner);
+    await this.basil.initialize(owner);
+
     this.token = await MintableERC721Token.new();
-    await this.token.initialize(this.basil.address, this.tokenName, this.tokenSymbol);
-    await this.basil.setToken(this.token.address, {from: this.owner});
+    await this.token.initialize(this.basil.address, tokenName, tokenSymbol);
+    await this.basil.setToken(this.token.address, {from: owner});
   });
 
-  shouldBehaveLikeBasilWithTokens();
+  shouldBehaveLikeBasilWithTokens(owner, aWallet, someone, anotherone, tokenName, tokenSymbol);
 });

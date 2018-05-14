@@ -4,6 +4,10 @@ This is a sample Dapp built on top of *ZOS* (ZeppelinOS). It presents a basic co
 
 As for functionality, the Dapp allows users to change the light color of a Basil plant, using an Arduino and an RGB wifi light bulb. The upgraded contract also emits an ERC721 non fungible token to the user.
 
+### ZOS cli
+
+This example makes use of [zeppelinos/zos-cli](https://github.com/zeppelinos/zos-cli). ZeppelinOS's cli is a tool for automating deployment of [zeppelinos/zos-lib](https://github.com/zeppelinos/zos-lib) contracts, as well as storing deployment information in json files. For a lower level understanding of ZOS and zos-lib, please see the [complex-example](https://github.com/zeppelinos/zos-lib/tree/master/examples/complex), or the tests within this project.
+
 ### Running the app locally
 
 ```
@@ -16,4 +20,4 @@ This will start a dev sever at `localhost:3000`. The application will connect to
 
 Same as "Running the spp locally" but modify `ACTIVE_NETWORK` in `src/js/constants.js` to `config.networks.development`.
 
-Then start `ganache-cli --deterministic` and run `npm run deploy`. This will run the contracts deployment script on the local network. If you have problems with an account not being recognized, change the used account address in `package.json`'s deploy script.
+Then start `ganache-cli --deterministic` and run `npm run deploy`. This will run the contracts deployment script on the local network. If you have problems with an account not being recognized, change the used account address in `package.json`'s deploy script.

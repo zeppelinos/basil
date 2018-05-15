@@ -2,6 +2,7 @@ pragma solidity ^0.4.21;
 
 import "./Basil.sol";
 import "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";
+import "openzeppelin-zos/contracts/math/SafeMath.sol";
 
 contract BasilERC721 is Basil {
   using SafeMath for uint256;

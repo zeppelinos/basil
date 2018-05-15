@@ -35,7 +35,12 @@ const DonationsActions = {
       dispatch(FetchingActions.start(message))
       try {
         const basil = Basil.at(BASIL_ADDRESS)
-        await basil.donate(r, g, b, { from: donor, value: toWei(value) })
+        await basil.donate(r, g, b, { 
+          from: donor, 
+          value: toWei(value),
+          gas: 400000,
+          gasPrice: 20000000000
+        })
         dispatch(FetchingActions.stop())
       } catch(error) {
         dispatch(AlertActions.showError(error))

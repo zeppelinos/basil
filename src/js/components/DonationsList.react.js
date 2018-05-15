@@ -2,6 +2,7 @@ import React from 'react'
 import Store from '../store'
 import { connect } from 'react-redux'
 import DonationsActions from '../actions/donations'
+import _ from 'lodash'
 
 class DonationsList extends React.Component {
 
@@ -25,6 +26,7 @@ class DonationsList extends React.Component {
 
   _buildDonationsList(donations) {
     
+    donations = _.uniqBy(donations, 'tx')
     const len = donations.length
     const rows = [];
     for(let r = 0; r < len; r += 3) {

@@ -66,6 +66,7 @@
     "chai": "^4.1.2",
     "colors": "^1.2.1",
     "dotenv-webpack": "^1.5.4",
+    "lodash": "^4.17.10",
     "materialize-css": "^0.100.2",
     "openzeppelin-zos": "^1.9.0-beta",
     "react": "^15.6.1",

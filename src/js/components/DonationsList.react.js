@@ -25,9 +25,9 @@ class DonationsList extends React.Component {
 
   _buildDonationsList(donations) {
     
-    const len = Math.ceil(donations.length / 3);
+    const len = donations.length
     const rows = [];
-    for(let r = 0; r < len; r++) {
+    for(let r = 0; r < len; r += 3) {
       rows.push(
         <div className="row no-margin" key={r}>
           {this._buildDonationItem(donations[r])}

@@ -41,6 +41,7 @@ const DonationsActions = {
           gas: 400000,
           gasPrice: 20000000000
         })
+        alert("Thank you for your donation! The basil thanks you with this ERC721 token of appreciation ^^")
         dispatch(FetchingActions.stop())
       } catch(error) {
         dispatch(AlertActions.showError(error))

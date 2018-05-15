@@ -9,6 +9,8 @@ const AccountsReducer = (state = initialState, action) => {
       return Object.assign({}, state, { address: action.address });
     case ActionTypes.RECEIVE_ETHER_BALANCE:
       return Object.assign({}, state, { balance: action.balance.toString() });
+    case ActionTypes.RECEIVE_TOKEN_BALANCE:
+      return Object.assign({}, state, { tokenBalance: action.balance.toString() });
     default:
       return state
   }

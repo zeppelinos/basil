@@ -39,7 +39,7 @@ const DonationsActions = {
           from: donor, 
           value: toWei(value),
           gas: 400000,
-          gasPrice: 20000000000
+          gasPrice: 22000000000
         })
         alert("Thank you for your donation! The basil thanks you with this ERC721 token of appreciation ^^")
         dispatch(FetchingActions.stop())

@@ -6,8 +6,10 @@
   "scripts": {
     "test": "NODE_ENV=test npx truffle test",
     "console": "npx truffle console",
-    "deploy": "deploy/deploy_with_cli.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
-    "deploy_ropsten": "deploy/deploy_with_cli.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
+    "deploy_v1": "deploy/deploy_with_cli_v1.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+    "deploy_ropsten_v1": "deploy/deploy_with_cli_v1.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
+    "deploy_v2": "deploy/deploy_with_cli_v2.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+    "deploy_ropsten_v2": "deploy/deploy_with_cli_v2.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",
     "lint:sol": "solium -d .",

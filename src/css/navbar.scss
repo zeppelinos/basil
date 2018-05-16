@@ -1,26 +1,29 @@
 @import "variables";
 
-nav {
-  background-color: $white !important;
+.main-nav {
+  background-color: $white;
+  box-shadow: none;
+  margin-bottom: 50px;
 
   .search-contract {
-    width: 350px !important;
-    font-size: 14px !important;
-    text-align: right !important;
+    width: 350px;
+    font-size: 14px;
+    text-align: right;
   }
 
   .brand-logo {
     font-family: Lato;
-    font-size: 25px!important;
-    padding-top: 10px !important;
+    font-size: 25px;
+    padding-top: 10px;
   }
 
   .nav-wrapper {
-    width: 60%!important;
+    width: 60%;
     margin: auto;
+    padding: 15px 0;
   }
 
   ul a {
-    color: $grey !important;
+    color: $grey;
   }
 }

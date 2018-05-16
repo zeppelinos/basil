@@ -13,7 +13,7 @@ class DonationsList extends React.Component {
   render() {
     const donations = this.props.donations.list
     return (
-      <div className={"col " + this.props.col}>
+      <div className="col">
         <div className="card donations-list">
           <div className="card-content">
             <h3 className="titleList">Some already thought about our basil</h3>

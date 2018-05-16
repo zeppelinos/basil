@@ -6,9 +6,75 @@
   }
 }
 
-.card {
+.basil.card {
+  min-width: 320px;
+
+  .card-content {
+    height: $card-size;
+    padding: 0;
+  }
+
   .card-action {
-    text-align: center !important;
+    text-align: center;
+    border: none;
+  }
+
+  .donate-form {
+    padding: 30px;
+  }
+
+  .title {
+    margin: 40px 0;
+    font-size: 20px;
+  }
+
+  .color-picker {
+    margin: 10px 7px;
+  }
+
+  #owner {
+    margin: 10px 0;
+    width: 323px;
+  }
+
+  .input-field {
+    margin-top: 15px;
+    padding-left: 0;
+  }
+
+  .submit {
+    text-align: right;
+
+    .btn.donate {
+      margin: 8px;
+      background: none;
+      color: $violet;
+      border: 2px solid $violet;
+      border-radius: 50px;
+    }
+  }
+}
+
+.basil-icon {
+  position: relative;
+  height: $card-size;
+
+  img {
+    $size: 150px;
+    display: block;
+    height: $size;
+    margin: auto;
+    margin-top: $card-size / 2 - $size / 2;
+  }
+
+  .notch {
+    $size: 15px;
+    position: absolute;
+    top: $card-size / 2 - $size / 2; 
+    left: 0; 
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid white;
   }
 }
 

@@ -13,7 +13,7 @@ class Navbar extends React.Component {
   render() {
     const basil = this.props.basil
     return (
-      <nav>
+      <nav className="main-nav">
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo">
             <img width="150" src={require('../../images/zeppelin-logo.png')}/>

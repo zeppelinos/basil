@@ -4,7 +4,7 @@
   "description": "Zeppelin Basil",
   "main": "truffle.js",
   "scripts": {
-    "test": "npx truffle test",
+    "test": "NODE_ENV=test npx truffle test",
     "console": "npx truffle console",
     "deploy": "deploy/deploy_with_cli.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
     "deploy_ropsten": "deploy/deploy_with_cli.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
@@ -58,8 +58,7 @@
     "truffle": "^4.1.5",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1",
-    "webpack-merge": "^4.1.0",
-    "zeppelin-solidity": "^1.8.0"
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -68,7 +67,6 @@
     "dotenv-webpack": "^1.5.4",
     "lodash": "^4.17.10",
     "materialize-css": "^0.100.2",
-    "openzeppelin-zos": "^1.9.0-beta",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
     "react-dom": "^15.6.1",
@@ -81,7 +79,8 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos": "^0.3.18",
-    "zos-lib": "^0.1.10"
+    "zos": "^0.4.0",
+    "zos-lib": "^0.1.16",
+    "openzeppelin-zos": "^1.9.0-beta"
   }
 }

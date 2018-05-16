@@ -12,7 +12,7 @@ const AccountActions = {
         const mainAddress = addresses[0]
         dispatch(AccountActions.receiveAccount(mainAddress))
         dispatch(AccountActions.getEtherBalance(mainAddress))
-        dispatch(AccountActions.getTokenBalance(mainAddress))
+        // dispatch(AccountActions.getTokenBalance(mainAddress))
       } catch(error) {
         dispatch(AlertActions.showError(error))
       }

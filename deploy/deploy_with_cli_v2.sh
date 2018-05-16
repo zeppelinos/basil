@@ -22,11 +22,11 @@ zos bump 0.0.2
 zos add BasilERC721:Basil
 
 # Deploy all implementations in the specified network.
-zos push --network $NETWORK --skip-compile
+zos push --from $OWNER --network $NETWORK --skip-compile
 
 # Upgrade the existing contract proxy to use the new version
 BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
-zos upgrade Basil "$BASIL" --network $NETWORK
+zos upgrade Basil "$BASIL" --from $OWNER --network $NETWORK
 
 # Link to ZeppelinOS standard library
 zos link openzeppelin\-zos --no-install
@@ -34,7 +34,7 @@ zos link openzeppelin\-zos --no-install
 # If on a local network, inject a simulation of the stdlib.
 if [ $INJECT_ZOS == true ] 
 then
-  zos push --deploy-stdlib --network $NETWORK --skip-compile
+  zos push --deploy-stdlib --from $OWNER --network $NETWORK --skip-compile
 fi
 
 # Create a proxy for the standard library's ERC721 token.

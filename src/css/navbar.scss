@@ -1,26 +1,36 @@
 @import "variables";
 
-nav {
-  background-color: $white !important;
+.container.main-nav {
+  background-color: $white;
+  box-shadow: none;
+  margin-bottom: 50px;
 
   .search-contract {
-    width: 350px !important;
-    font-size: 14px !important;
-    text-align: right !important;
+    width: 350px;
+    font-size: 14px;
+    text-align: right;
   }
 
   .brand-logo {
+    position: relative;
     font-family: Lato;
-    font-size: 25px!important;
-    padding-top: 10px !important;
+    font-size: 25px;
+    padding-top: 10px;
   }
 
   .nav-wrapper {
-    width: 60%!important;
     margin: auto;
   }
 
+  .col {
+    padding: 0;
+  }
+
   ul a {
-    color: $grey !important;
+    color: $grey;
+  }
+
+  li {
+    margin-left: 30px;
   }
 }

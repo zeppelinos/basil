@@ -26,7 +26,7 @@ const config = {
         use: 'json-loader'
       },
       {
-        test: /\.(ico|jpg|jpeg|png)$/,
+        test: /\.(ico|jpg|jpeg|png|svg)$/,
         loader: 'file-loader?name=images/[name].[ext]'
       },
       {

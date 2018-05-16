@@ -13,12 +13,10 @@ class DonationsList extends React.Component {
   render() {
     const donations = this.props.donations.list
     return (
-      <div className={"col " + this.props.col}>
-        <div className="card donations-list">
-          <div className="card-content">
-            <h3 className="titleList">Some already thought about our basil</h3>
-            { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
-          </div>
+      <div>
+        <h3 className="titleList">Some have already thought about our basil</h3>
+        <div className="donations-list">
+          { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
         </div>
       </div>
     )
@@ -46,7 +44,7 @@ class DonationsList extends React.Component {
     if(!donation) return <div className="col s4"></div>
     const style = { backgroundColor: `rgb(${[donation.r, donation.g, donation.b]})` }
     return (
-      <div className="col s4">
+      <div className="col l4 m12">
         <div className="donationCard">
           <div className="row no-margin donationColor" style={style}>
             <label>

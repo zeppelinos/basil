@@ -21,12 +21,11 @@ class DonateForm extends React.Component {
     const rgb = this.state.color.rgb;
     const { address, balance } = this.props.account;
     return (
-      <div className="col">
-        <form className="basil card" onSubmit={this._handleSubmit}>
-          <div className="card-content">
-            <div className="row no-margin">
-              <div className="donate-form col s6">
-
+      <form className="basil card" onSubmit={this._handleSubmit}>
+        <div className="card-content">
+          <div className="row no-margin">
+            <div className="col s6">
+              <div className="donate-form">
                 <h3 className="title">Customize the Zeppelin LED</h3>
 
                 <HuePicker className="color-picker" style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
@@ -43,16 +42,16 @@ class DonateForm extends React.Component {
                   </div>
                 </div>
               </div>
-
-              <div className="basil-icon col s6" style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
-                <img width="150" src={require('../../images/basil.svg')}></img>
-                <span className="notch"></span>
-              </div>
-
             </div>
+
+            <div className="basil-icon col s6" style={{backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}}>
+              <img width="150" src={require('../../images/basil.svg')}></img>
+              <span className="notch"></span>
+            </div>
+
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     )
   }
 

@@ -1,6 +1,6 @@
 @import "variables";
 
-.main-nav {
+.container.main-nav {
   background-color: $white;
   box-shadow: none;
   margin-bottom: 50px;
@@ -12,18 +12,21 @@
   }
 
   .brand-logo {
+    position: relative;
     font-family: Lato;
     font-size: 25px;
     padding-top: 10px;
   }
 
   .nav-wrapper {
-    width: 60%;
     margin: auto;
-    padding: 15px 0;
   }
 
   ul a {
     color: $grey;
+  }
+
+  li {
+    margin-left: 30px;
   }
 }

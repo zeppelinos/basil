@@ -10,6 +10,10 @@
   url('./fonts/material-icons/MaterialIcons-Regular.ttf') format('truetype');
 }
 
+html, body {
+  font-family: Roboto;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

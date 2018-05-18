@@ -11,9 +11,9 @@ contract BasilERC721 is Basil {
   MintableERC721Token public token;
   uint256 public numEmittedTokens;
 
-  function setToken(MintableERC721Token _token) external onlyOwner {
+  function initialize(address _sender, MintableERC721Token _token) public isInitializer("Basil", "1") {
+    Ownable.initialize(_sender);
     require(_token != address(0));
-    require(token == address(0));
     token = _token;
   }
 

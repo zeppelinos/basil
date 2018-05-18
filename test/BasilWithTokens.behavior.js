@@ -21,12 +21,6 @@ module.exports = function(owner, aWallet, someone, anotherone, tokenName, tokenS
       (await this.token.symbol()).should.be.eq(tokenSymbol);
     });
 
-    it('cannot be set a second time', async function() {
-      await assertRevert(
-        this.basil.setToken(this.token.address, {from: owner})
-      );
-    });
-
     it('is the token set in the donations contract', async function() {
       (await this.basil.token()).should.be.eq(this.token.address);
     });

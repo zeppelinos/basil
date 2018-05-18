@@ -9,13 +9,10 @@ contract('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
   const tokenSymbol = 'DON';
 
   beforeEach(async function() {
-
     this.basil = await BasilERC721.new();
-    await this.basil.initialize(owner);
-
     this.token = await MintableERC721Token.new();
     await this.token.initialize(this.basil.address, tokenName, tokenSymbol);
-    await this.basil.setToken(this.token.address, {from: owner});
+    await this.basil.initialize(owner, this.token.address);
   });
 
   shouldBehaveLikeBasilWithTokens(owner, aWallet, someone, anotherone, tokenName, tokenSymbol);

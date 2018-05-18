@@ -8,7 +8,7 @@ const should = require('chai').should();
 
 const { decodeLogs, Logger, App, AppDeployer, Contracts } = require('zos-lib')
 
-contract('AppManager', ([_, owner, aWallet, someone, anotherone]) => {
+contract.only('App', ([_, owner, aWallet, someone, anotherone]) => {
 
   const initialVersion = '0.0.1';
   const updatedVersion = '0.0.2';
@@ -68,9 +68,10 @@ contract('AppManager', ([_, owner, aWallet, someone, anotherone]) => {
     });
   });
 
-  describe('version 0.0.2', function() {
+  describe.only('version 0.0.2', function() {
 
     beforeEach(async function() {
+
       this.app = await App.deploy(initialVersion, 0x0, txParams);
       const Basil = Contracts.getFromLocal('Basil');
       await this.app.setImplementation(Basil, contractName);
@@ -81,18 +82,18 @@ contract('AppManager', ([_, owner, aWallet, someone, anotherone]) => {
       await stdlib.setImplementation(tokenClass, tokenImplementation.address, txParams);
 
       await this.app.newVersion(updatedVersion, stdlib.address);
-      const BasilERC721 = Contracts.getFromLocal('BasilERC721')
-      await this.app.setImplementation(BasilERC721, contractName);
-      await this.app.upgradeProxy(this.basil.address, null, contractName)
-      this.basil = BasilERC721.at(this.basil.address)
-
       this.token = await this.app.createProxy(
         MintableERC721Token, 
         tokenClass,
         'initialize',
         [this.basil.address, tokenName, tokenSymbol]
       )
-      await this.basil.setToken(this.token.address, txParams)
+      console.log('> ', this.token.address)
+
+      const BasilERC721 = Contracts.getFromLocal('BasilERC721')
+      await this.app.setImplementation(BasilERC721, contractName);
+      await this.app.upgradeProxy(this.basil.address, BasilERC721, contractName, 'initialize', [owner, this.token.address])
+      this.basil = BasilERC721.at(this.basil.address)
     });
 
     describe('implementation', function() {

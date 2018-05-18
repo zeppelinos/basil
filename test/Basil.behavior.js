@@ -22,7 +22,7 @@ module.exports = function(owner, aWallet, someone, anotherone) {
       });
 
       describe('when the donation is greater than zero', function () {
-        const firstDonation = 2;
+        const firstDonation = 20;
 
         describe('when the given R value are invalid', function () {
           const R = 256;
@@ -92,7 +92,7 @@ module.exports = function(owner, aWallet, someone, anotherone) {
 
     describe('when there was a donation before', function () {
 
-      const firstDonation = 2;
+      const firstDonation = 20;
       
       beforeEach(function() {
         this.donor = someone;
@@ -117,7 +117,7 @@ module.exports = function(owner, aWallet, someone, anotherone) {
         });
 
         describe('when the new donation is equal to the previous one', function () {
-          const secondDonation = 2;
+          const secondDonation = 20;
 
           it('reverts', async function () {
             await assertRevert(this.basil.sendTransaction({ from: this.anotherDonor, value: secondDonation }))
@@ -125,7 +125,7 @@ module.exports = function(owner, aWallet, someone, anotherone) {
         });
 
         describe('when the new donation is greater than the previous one', function () {
-          const secondDonation = 3;
+          const secondDonation = 30;
 
 
           describe('when the given R value are invalid', function () {

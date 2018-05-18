@@ -18,6 +18,11 @@ contract Basil is Ownable {
   event Withdrawal(address indexed wallet, uint256 value);
   event NewDonation(address indexed donor, uint256 value, uint256 r, uint256 g, uint256 b);
 
+  function initialize(address _sender) public isInitializer("Basil", "0") {
+    Ownable.initialize(_sender);
+    highestDonation = 10;
+  }
+
   function donate(uint256 _r, uint256 _g, uint256 _b) public payable {
     require(_r < 256);
     require(_g < 256);

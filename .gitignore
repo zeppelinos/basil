@@ -7,5 +7,4 @@ bundle.js
 geth.log
 .env.*
 .env
-deploy/deploy_data.development.json
-package.zos.development.json
+zos.development.json

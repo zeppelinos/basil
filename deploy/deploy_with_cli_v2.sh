@@ -26,7 +26,7 @@ zos push --network $NETWORK --skip-compile
 
 # Upgrade the existing contract proxy to use the new version
 BASIL=$(jq ".proxies.Basil[0].address" zos.$NETWORK.json --raw-output)
-zos upgrade Basil "$BASIL" --from $OWNER --network $NETWORK
+zos upgrade Basil --from $OWNER --network $NETWORK
 
 # Link to ZeppelinOS standard library
 zos link openzeppelin\-zos --no-install

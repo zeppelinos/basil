@@ -1,12 +1,14 @@
-const ImplementationDirectory = artifacts.require('ImplementationDirectory');
-const MintableERC721Token = artifacts.require('MintableERC721Token');
-
 const validateAddress = require('./helpers/validateAddress.js');
 const shouldBehaveLikeBasil = require('./Basil.behavior.js');
 const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 const should = require('chai').should();
 
 const { decodeLogs, Logger, App, AppDeployer, Contracts } = require('zos-lib')
+
+const Basil = Contracts.getFromLocal('Basil');
+const BasilERC721 = Contracts.getFromLocal('BasilERC721')
+const ImplementationDirectory = Contracts.getFromNodeModules('zos-lib', 'ImplementationDirectory');
+const MintableERC721Token = Contracts.getFromNodeModules('openzeppelin-zos', 'MintableERC721Token');
 
 contract('App', ([_, owner, aWallet, someone, anotherone]) => {
 
@@ -23,7 +25,7 @@ contract('App', ([_, owner, aWallet, someone, anotherone]) => {
   describe('setup', function() {
 
     beforeEach(async function() {
-      this.app = await App.deploy(initialVersion, 0x0, txParams);
+      this.app = await App.deploy(initialVersion, txParams);
     });
 
     describe('package', function() {
@@ -47,8 +49,7 @@ contract('App', ([_, owner, aWallet, someone, anotherone]) => {
   describe('version 0.0.1', function() {
 
     beforeEach(async function() {
-      this.app = await App.deploy(initialVersion, 0x0, txParams);
-      const Basil = Contracts.getFromLocal('Basil');
+      this.app = await App.deploy(initialVersion, txParams);
       await this.app.setImplementation(Basil, contractName);
       this.basil = await this.app.createProxy(Basil, contractName, 'initialize', [owner]);
     });
@@ -71,8 +72,7 @@ contract('App', ([_, owner, aWallet, someone, anotherone]) => {
   describe('version 0.0.2', function() {
 
     beforeEach(async function() {
-      this.app = await App.deploy(initialVersion, 0x0, txParams);
-      const Basil = Contracts.getFromLocal('Basil');
+      this.app = await App.deploy(initialVersion, txParams);
       await this.app.setImplementation(Basil, contractName);
       this.basil = await this.app.createProxy(Basil, contractName, 'initialize', [owner]);
 
@@ -81,7 +81,6 @@ contract('App', ([_, owner, aWallet, someone, anotherone]) => {
       await stdlib.setImplementation(tokenClass, tokenImplementation.address, txParams);
 
       await this.app.newVersion(updatedVersion, stdlib.address);
-      const BasilERC721 = Contracts.getFromLocal('BasilERC721')
       await this.app.setImplementation(BasilERC721, contractName);
       await this.app.upgradeProxy(this.basil.address, null, contractName)
       this.basil = BasilERC721.at(this.basil.address)

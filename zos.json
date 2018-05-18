@@ -1,0 +1,10 @@
+{
+  "name": "Basil",
+  "version": "0.0.2",
+  "contracts": {
+    "Basil": "BasilERC721"
+  },
+  "stdlib": {
+    "name": "openzeppelin-zos"
+  }
+}

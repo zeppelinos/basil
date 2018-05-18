@@ -22,10 +22,10 @@ zos bump 0.0.2
 zos add BasilERC721:Basil
 
 # Deploy all implementations in the specified network.
-zos push --from $OWNER --network $NETWORK --skip-compile
+zos push --network $NETWORK --skip-compile
 
 # Upgrade the existing contract proxy to use the new version
-BASIL=$(jq ".proxies.Basil[0].address" package.zos.$NETWORK.json --raw-output)
+BASIL=$(jq ".proxies.Basil[0].address" zos.$NETWORK.json --raw-output)
 zos upgrade Basil "$BASIL" --from $OWNER --network $NETWORK
 
 # Link to ZeppelinOS standard library
@@ -34,15 +34,15 @@ zos link openzeppelin\-zos --no-install
 # If on a local network, inject a simulation of the stdlib.
 if [ $INJECT_ZOS == true ] 
 then
-  zos push --deploy-stdlib --from $OWNER --network $NETWORK --skip-compile
+  zos push --deploy-stdlib --network $NETWORK --skip-compile
 fi
 
 # Create a proxy for the standard library's ERC721 token.
 echo "Using Basil proxy deployed at: "$BASIL
-zos create MintableERC721Token --init --from $OWNER --args $BASIL,BasilToken,BSL --network $NETWORK
+zos create MintableERC721Token --init --from $OWNER --args $BASIL,\"BasilToken\",\"BSL\" --network $NETWORK
 
 # Read deployed addresses
-ERC721=$(jq ".proxies.MintableERC721Token[0].address" package.zos.$NETWORK.json)
+ERC721=$(jq ".proxies.MintableERC721Token[0].address" zos.$NETWORK.json)
 echo "Token deployed at: "$ERC721
 
 # Register the token in Basil.

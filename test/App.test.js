@@ -8,7 +8,7 @@ const should = require('chai').should();
 
 const { decodeLogs, Logger, App, AppDeployer, Contracts } = require('zos-lib')
 
-contract('AppManager', ([_, owner, aWallet, someone, anotherone]) => {
+contract('App', ([_, owner, aWallet, someone, anotherone]) => {
 
   const initialVersion = '0.0.1';
   const updatedVersion = '0.0.2';

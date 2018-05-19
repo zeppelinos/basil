@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import AlertActions from '../actions/alerts'
 
 class Alert extends React.Component {
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.alert !== this.props.alert) setTimeout(() => Store.dispatch(AlertActions.reset()), 5000)
   }
-  
+ 
   render() {
-    const alert = this.props.alert;
+    const alert = this.props.alerts;
     return !alert ? <div/> :
       <div>
         <div className="row">
@@ -31,8 +32,8 @@ class Alert extends React.Component {
   }
 }
 
-function mapStateToProps({ alert }) {
-  return { alert }
+function mapStateToProps({ alerts }) {
+  return { alerts }
 }
 
 export default connect(mapStateToProps)(Alert)

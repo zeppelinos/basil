@@ -23,7 +23,7 @@ class DonateForm extends React.Component {
     let highestDonation = parseFloat(nextProps.basil.highestDonation, 10);
     if(highestDonation != 0) {
       this.setState({
-        value: nextProps.basil.highestDonation + 0.01
+        value: (highestDonation + 0.001).toFixed(3)
       });
     }
 
@@ -62,8 +62,7 @@ class DonateForm extends React.Component {
 
                 <div className="row no-margin">
                   <div className="input-field col s6">
-                    <label htmlFor="value">{newHighestDonation} ETH</label>
-                    <input onChange={this._updateValue} type="number" step="any" id="value" required/>
+                    <input onChange={this._updateValue} type="number" step="any" id="value"  value={this.state.value} required/>
                   </div>
                   <div className="input-field submit col s6">
                     <button className="btn donate">Donate</button>
@@ -90,6 +89,7 @@ class DonateForm extends React.Component {
   }
 
   _updateValue(e) {
+    console.log('UPDATE')
     e.preventDefault()
     this.setState({ value: e.target.value })
   }

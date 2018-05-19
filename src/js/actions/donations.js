@@ -42,7 +42,8 @@ const DonationsActions = {
         })
         dispatch(FetchingActions.stop())
       } catch(error) {
-        dispatch(AlertActions.showError(error))
+				dispatch(FetchingActions.stop())
+        dispatch(AlertActions.showError(error, 'Error processing tx.'))
       }
     }
   },

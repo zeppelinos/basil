@@ -14,10 +14,13 @@ class DonationsList extends React.Component {
     const donations = this.props.donations.list
     return (
       <div>
-        <h3 className="titleList">Some have already thought about our basil</h3>
-        <div className="donations-list">
-          { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
-        </div>
+        {this._buildTitle(donations.length)}
+        <a href='http://www.twitter.com/zeppelinbasil' target='_blank'><h4 className='subtitleList'>twitter.com/zeppelinbasil</h4></a>
+        { donations.length > 0 &&
+          <div className="donations-list">
+            { donations.length === 0 ? <em>Loading...</em> : <div>{this._buildDonationsList(donations)}</div>}
+          </div>
+        }
       </div>
     )
   }
@@ -38,6 +41,18 @@ class DonationsList extends React.Component {
     }
     return rows;
     // TODO: delete chip css object
+  }
+
+  _buildTitle(numDonations) {
+    if(numDonations === 0) {
+      return <h3 className="titleList"></h3>
+    } 
+    else if(numDonations === 1) {
+      return <h3 className="titleList">Someone has thought about our Basil</h3>
+    }
+    else {
+      return <h3 className="titleList">Many have thought about our Basil</h3>
+    }
   }
 
   _buildDonationItem(donation) {

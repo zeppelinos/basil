@@ -68,9 +68,11 @@
     "dotenv-webpack": "^1.5.4",
     "lodash": "^4.17.10",
     "materialize-css": "^0.100.2",
+    "openzeppelin-zos": "^1.9.0-beta",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
     "react-dom": "^15.6.1",
+    "react-fontawesome": "^1.6.1",
     "react-modal": "^3.1.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
@@ -81,7 +83,6 @@
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
     "zos": "^0.6.0",
-    "zos-lib": "^0.1.24",
-    "openzeppelin-zos": "^1.9.0-beta"
+    "zos-lib": "^0.1.24"
   }
 }

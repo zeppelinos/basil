@@ -20,6 +20,11 @@ html, body{
   padding-top: 15px;
 }
 
+.info {
+  text-align: center;
+  text-color: $grey;
+}
+
 @import "./css/buttons";
 @import "./css/navbar";
 @import "./css/forms";

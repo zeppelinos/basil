@@ -17,16 +17,44 @@ class DonateForm extends React.Component {
     Store.dispatch(AccountActions.findAccount());
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    // Init value set
+    let highestDonation = parseFloat(nextProps.basil.highestDonation, 10);
+    if(highestDonation != 0) {
+      this.setState({
+        value: nextProps.basil.highestDonation + 0.01
+      });
+    }
+
+    // Init color set
+    const r = parseInt(nextProps.basil.r, 10);
+    const g = parseInt(nextProps.basil.g, 10);
+    const b = parseInt(nextProps.basil.b, 10);
+    const currentRgbIsRed = this.state.color.rgb.r == 255 && this.state.color.rgb.g == 0 && this.state.color.rgb.b == 0;
+    const incomingRgbIsZero = r == 0 && g == 0 && b == 0;
+    if(currentRgbIsRed && !incomingRgbIsZero) {
+      this.setState({
+        color: {
+          rgb: {r, g, b} 
+        }
+      });
+    }
+  }
+
   render() {
     const rgb = this.state.color.rgb;
     const { address, balance } = this.props.account;
+    let { highestDonation } = this.props.basil;
+    highestDonation = parseFloat(highestDonation, 10);
+    const newHighestDonation = highestDonation + 0.01
     return (
       <form className="basil card" onSubmit={this._handleSubmit}>
         <div className="card-content">
           <div className="row no-margin">
             <div className="col s6">
               <div className="donate-form">
-                <h3 className="title">Customize the Zeppelin LED</h3>
+                <h3 className="title">Donate more than {highestDonation} ETH to change the color of the Hue lamp in Zeppelin's Office!</h3>
 
                 <HuePicker className="color-picker" style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
 
@@ -34,7 +62,7 @@ class DonateForm extends React.Component {
 
                 <div className="row no-margin">
                   <div className="input-field col s6">
-                    <label htmlFor="value">Value (ETH)</label>
+                    <label htmlFor="value">{newHighestDonation} ETH</label>
                     <input onChange={this._updateValue} type="number" step="any" id="value" required/>
                   </div>
                   <div className="input-field submit col s6">
@@ -71,8 +99,8 @@ class DonateForm extends React.Component {
   }
 }
 
-function mapStateToProps({ account, donations }) {
-  return { account, donations }
+function mapStateToProps({ account, donations, basil }) {
+  return { account, donations, basil }
 }
 
 export default connect(mapStateToProps)(DonateForm)

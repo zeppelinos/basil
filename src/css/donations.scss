@@ -98,13 +98,23 @@
 }
 
 .titleList {
-    margin: 150px 0 50px;
+    margin: 150px 0 10px;
     font-size: 2.4rem;
     line-height: 110%;
     text-align: center;
     font-family: roboto;
     font-weight: 300;
     color: grey;
+}
+
+.subtitleList {
+    margin: 0 0 50px;
+    font-size: 2.0rem;
+    line-height: 100%;
+    text-align: center;
+    font-family: roboto;
+    font-weight: 300;
+    color: blue;
 }
 
 .donationAddress {

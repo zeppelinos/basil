@@ -38,8 +38,7 @@ const DonationsActions = {
         await basil.donate(r, g, b, { 
           from: donor, 
           value: toWei(value),
-          gas: 400000,
-          gasPrice: 22000000000
+          gas: 400000
         })
         dispatch(FetchingActions.stop())
       } catch(error) {

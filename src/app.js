@@ -2,6 +2,7 @@
 require('babel-register')
 require('babel-polyfill')
 require('materialize-loader')
+require('./images/favicon.ico')
 
 import './app.scss'
 import 'materialize-css/dist/js/materialize.js'

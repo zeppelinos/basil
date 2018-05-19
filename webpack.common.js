@@ -33,6 +33,10 @@ const config = {
         test: /\.(woff|woff2|eot|ttf)$/,
         loader: 'file-loader?name=fonts/[name].[ext]'
       },
+      {
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+          loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
+      }
     ]
   },
   plugins: [

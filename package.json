@@ -55,7 +55,6 @@
     "node-sass": "^4.5.3",
     "resolve-url-loader": "^2.2.0",
     "sass-loader": "^6.0.6",
-    "solium": "^1.1.5",
     "style-loader": "^0.18.2",
     "truffle": "^4.1.5",
     "webpack": "^3.5.5",
@@ -81,8 +80,8 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos": "^0.4.0",
-    "zos-lib": "^0.1.16",
+    "zos": "^0.6.0",
+    "zos-lib": "^0.1.24",
     "openzeppelin-zos": "^1.9.0-beta"
   }
 }

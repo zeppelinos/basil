@@ -11,10 +11,6 @@ then
   INJECT_ZOS=true 
 fi
 
-# Util to trace accounts.
-# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
-# exit
-
 # -------------------------------------------------------------------------------
 # New version of Basil.sol that uses an on-chain ERC721 token implementation
 # -------------------------------------------------------------------------------
@@ -43,7 +39,7 @@ fi
 
 # Create a proxy for the standard library's ERC721 token.
 echo "Using Basil proxy deployed at: "$BASIL
-ERC721=$(zos create MintableERC721Token --init --from $OWNER --args $BASIL,\"BasilToken\",\"BSL\" --network $NETWORK)
+ERC721=$(zos create MintableERC721Token --from $OWNER --args $BASIL,\"BasilToken\",\"BSL\" --network $NETWORK)
 
 # Read deployed addresses
 echo "Token deployed at: "$ERC721

@@ -30,7 +30,7 @@ zos push --from $OWNER --network $NETWORK --skip-compile
 
 # Request a proxy for the upgradeably Basil.sol
 # NOTE: A dapp could now use the address of the proxy specified in zos.<network_name>.json
-zos create Basil --from $OWNER --init --args $OWNER --network $NETWORK
+zos create Basil --from $OWNER --args $OWNER --network $NETWORK
 
 # Disable command logging
 set +x

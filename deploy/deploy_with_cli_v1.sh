@@ -4,12 +4,7 @@
 set -x
 
 NETWORK=$1
-INJECT_ZOS=$2
-OWNER=$3
-
-# Util to trace accounts.
-# echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK
-# exit
+OWNER=$(node truffle $NETWORK)
 
 # -----------------------------------------------------------------------
 # Project setup and first implementation of an upgradeable Basil.sol

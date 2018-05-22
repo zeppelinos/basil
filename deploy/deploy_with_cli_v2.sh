@@ -4,8 +4,12 @@
 set -x
 
 NETWORK=$1
-INJECT_ZOS=$2
-OWNER=$3
+OWNER=$(node truffle $NETWORK)
+INJECT_ZOS=false
+if [ $NETWORK == "development" ]
+then
+  INJECT_ZOS=true 
+fi
 
 # Util to trace accounts.
 # echo "console.log(web3.eth.accounts)" | truffle console --network $NETWORK

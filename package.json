@@ -7,10 +7,9 @@
     "compile": "rm -rf build && npx truffle compile",
     "test": "npm run compile && NODE_ENV=test npx truffle test",
     "console": "npx truffle console",
-    "deploy_v1": "deploy/deploy_with_cli_v1.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
-    "deploy_ropsten_v1": "deploy/deploy_with_cli_v1.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
-    "deploy_v2": "deploy/deploy_with_cli_v2.sh development true 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
-    "deploy_ropsten_v2": "deploy/deploy_with_cli_v2.sh ropsten false 0x09902a56d04a9446601a0d451e07459dc5af0820",
+    "deployv1": "deploy/deploy_with_cli_v1.sh",
+    "deployv2": "deploy/deploy_with_cli_v2.sh",
+    "deploy": "deploy/deploy_with_cli.sh",
     "start": "webpack-dev-server --config webpack.dev.js --hot --history-api-fallback",
     "build": "webpack --config webpack.prod.js",
     "lint:sol": "solium -d .",
@@ -82,7 +81,7 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos": "^0.6.0",
+    "zos": "^0.7.0",
     "zos-lib": "^0.1.27"
   }
 }

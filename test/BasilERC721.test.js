@@ -25,7 +25,6 @@ contract.only('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
       [this.basil.address, tokenName, tokenSymbol]
     );
     await this.token.sendTransaction({data});
-    await this.basil.setToken(this.token.address, {from: owner});
   });
 
   shouldBehaveLikeBasilWithTokens(owner, aWallet, someone, anotherone, tokenName, tokenSymbol);

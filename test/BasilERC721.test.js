@@ -1,3 +1,5 @@
+const encodeCall = require('zos-lib/lib/helpers/encodeCall').default
+
 const BasilERC721 = artifacts.require('BasilERC721');
 const MintableERC721Token = artifacts.require('MintableERC721Token');
 
@@ -14,7 +16,20 @@ contract('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
     await this.basil.initialize(owner);
 
     this.token = await MintableERC721Token.new();
-    await this.token.initialize(this.basil.address, tokenName, tokenSymbol);
+    // Note: truffle can't handle function overloading here, so 
+    // we're using zos instead to make the call to initialize
+    // wait this.token.initialize(this.basil.address, tokenName, tokenSymbol, {});
+    const callData = encodeCall(
+      "initialize", 
+      ['address', 'string', 'string'],
+      [this.basil.address, tokenName, tokenSymbol]
+    );
+    await web3.eth.sendTransaction({
+      from: owner,
+      to: this.token.address,
+      gas: 3000000,
+      data: callData
+    })
     await this.basil.setToken(this.token.address, {from: owner});
   });
 

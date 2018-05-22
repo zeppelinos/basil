@@ -54,11 +54,9 @@ class DonateForm extends React.Component {
           <div className="row no-margin">
             <div className="col s6">
               <div className="donate-form">
-                <h3 className="title">Donate more than {highestDonation} ETH to change the color of the Hue lamp in Zeppelin's Office!</h3>
+                <h3 className="title">Donate more than {highestDonation} ETH to change the color of the LED in Zeppelin's Office!</h3>
 
                 <HuePicker className="color-picker" style={{width: 100}} onChangeComplete={this._updateColor} color={rgb}/>
-
-                <input value={address} type="text" id="owner" disabled required/>
 
                 <div className="row no-margin">
                   <div className="input-field col s6">
@@ -89,7 +87,6 @@ class DonateForm extends React.Component {
   }
 
   _updateValue(e) {
-    console.log('UPDATE')
     e.preventDefault()
     this.setState({ value: e.target.value })
   }

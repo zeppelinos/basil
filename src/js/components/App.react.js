@@ -9,6 +9,7 @@ import NetworkActions from "../actions/network";
 import DonationsList from './DonationsList.react'
 import { withRouter, Switch } from 'react-router-dom'
 import FontAwesome from "react-fontawesome";
+import { ACTIVE_NETWORK } from '../constants'
 
 class App extends React.Component {
   
@@ -20,6 +21,7 @@ class App extends React.Component {
   render() {
     const network = this.props.network
     const fetching = this.props.fetching;
+    console.log(`>> ${network} ${fetching}`)
     return (network.connected && network.couldAccessAccount) ?
       (fetching ?
         <Modal open={fetching} progressBar message={fetching}/> :
@@ -39,8 +41,8 @@ class App extends React.Component {
         </div>
       ) :
       <div>
-        <Modal dark open={!network.connected} message={'Please access using MIST or Metamask'}/>
-        <Modal dark open={network.connected && !network.couldAccessAccount} message={'Please enable your account and connect to the ropsten network'}/>
+        <Modal dark open={!network.connected} message={'Please access this app using MIST or Metamask'}/>
+        <Modal dark open={network.connected && !network.couldAccessAccount} message={`Please enable your account and connect to the ${ACTIVE_NETWORK.name} network`}/>
       </div>
   }
 }

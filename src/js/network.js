@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { ACTIVE_NETWORK } from 'constants'
+import { ACTIVE_NETWORK } from './constants'
 
 const Network = {
   web3() {

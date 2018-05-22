@@ -5,10 +5,10 @@ const MintableERC721Token = artifacts.require('MintableERC721Token');
 
 const shouldBehaveLikeBasilWithTokens = require('./BasilWithTokens.behavior.js');
 
-contract('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
+contract.only('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
 
-  const tokenName = 'DonationToken';
-  const tokenSymbol = 'DON';
+  const tokenName = 'BSLToken';
+  const tokenSymbol = 'BSL';
 
   beforeEach(async function() {
 

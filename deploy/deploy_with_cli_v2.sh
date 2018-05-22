@@ -6,7 +6,7 @@ set -x
 NETWORK=$1
 OWNER=$(node truffle $NETWORK)
 INJECT_ZOS=false
-if [ $NETWORK == "development" ]
+if [ $NETWORK == "local" ]
 then
   INJECT_ZOS=true 
 fi

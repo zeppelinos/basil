@@ -1,0 +1,40 @@
+{
+  "contracts": {
+    "Basil": {
+      "address": "0x0149578b6d77fa67246045fcaf26e4b57eebb428",
+      "bytecodeHash": "d7205ca75354a29ac5f1e5311e7d03e5f76b8cc77b48c90946e20a479f031f74"
+    }
+  },
+  "proxies": {
+    "Basil": [
+      {
+        "address": "0x0d0774e1f54855b547572ec837a6c2138d190448",
+        "version": "0.0.2",
+        "implementation": "0x0149578b6d77fa67246045fcaf26e4b57eebb428"
+      }
+    ],
+    "MintableERC721Token": [
+      {
+        "address": "0x1b7af16fc91e5feb4ba57dd7dde4edefde4ea341",
+        "version": "0.0.2",
+        "implementation": "0x405fc0ee23c7fcd0a41a864505fe8c969ca3ef6a"
+      }
+    ]
+  },
+  "app": {
+    "address": "0xc4bc1f775db36c07b0bc506cbb83fce12e182053"
+  },
+  "version": "0.0.2",
+  "package": {
+    "address": "0x71e02441209d3dd9ed064a4e4eafaf90d0263088"
+  },
+  "provider": {
+    "address": "0x4d32ecec25d722c983f974134d649a20e78b1417"
+  },
+  "stdlib": {
+    "address": "0xae5057bb185fc820219e21bc7382c0de7a42fe86",
+    "customDeploy": true,
+    "name": "openzeppelin-zos",
+    "version": "1.9.0-beta"
+  }
+}

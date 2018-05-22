@@ -19,17 +19,12 @@ contract('BasilERC721', ([_, owner, aWallet, someone, anotherone]) => {
     // Note: truffle can't handle function overloading here, so 
     // we're using zos instead to make the call to initialize
     // wait this.token.initialize(this.basil.address, tokenName, tokenSymbol, {});
-    const callData = encodeCall(
+    const data = encodeCall(
       "initialize", 
       ['address', 'string', 'string'],
       [this.basil.address, tokenName, tokenSymbol]
     );
-    await web3.eth.sendTransaction({
-      from: owner,
-      to: this.token.address,
-      gas: 3000000,
-      data: callData
-    })
+    await this.token.sendTransaction({data});
     await this.basil.setToken(this.token.address, {from: owner});
   });
 

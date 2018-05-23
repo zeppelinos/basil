@@ -1,23 +1,27 @@
 {
-  "app": {
-    "address": "0xc21f6d71eebe788fece524b98dbd18b8a9884265",
-    "version": "0.0.1"
+  "contracts": {
+    "Basil": {
+      "address": "0x9c5dae202ade4864095fcee49b33744ad1e52424",
+      "bytecodeHash": "152f8f16221c2a14b92eb0ff7c4598100306f58de13d6f2e1517b6b21cffd9d5"
+    }
   },
   "proxies": {
     "Basil": [
       {
-        "address": "0x74e69eb21fe53169db6fe6f765fea7fea23d03ec",
-        "version": "0.0.1"
+        "address": "0xd1ed7c1c27c0aa4169fff8f0a5bcd2675fad8781",
+        "version": "0.0.1",
+        "implementation": "0x9c5dae202ade4864095fcee49b33744ad1e52424"
       }
     ]
   },
-  "contracts": {
-    "Basil": {
-      "address": "0x80eb2d571e1b1428a84cbdd4af9fadf9481f44ab",
-      "bytecodeHash": "002d52e2b72299e0e0af4305d484269c21cc46ac0585d6b54b0a7c41f0c8e65f"
-    }
+  "app": {
+    "address": "0xb43763fd82fe4973ef3cb34c82732a1a784eb7be"
+  },
+  "version": "0.0.1",
+  "package": {
+    "address": "0x04ae363363e5d464cf92c25e2c72f7f1190fc3b2"
   },
   "provider": {
-    "address": "0x921e2d8e32293793f7dad4070e680b192193a3ab"
+    "address": "0x3abfa06d4d9eb02a277825638efa0091cf0a44bb"
   }
 }

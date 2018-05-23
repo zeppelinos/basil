@@ -8,3 +8,4 @@ geth.log
 .env.*
 .env
 zos.development.json
+zos.local.json

@@ -21,7 +21,6 @@ class App extends React.Component {
   render() {
     const network = this.props.network
     const fetching = this.props.fetching;
-    console.log(`>> ${network} ${fetching}`)
     return (network.connected && network.couldAccessAccount) ?
       (fetching ?
         <Modal open={fetching} progressBar message={fetching}/> :

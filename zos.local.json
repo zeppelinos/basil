@@ -1,40 +1,40 @@
 {
   "contracts": {
     "Basil": {
-      "address": "0x0149578b6d77fa67246045fcaf26e4b57eebb428",
-      "bytecodeHash": "d7205ca75354a29ac5f1e5311e7d03e5f76b8cc77b48c90946e20a479f031f74"
+      "address": "0x1872358e6b8f0b63cfef7f6626cf1a6076cf47d5",
+      "bytecodeHash": "7036eb1c7f7f8a10f74de390872d85c02718a821dc39693c0f914389373fe1b7"
     }
   },
   "proxies": {
     "Basil": [
       {
-        "address": "0x0d0774e1f54855b547572ec837a6c2138d190448",
+        "address": "0x86a6c113d9e923de21031067e13b5ea9e32ac63a",
         "version": "0.0.2",
-        "implementation": "0x0149578b6d77fa67246045fcaf26e4b57eebb428"
+        "implementation": "0x1872358e6b8f0b63cfef7f6626cf1a6076cf47d5"
       }
     ],
     "MintableERC721Token": [
       {
-        "address": "0x1b7af16fc91e5feb4ba57dd7dde4edefde4ea341",
+        "address": "0x9b4ad4ea2c312273fd877ffc5bb3565806adba3a",
         "version": "0.0.2",
-        "implementation": "0x405fc0ee23c7fcd0a41a864505fe8c969ca3ef6a"
+        "implementation": "0x44958c3df9c64de7bb5f1653af7484c09f2f48ab"
       }
     ]
   },
   "app": {
-    "address": "0xc4bc1f775db36c07b0bc506cbb83fce12e182053"
+    "address": "0xf75dbb20fad41d2f22f4fcd357d0f24b1390c133"
   },
   "version": "0.0.2",
   "package": {
-    "address": "0x71e02441209d3dd9ed064a4e4eafaf90d0263088"
+    "address": "0x008a82e7d4825c2a4e6754e06ca5cbb079f8bbe2"
   },
   "provider": {
-    "address": "0x4d32ecec25d722c983f974134d649a20e78b1417"
+    "address": "0x4ce0ad3f046568e11e99113360b05610562b635d"
   },
   "stdlib": {
-    "address": "0xae5057bb185fc820219e21bc7382c0de7a42fe86",
+    "address": "0x60db0c781608ecdca2ada00e3b77842f116fdfa4",
     "customDeploy": true,
     "name": "openzeppelin-zos",
-    "version": "1.9.0-beta"
+    "version": "1.9.1"
   }
 }

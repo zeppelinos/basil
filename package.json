@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "rm -rf build && npx truffle compile",
     "test": "npm run compile && NODE_ENV=test npx truffle test",
-    "console": "npx truffle console",
+    "console": "truffle console",
     "deployv1": "deploy/deploy_with_cli_v1.sh",
     "deployv2": "deploy/deploy_with_cli_v2.sh",
     "deploy": "deploy/deploy_with_cli.sh",
@@ -67,7 +67,7 @@
     "dotenv-webpack": "^1.5.4",
     "lodash": "^4.17.10",
     "materialize-css": "^0.100.2",
-    "openzeppelin-zos": "^1.9.0-beta",
+    "openzeppelin-zos": "^1.9.1",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
     "react-dom": "^15.6.1",
@@ -81,7 +81,7 @@
     "redux-thunk": "^2.2.0",
     "truffle-contract": "^3.0.3",
     "web3": "~0.20.1",
-    "zos": "^0.7.0",
+    "zos": "^0.8.0",
     "zos-lib": "^0.1.27"
   }
 }

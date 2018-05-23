@@ -19,7 +19,7 @@ contract BasilERC721 is Basil {
 
   function donate(uint256 _r, uint256 _g, uint256 _b) public payable {
     super.donate(_r, _g, _b);
-    emitUniqueToken(tx.origin);
+    emitUniqueToken(msg.sender);
   }
 
   function emitUniqueToken(address _tokenOwner) internal {

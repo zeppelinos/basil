@@ -1,0 +1,27 @@
+{
+  "contracts": {
+    "Basil": {
+      "address": "0xa6114Ad2337a493E12c3F72b077554918F272890",
+      "bytecodeHash": "152f8f16221c2a14b92eb0ff7c4598100306f58de13d6f2e1517b6b21cffd9d5"
+    }
+  },
+  "proxies": {
+    "Basil": [
+      {
+        "address": "0x96dc0af2a77e4b185e5fe6cbfdb21f281e17c733",
+        "version": "0.0.1",
+        "implementation": "0xa6114ad2337a493e12c3f72b077554918f272890"
+      }
+    ]
+  },
+  "app": {
+    "address": "0x8d5eb703c81c03f6a4ac808ddcae5898deb7d471"
+  },
+  "version": "0.0.1",
+  "package": {
+    "address": "0xab5c29ee7f5e6bec556a35c2cbae38b4231aaa9e"
+  },
+  "provider": {
+    "address": "0xc443652d23670430926702cf239777cd4ce84834"
+  }
+}

@@ -6,6 +6,18 @@ const Network = {
     return new Web3(this.provider())
   },
 
+  onCorrectNetwork() {
+    return new Promise((reject, resolve) => {
+      this.web3.version.getNetwork((err, res) => {
+        if(err) reject('Error getting network id')
+        else {
+          if(res === ACTIVE_NETWORK.network_id) resolve()
+          else reject('Incorrect network')
+        }
+      }) 
+    })
+  },
+
   eth() {
     return this.web3().eth;
   },

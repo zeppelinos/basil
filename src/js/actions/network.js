@@ -5,9 +5,15 @@ import * as ActionTypes from '../actiontypes'
 const NetworkActions = {
   checkConnection() {
     return dispatch => {
-      Network.web3().isConnected() ?
-        dispatch(NetworkActions.connectionSucceeded()) :
-        dispatch(NetworkActions.connectionFailed())
+      if(Network.web3().isConnected()) {
+        Network.onCorrectNetwork().then(() => {
+          dispatch(NetworkActions.connectionSucceeded())
+        })
+        .catch(err => {
+          dispatch(NetworkActions.connectionFailed())
+        })
+      }
+      else dispatch(NetworkActions.connectionFailed())
     }
   },
 

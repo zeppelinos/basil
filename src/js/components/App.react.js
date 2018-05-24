@@ -40,7 +40,7 @@ class App extends React.Component {
         </div>
       ) :
       <div>
-        <Modal dark open={!network.connected} message={'Please access this app using MIST or Metamask'}/>
+        <Modal dark open={!network.connected} message={`Please access this app using MIST or Metamask and connect to the ${ACTIVE_NETWORK.name} network`}/>
         <Modal dark open={network.connected && !network.couldAccessAccount} message={`Please enable your account and connect to the ${ACTIVE_NETWORK.name} network`}/>
       </div>
   }

@@ -7,11 +7,12 @@ const Network = {
   },
 
   onCorrectNetwork() {
-    return new Promise((reject, resolve) => {
-      this.web3.version.getNetwork((err, res) => {
+    return new Promise((resolve, reject) => {
+      this.web3().version.getNetwork((err, res) => {
         if(err) reject('Error getting network id')
         else {
-          if(res === ACTIVE_NETWORK.network_id) resolve()
+          const network_id = parseInt(res, 10)
+          if(network_id == ACTIVE_NETWORK.network_id) resolve()
           else reject('Incorrect network')
         }
       }) 

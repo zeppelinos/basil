@@ -32,4 +32,4 @@ This will start a dev sever at `localhost:3000`. The application will connect to
 
 Same as "Running the spp locally" but modify `ACTIVE_NETWORK` in `src/js/constants.js` to `config.networks.local`.
 
-Then start `ganache-cli --deterministic` and run `npm run deploy`. This will run the contracts deployment script on the local network. If you have problems with an account not being recognized, change the used account address in `package.json`'s deploy script.
+Then start `ganache-cli --deterministic` and run `npm run deploy`. This will run the contracts deployment script on the local network. If you have problems with an account not being recognized, change the used account address in `package.json`'s deploy script.

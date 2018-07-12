@@ -28,17 +28,17 @@ contract Basil is Ownable {
     g = _g;
     b = _b;
     highestDonation = msg.value;
-    NewDonation(
+    emit NewDonation(
       msg.sender, msg.value,
       r, g, b);
   }
 
   function withdraw(address wallet) public onlyOwner {
-    require(this.balance > 0);
+    require(address(this).balance > 0);
     require(wallet != address(0));
-    uint256 value = this.balance;
+    uint256 value = address(this).balance;
     wallet.transfer(value);
-    Withdrawal(wallet, value);
+    emit Withdrawal(wallet, value);
   }
 
 }

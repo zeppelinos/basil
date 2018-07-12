@@ -18,7 +18,7 @@ const DonationsActions = {
         events.watch(function(error, result) {
           if(error) AlertActions.showError(error)
           else dispatch(DonationsActions.add({
-            ...result.args, 
+            ...result.args,
             tx: result.transactionHash
           }))
         })
@@ -35,15 +35,15 @@ const DonationsActions = {
       dispatch(FetchingActions.start(message))
       try {
         const basil = Basil.at(BASIL_ADDRESS)
-        await basil.donate(r, g, b, { 
-          from: donor, 
+        await basil.donate(r, g, b, {
+          from: donor,
           value: toWei(value),
           gas: 400000
         })
         dispatch(FetchingActions.stop())
       } catch(error) {
 				dispatch(FetchingActions.stop())
-        dispatch(AlertActions.showError(error, 'Error processing tx.'))
+        dispatch(AlertActions.showError(error, 'Error processing transaction.'))
       }
     }
   },
